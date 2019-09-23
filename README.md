@@ -1,6 +1,6 @@
-# Petbook
+# PetBook
 
-## Team 5
+### Team 5
 
 ### Elana Olson, Julio Mercado Soto, Lovejit Kharod
 
@@ -21,7 +21,6 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 | Provide recommendations to pet owners aligning with their pet specifications. | Suggest meeting pets with similar specifications
 Prioritize based on: Location, Walking route, Parks, Species, Favorite Activity | Allow owners to decide which criteria are important |
 | Pet owners can friend request other pet owners to connect their pets | New friend requests send an email to the owner | Notify owners of changes to friends’ profiles |
-| 
 
 
 ## Nonfunctional Requirements
