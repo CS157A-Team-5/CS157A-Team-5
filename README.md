@@ -22,3 +22,8 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 Prioritize based on: Location, Walking route, Parks, Species, Favorite Activity | Allow owners to decide which criteria are important |
 | Pet owners can friend request other pet owners to connect their pets | New friend requests send an email to the owner | Notify owners of changes to friends’ profiles |
 | 
+
+
+## Nonfunctional Requirements
+
+To ensure all pet and pet owner data is kept secure, we will use Google sign on to keep their username and password secure and confidential. All pet profile information will be kept confidential in our database unless the owner specifies it to be shown on their profile. We will prevent against SQL injection and other forms of attack on SQL databases and have duplicated databases for backup. Database queries will go through a middleware that securely interacts with the database and prevent client-side database interaction.
