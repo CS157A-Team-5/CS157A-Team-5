@@ -17,10 +17,9 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 
 | Essential          | Desired            | Optional          |
 | :----------------- | :----------------- | :----------------- |
-| Pet owners onboard and login to register their pet. | Use Google sign in to authenticate users | Allow multiple pets per profile |
-| Provide recommendations to pet owners aligning with their pet specifications. | Suggest meeting pets with similar specifications
-Prioritize based on: Location, Walking route, Parks, Species, Favorite Activity | Allow owners to decide which criteria are important |
-| Pet owners can friend request other pet owners to connect their pets | New friend requests send an email to the owner | Notify owners of changes to friends’ profiles |
+| Pet owners onboard and login to register their pet. | Use Google sign in to authenticate users. | Allow multiple pets per profile. |
+| Provide recommendations to pet owners aligning with their pet specifications. | Suggest meeting pets with similar specifications. Prioritize based on: location, walking route, parks, species, favorite activity. | Allow owners to decide which criteria are important. |
+| Pet owners can friend request other pet owners to connect their pets. | New friend requests send an email to the owner. | Notify owners of changes to friends’ profiles. |
 
 
 ## Nonfunctional Requirements
