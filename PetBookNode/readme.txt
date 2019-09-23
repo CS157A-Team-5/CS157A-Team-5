@@ -19,3 +19,5 @@ To prepare MySQL with proper schema, run the following in MySQL workbench:
 	GRANT ALL PRIVILEGES ON petbook.* TO 'petbook'@'%';
 	FLUSH PRIVILEGES;
 
+To test functionality, visit http://localhost:3000/pets to list values in the table.
+Alternatively, use CURL or Postman to test POST and GET
