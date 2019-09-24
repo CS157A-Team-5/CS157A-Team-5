@@ -21,11 +21,11 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 
 | Essential          | Desired            | Optional          |
 | :----------------- | :----------------- | :----------------- |
-| Pet owners onboard and login to register their pet. | Use Google sign in to authenticate users. | Allow multiple pets per profile. |
+| User can oboard and login to register their pet. | User can use Google sign-in. The system authenticates user with Google Authentication API. | Each user will be able to have multiple profiles for each pet they would like to register. |
 | Pet owner interact with database values through CRUD functionality. | Create a new profile. Read others’ profiles. Update their pet’s profile. Delete their pet’s profile. Profile consists of: Pet name, species, breed, size, home location, favorite activities, favorite treats, walking routes, parks nearby. | Owner can fill information out using Angular forms. |
 | Map relationships between pets in a graph-based database. | CRUD on the database is handled by admin. Use multiple tables with foreign keys for significantly different sets of data. | Using MySQL |
-| Provide recommendations to pet owners aligning with their pet specifications. | Suggest meeting pets with similar specifications. Prioritize based on: location, walking route, parks, species, favorite activity. | Allow owners to decide which criteria are important. |
-| Pet owners can friend request other pet owners to connect their pets. | New friend requests send an email to the owner. | Notify owners of changes to friends’ profiles. |
+| Provide recommendations to pet owners aligning with their pet specifications. | Users will be suggested to meet and connect with other users’ pets with similar specifications. System recommends other pets based on criteria like: location, walking routes, parks, species, favorite activity. | Owners will also be given the option to decide what criteria are important in order to meet desired pets. |
+| User can friend request other pet owners in order to have their pets connect in the form of playdates or meetups  | User can search for a specific user in order to view their pet’s profile and/or connect with the user. The system sends an email to notify user of friend requests. | Notify owners of changes to friends’ profiles. |
 
 
 ## Nonfunctional Requirements
