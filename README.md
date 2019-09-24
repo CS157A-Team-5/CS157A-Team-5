@@ -23,5 +23,6 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 
 
 ## Nonfunctional Requirements
+The GUI will be done using Angular with HTML/CSS to go with it. Angular will also will be used to handle some of the authentication by using route guard to prevent users from accessing management pages for pets that are not their own. Access control will be checked again at the middleware within Node.js as a secondary security measure.
 
 To ensure all pet and pet owner data is kept secure, we will use Google sign on to keep their username and password secure and confidential. All pet profile information will be kept confidential in our database unless the owner specifies it to be shown on their profile. We will prevent against SQL injection and other forms of attack on SQL databases and have duplicated databases for backup. Database queries will go through a middleware that securely interacts with the database and prevent client-side database interaction.
