@@ -14,7 +14,7 @@ The stakeholders of our project will be both pets and pet owners.  Owners will b
 
 ## System Environment
 ![alt text](https://i.imgur.com/tzmDHds.png)
-Petbook will rely on a three-tiered architecture, built over a MySQL backend. The frontend will be built with Angular and the related HTML and CSS bits and pieces. The two will be connected by a middleware business layer running on Node.js, using Express.js to manage an API, allowing everything to safely and cleanly link together.
+Petbook will rely on a three-tiered architecture, built over a MySQL backend. The frontend will be built with Angular and the related HTML and CSS bits and pieces. The two will be connected by a middleware business layer running on Node.js, using Express.js to manage an API, allowing everything to safely and cleanly link together. This will use standard the http client existing within Angular, and the router supplied by Express.js will handle information coming into and going out of the Node backend.
 
 ## Functional Requirements
 Users of PetBook are pet owners looking for companions and play dates for their pets. Pet owners can connect to other owners in nearby locations to find people that go to the same parks, allowing their pets to socialize and meet new friends. Users can go online to our user-friendly website to search for nearby pets, find pets that connect well with their pet, and befriend other pet owners to arrange activities together.
@@ -22,6 +22,8 @@ Users of PetBook are pet owners looking for companions and play dates for their 
 | Essential          | Desired            | Optional          |
 | :----------------- | :----------------- | :----------------- |
 | Pet owners onboard and login to register their pet. | Use Google sign in to authenticate users. | Allow multiple pets per profile. |
+| Pet owner interact with database values through CRUD functionality. | Create a new profile. Read others’ profiles. Update their pet’s profile. Delete their pet’s profile. Profile consists of: Pet name, species, breed, size, home location, favorite activities, favorite treats, walking routes, parks nearby. | Owner can fill information out using Angular forms. |
+| Map relationships between pets in a graph-based database. | CRUD on the database is handled by admin. Use multiple tables with foreign keys for significantly different sets of data. | Using MySQL |
 | Provide recommendations to pet owners aligning with their pet specifications. | Suggest meeting pets with similar specifications. Prioritize based on: location, walking route, parks, species, favorite activity. | Allow owners to decide which criteria are important. |
 | Pet owners can friend request other pet owners to connect their pets. | New friend requests send an email to the owner. | Notify owners of changes to friends’ profiles. |
 
