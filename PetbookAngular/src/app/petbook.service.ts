@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class PetbookService { 
 	constructor(private http: HttpClient, private router: Router) { }
-	url = 'http://localhost:3000/pets';
+	url = 'http://localhost:3000/api';
 	
 	getPets(): Observable<Object> {
 		return this.http.get(this.url);
