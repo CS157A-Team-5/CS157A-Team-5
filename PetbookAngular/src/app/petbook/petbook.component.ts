@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PetbookService } from '../petbook.service';
+import { Pet } from '../petbook.interface';
 
 @Component({
   selector: 'app-petbook',
@@ -8,12 +9,11 @@ import { PetbookService } from '../petbook.service';
   providers: [PetbookService],
 })
 export class PetbookComponent implements OnInit {
-  data;
+  pets: Pet[];
 
   constructor(private petbookService: PetbookService) { 
-    this.data = petbookService.getPets();
-
-    // this.data.subscribe();
+    this.pets = petbookService.getPets();
+    console.log(this.pets);
   }
 
   ngOnInit() {

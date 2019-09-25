@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Pet } from './petbook.interface';
 
 @Injectable()
 export class PetbookService { 
@@ -9,7 +10,9 @@ export class PetbookService {
 	url = 'http://localhost:3000/api';
 	
 	getPets(): Observable<Object> {
-		return this.http.get(this.url);
+		return this.http.get(this.url).subscribe((res: Pet[])=>{
+            console.log(res);
+        });
 	}
 	
 	createPet(data) {
