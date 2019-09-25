@@ -1,1 +1,4 @@
 <p>petbook works!</p>
+<ng-container *ngIf="data | async as pets">
+    <p>{{pets}}</p>
+</ng-container>
