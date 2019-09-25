@@ -1,2 +1,7 @@
 <p>petbook works!</p>
-<p>{{pets}}</p>
+<ul class="list-group" *ngIf="pets">
+	<li *ngFor="let p of pets" class="list-group-item">
+		{{p.name}}, {{p.species}}
+	</li>
+</ul>
+

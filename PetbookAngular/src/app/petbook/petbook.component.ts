@@ -12,8 +12,9 @@ export class PetbookComponent implements OnInit {
   pets: Pet[];
 
   constructor(private petbookService: PetbookService) { 
-    this.pets = petbookService.getPets();
-    console.log(this.pets);
+    petbookService.getPets().subscribe((res: any)=>{
+            this.pets = res;
+	});
   }
 
   ngOnInit() {

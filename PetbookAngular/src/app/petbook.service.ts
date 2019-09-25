@@ -8,11 +8,10 @@ import { Pet } from './petbook.interface';
 export class PetbookService { 
 	constructor(private http: HttpClient, private router: Router) { }
 	url = 'http://localhost:3000/api';
+	pets: Pet[];
 	
-	getPets(): Observable<Object> {
-		return this.http.get(this.url).subscribe((res: Pet[])=>{
-            console.log(res);
-        });
+	getPets(): Observable<Pet[]> {
+		return this.http.get<Pet[]>(this.url)
 	}
 	
 	createPet(data) {
