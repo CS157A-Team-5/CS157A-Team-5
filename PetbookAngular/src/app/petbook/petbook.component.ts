@@ -12,7 +12,8 @@ export class PetbookComponent implements OnInit {
 
   constructor(private petbookService: PetbookService) { 
     this.data = petbookService.getPets();
-    console.log(data);
+
+    // this.data.subscribe();
   }
 
   ngOnInit() {
