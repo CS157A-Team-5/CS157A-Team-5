@@ -18,7 +18,7 @@ export class PetbookService {
 		this.http.post(this.url, data).subscribe(
 			res => {
 				console.log(res);
-				this.router.navigateByUrl('/pet');
+				// this.router.navigateByUrl('/');
 			},
 			err => {
 				console.log('Error: ', err);
