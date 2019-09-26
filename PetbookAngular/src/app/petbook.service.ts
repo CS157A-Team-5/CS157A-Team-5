@@ -17,8 +17,30 @@ export class PetbookService {
 	createPet(data) {
 		this.http.post(this.url, data).subscribe(
 			res => {
-				console.log(res);
+				console.log("Created " + res);
 				// this.router.navigateByUrl('/');
+			},
+			err => {
+				console.log('Error: ', err);
+			}
+		);
+	}
+
+	updatePet(data) {
+		this.http.put(this.url, data).subscribe(
+			res => {
+				console.log("Updated " + res);
+			},
+			err => {
+				console.log('Error: ', err);
+			}
+		);
+	}
+
+	deletePet(data) {
+		this.http.delete(this.url, data).subscribe(
+			res => {
+				console.log("Deleted " + res);
 			},
 			err => {
 				console.log('Error: ', err);
