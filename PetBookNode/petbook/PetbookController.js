@@ -24,4 +24,24 @@ router.post('/', function (req, res) {
     });
 });
 
+router.put('/', function (req, res) {
+    Petbook.updatepet(req.body,function(err,count){
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.delete('/', function (req, res) {
+    Petbook.deletepet(req.body,function(err,count){
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
 module.exports = router;
