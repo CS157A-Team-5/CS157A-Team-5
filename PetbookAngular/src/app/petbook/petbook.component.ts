@@ -25,8 +25,19 @@ export class PetbookComponent implements OnInit {
 	});
   }
 
-  submitPet(model: Pet) {
+  createPet(model: Pet) {
+  	console.log(model);
   	this.petbookService.createPet(model);
+  }
+
+  updatePet(model: Pet) {
+  	console.log(model);
+  	this.petbookService.updatePet(model);
+  }
+
+  deletePet(model: Pet) {
+  	console.log(model);
+  	this.petbookService.deletePet(model);
   }
 
 }
