@@ -18,7 +18,7 @@ export class PetbookService {
 		this.http.post(this.url, data).subscribe(
 			res => {
 				console.log("Created " + res);
-				// this.router.navigateByUrl('/');
+				this.router.navigateByUrl('/');
 			},
 			err => {
 				console.log('Error: ', err);
@@ -30,6 +30,7 @@ export class PetbookService {
 		this.http.put(this.url, data).subscribe(
 			res => {
 				console.log("Updated " + res);
+				this.router.navigateByUrl('/');
 			},
 			err => {
 				console.log('Error: ', err);
@@ -41,6 +42,7 @@ export class PetbookService {
 		this.http.delete(this.url, data).subscribe(
 			res => {
 				console.log("Deleted " + res);
+				this.router.navigateByUrl('/');
 			},
 			err => {
 				console.log('Error: ', err);

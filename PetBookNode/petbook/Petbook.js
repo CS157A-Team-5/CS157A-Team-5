@@ -11,7 +11,7 @@ var Petbook = {
     	return db.query('UPDATE t_pets SET name=?, species=? WHERE ID=?', [pet.name, pet.species, pet.id], callback);
     },
     deletepet: function (pet, callback) {
-    	return db.query('DELETE FROM t_pets WHERE ID=?', [pet.id], callback);
+    	return db.query('DELETE FROM t_pets WHERE ID=34', [pet.id], callback);
     }
 }
 
