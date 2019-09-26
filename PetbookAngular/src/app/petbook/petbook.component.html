@@ -1,12 +1,14 @@
 <ul class="list-group" *ngIf="pets">
 	<li *ngFor="let p of pets" class="list-group-item">
-		{{p.name}}, {{p.species}}
+		{{p.id}}, {{p.name}}, {{p.species}}, {{p.age}}
 	</li>
 </ul>
 <form #petForm="ngForm" (ngSubmit) = "submitPet(petForm.value)"> 
    <input type="text" name="name" placeholder="Name" ngModel> 
    <br/> 
    <input type="text" name="species" placeholder="Species" ngModel> 
+   <br/> 
+   <input type="text" name="age" placeholder="Age" ngModel> 
    <br/> 
    <input type="submit" value="submit"> 
 </form>
