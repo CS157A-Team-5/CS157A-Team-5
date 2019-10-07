@@ -34,3 +34,38 @@ The GUI will be done using Angular with HTML/CSS to go with it. Angular will als
 To ensure all pet and pet owner data is kept secure, we will use Google sign on to keep their username and password secure and confidential. This approach will allow us to use an established and secure login system to keep user information safe. All pet profile information will be kept confidentially in our database unless the owner specifies it to be shown on their profile, or if the user themselves is logged in. We will also allow users to remove their account and information permanently if they wish to do so.
 
 As for access control, we will prevent against SQL injection and other forms of attack on our database and have a duplicated database to keep information backed up. Database queries will go through a middleware built on Node.js and Express.js that securely interacts with the MySQL database and prevents unwanted database interaction. We will also use Angular route guard to prevent users from accessing pages for which they do not have the correct permissions.
+
+## Database Design
+
+[insert ER Diagram here]
+
+### Explanation for entity sets and relationships:
+### Pets 
+The database needs to store the data of each pet
+
+### Owners
+The database needs to store data of the owners of the pets
+
+### Location
+Each owner will have a location they live in so the database needs to store that data
+
+### Park
+There is likely parks in which owners take their pet so the database needs to stare that information
+
+### Treats (I do not remember if this was one we established that we were using)
+Pets have treats they enjoy so we want our database to store the data on the treats that each pet enjoys
+
+### Owns (Owner-to-Pet)
+All pets registered in our application have owners to the database needs to store that information as a relationship
+
+### Friends (Pet-to-Pet)
+The goal of PetBook is to allow pets to meet and befriend new pets so our database needs to store that relationship
+
+### LivesIn (Owner-to-Location)
+Each owner registered in our application needs to provide general information on where they live so our database needs to store the relationship between owners and their location
+
+### LocatedIn (Park-to-Location)
+Each park has a location in which they are located in so the database needs to store the relationship between the park and the location in which it is located in
+
+### Enjoys (Pet-to-Treat) || (again, I do not remember if we established that we were going to used this relationship)
+We want our database to store information on what pets enjoy which treats
