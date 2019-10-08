@@ -47,7 +47,7 @@ The database needs to store the data of each pet. Pets are weak entity sets so t
 The database needs to store data of the owners of the pets
 
 ### Park
-There is likely parks in which owners take their pet so the database needs to stare that information
+There are likely parks in which owners take their pet so the database needs to stare that information
 
 ### Treat
 Pets have treats they enjoy so we want our database to store the data on the treats that each pet enjoys
@@ -56,7 +56,7 @@ Pets have treats they enjoy so we want our database to store the data on the tre
 People can meet together in groups so their pets can play so we need our database to store the information of the groups
 
 ### Owns (Owner-to-Pet)
-All pets registered in our application have owners to the database needs to store that information as a relationship
+All pets registered in our application have owners so the database needs to store that information as a relationship
 
 ### Friends (Pet-to-Pet)
 The goal of PetBook is to allow pets to meet and befriend new pets so our database needs to store that relationship
