@@ -41,19 +41,19 @@ As for access control, we will prevent against SQL injection and other forms of 
 
 ### Explanation for entity sets and relationships:
 ### Pets 
-The database needs to store the data of each pet
+The database needs to store the data of each pet. Pets are weak entity sets so they require an owner 
 
 ### Owners
 The database needs to store data of the owners of the pets
 
-### Location
-Each owner will have a location they live in so the database needs to store that data
-
 ### Park
 There is likely parks in which owners take their pet so the database needs to stare that information
 
-### Treats (I do not remember if this was one we established that we were using)
+### Treat
 Pets have treats they enjoy so we want our database to store the data on the treats that each pet enjoys
+
+### Group
+People can meet together in groups so their pets can play so we need our database to store the information of the groups
 
 ### Owns (Owner-to-Pet)
 All pets registered in our application have owners to the database needs to store that information as a relationship
@@ -61,11 +61,17 @@ All pets registered in our application have owners to the database needs to stor
 ### Friends (Pet-to-Pet)
 The goal of PetBook is to allow pets to meet and befriend new pets so our database needs to store that relationship
 
-### LivesIn (Owner-to-Location)
-Each owner registered in our application needs to provide general information on where they live so our database needs to store the relationship between owners and their location
+### In (Owner-to-Group)
+Owners can be in groups of people that meet together so their pets can interact so we want out databse to store this information
 
-### LocatedIn (Park-to-Location)
+### Nearby (Park-to-Location)
 Each park has a location in which they are located in so the database needs to store the relationship between the park and the location in which it is located in
 
-### Enjoys (Pet-to-Treat) || (again, I do not remember if we established that we were going to used this relationship)
+### MeetsAt (Group-to-Park)
+Groups of owners meet at parks so we want ot store this in out database
+
+### Likes (Pet-to-Treat) 
 We want our database to store information on what pets enjoy which treats
+
+### Sells (Park-to-Treat)
+Parks have treats that they can sell so we want to store this in our database
