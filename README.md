@@ -71,7 +71,7 @@ Owners can select parks that are near where they live, allowing them to find rel
 Groups can set up meetings at certain parks, which will be stored in our database as a relationship that can later be expanded to have reccurring meets.
 
 ### Likes (Pet-to-Treat) 
-The database will store which treats have been defined as something that a given pet likes.
+To help match pets with new friends and to suggest parks to owners, the database will store which treats have been defined by their owner as something that a given pet likes.
 
 ### Sells (Park-to-Treat)
 Parks can have vending machines or be near stores that sell treats. This can be added by owners who notice a treat being sold, and will be added to this relationship to be shown to other users.
