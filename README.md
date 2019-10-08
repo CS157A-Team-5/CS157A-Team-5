@@ -41,37 +41,37 @@ As for access control, we will prevent against SQL injection and other forms of 
 
 ### Explanation for entity sets and relationships:
 ### Pets 
-The database needs to store the data of each pet. Pets are weak entity sets so they require an owner 
+The database needs to store the data of each pet, holding some attributes to help describe the pet. Pets are weak entity sets so they require an owner.
 
 ### Owners
-The database needs to store data of the owners of the pets
+The database needs to store data of the owners of the pets, allowing them to claim ownership of pets and join groups they may be interested in.
 
-### Park
-There are likely parks in which owners take their pet so the database needs to stare that information
+### Parks
+Parks will be stored in a database describing their location and if they have a specific species they are targeting, such as a dog park.
 
-### Treat
-Pets have treats they enjoy so we want our database to store the data on the treats that each pet enjoys
+### Treats
+Pets may have treats that they prefer, and certain parks may have nearby stores that sell some of those treats. This provides another metric owners can use to pick which park they want to visit.
 
-### Group
-People can meet together in groups so their pets can play so we need our database to store the information of the groups
+### Groups
+People can be a part of groups that hold special interests or represent a certain region, so we need to maintain a database of groups that owners can join.
 
 ### Owns (Owner-to-Pet)
-All pets registered in our application have owners so the database needs to store that information as a relationship
+All pets registered in our application must have owners, so the database needs to store that information as a relationship.
 
 ### Friends (Pet-to-Pet)
-The goal of PetBook is to allow pets to meet and befriend new pets so our database needs to store that relationship
+One of the primary goals of PetBook is to allow pets to meet and befriend new pets, so our database will store these relationships to facilitate play dates and visits between pets.
 
 ### In (Owner-to-Group)
-Owners can be in groups of people that meet together so their pets can interact so we want out databse to store this information
+Owners can be in groups of people that meet together so their pets can interact, so we need to store which groups an owner has joined.
 
-### Nearby (Park-to-Location)
-Each park has a location in which they are located in so the database needs to store the relationship between the park and the location in which it is located in
+### Nearby (Owner-to-Park)
+Owners can select parks that are near where they live, allowing them to find relevant groups and other owners, so we store this relationship to the Parks table.
 
 ### MeetsAt (Group-to-Park)
-Groups of owners meet at parks so we want ot store this in out database
+Groups can set up meetings at certain parks, which will be stored in our database as a relationship that can later be expanded to have reccurring meets.
 
 ### Likes (Pet-to-Treat) 
-We want our database to store information on what pets enjoy which treats
+The database will store which treats have been defined as something that a given pet likes.
 
 ### Sells (Park-to-Treat)
-Parks have treats that they can sell so we want to store this in our database
+Parks can have vending machines or be near stores that sell treats. This can be added by owners who notice a treat being sold, and will be added to this relationship to be shown to other users.
