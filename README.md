@@ -75,3 +75,29 @@ To help match pets with new friends and to suggest parks to owners, the database
 
 ### Sells (Park-to-Treat)
 Parks can have vending machines or be near stores that sell treats. This can be added by owners who notice a treat being sold, and will be added to this relationship to be shown to other users.
+
+
+## Database Schema
+Pets(name, weight, age, species)
+
+Owners(email, password, name, location)
+
+Parks(id, location, hours)
+
+Treats(manufacturer, name, species)
+
+Groups(name, size, species)
+
+Owner-to-Pet(owner, pet)
+
+Pet-to-Pet(pet, pet)
+
+Owner-to-Group(owner, group)
+
+Owner-to-Park(owner, park)
+
+Group-to-Park(group, park)
+
+Pet-to-Treat(pet, treat)
+
+Park-to-Treat(park, treat)
