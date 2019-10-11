@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS owners(
 	password VARCHAR(45) NOT NULL, 
 	name VARCHAR(45) NOT NULL, 
 	location VARCHAR(100), 
-	PRIMARY KEY(email)
+	PRIMARY KEY (email)
 );
 
 CREATE TABLE IF NOT EXISTS pets(
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS pets(
 	weight INT, 
 	age INT, 
 	species VARCHAR(45), 
-	PRIMARY KEY(name, email), 
+	PRIMARY KEY (name, email), 
 	FOREIGN KEY (email) REFERENCES owners
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS groups(
 	name VARCHAR(45) NOT NULL, 
 	size INT NOT NULL, 
 	species VARCHAR(45), 
-	PRIMARY KEY(name)
+	PRIMARY KEY (name)
 );
 
 CREATE TABLE IF NOT EXISTS parks(
@@ -32,13 +32,16 @@ CREATE TABLE IF NOT EXISTS parks(
 	name VARCHAR(45) NOT NULL, 
 	location VARCHAR(100) NOT NULL, 
 	hours VARCHAR(45), 
-	PRIMARY KEY(id)
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS treats(
 	mfr VARCHAR(45) NOT NULL, 
 	name VARCHAR(45) NOT NULL, 
 	species VARCHAR(45), 
-	PRIMARY KEY(mfr, name)
+	PRIMARY KEY (mfr, name)
 );
 
+CREATE USER 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
+GRANT ALL PRIVILEGES ON petbook.* TO 'petbook'@'%';
+FLUSH PRIVILEGES;
