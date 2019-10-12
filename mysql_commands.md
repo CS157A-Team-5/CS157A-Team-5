@@ -5,7 +5,7 @@ CREATE DATABASE petbook;
 
 CREATE TABLE IF NOT EXISTS owners(
 	email VARCHAR(45) NOT NULL, 
-	password VARCHAR(45) NOT NULL, 
+	password CHAR(60) NOT NULL, 
 	name VARCHAR(45) NOT NULL, 
 	location VARCHAR(100), 
 	PRIMARY KEY (email)

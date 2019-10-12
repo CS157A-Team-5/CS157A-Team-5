@@ -1,8 +1,13 @@
-var mysql      = require('mysql');
-var connection = mysql.createPool({
+var mysql = require('mysql');
+var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'petbook',
     password : 'petbook!Node.js',
     database : 'petbook'
 });
-module.exports=connection;
+
+connection.connect(function(err) {
+    if (err) throw err;
+});
+
+module.exports = connection;

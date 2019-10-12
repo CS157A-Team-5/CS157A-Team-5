@@ -1,18 +1,31 @@
 var db = require('../db');
 
 var Petbook = {
-    getpets: function(callback) {
-        return db.query('SELECT * FROM t_pets', callback);
+    createowner: function(owner, hash, callback) {
+        return db.query('INSERT INTO owners(email, password, name, location) VALUES(?, ?, ?, ?)', 
+            [owner.email, hash, owner.name, owner.location] callback);
     },
-    createpet: function (pet, callback) {
-        return db.query('INSERT INTO t_pets(name, species, age) VALUES(?, ?, ?)', [pet.name, pet.species, pet.age], callback);
+    getowner: function(owner, hash, callback) {
+        return db.query('SELECT * FROM owners WHERE email=?', owner.email, callback);
     },
-    updatepet: function (pet, callback) {
-    	return db.query('UPDATE t_pets SET name=?, species=? WHERE ID=?', [pet.name, pet.species, pet.id], callback);
+
+    getgroups: function(callback) {
+        return db.query('SELECT name FROM groups', callback);
     },
-    deletepet: function (pet, callback) {
-    	return db.query('DELETE FROM t_pets WHERE ID=34', [pet.id], callback);
-    }
+    getgroup: function(name, callback) {
+        return db.query('SELECT * FROM groups WHERE name=?', name, callback);
+    },
+    creategroup: function (group, callback) {
+        return db.query('INSERT INTO groups(name, size, species) VALUES(?, ?, ?)', 
+            [group.name, group.size, group.species], callback);
+    },
+    updategroup: function (group, callback) {
+    	return db.query('UPDATE groups SET size=? WHERE name=?', 
+            [group.size, group.name], callback);
+    },
+    deletegroup: function (group, callback) {
+    	return db.query('DELETE FROM groups WHERE name=?', group.name, callback);
+    },
 }
 
 module.exports = Petbook;
