@@ -103,3 +103,10 @@ Group-to-Park(__group__, __park__)
 Pet-to-Treat(__pet__, __treat__)
 
 Park-to-Treat(__park__, __treat__)
+
+insert into parks(name, location, hours) values("", "", ""); 
+
+## Database Pictures
+
+Parks
+![alt-text](./db_assets/parks.png)
