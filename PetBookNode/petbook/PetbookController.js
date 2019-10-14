@@ -5,6 +5,35 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.json());
 var Petbook = require('./Petbook');
 
+/* All calls require respective object 
+ * interface unless solely param based.
+ * 
+ * user calls require owner interface
+ * pets calls require pet interface
+ * groups calls require group interface
+ * parks calls require park interface
+ */
+
+router.get('/user/login', function (req, res) {
+    Petbook.getowner(req.body, function(err, owner) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            if (owner === undefined || owner.length === 0) {
+                res.status(401).send('No such user');
+            } else {
+                bcrypt.compare(req.body.password, owner[0].password, function(err, valid) {
+                    if (valid) {
+                        res.json(owner[0]);
+                    } else {
+                        res.status(401).json(err);
+                    }
+                }
+            }
+        }
+    });
+});
+
 router.post('/user/create', function (req, res) {
     bcrypt.hash(req.body.password, 10, function(err, hash) {
         Petbook.createowner(req.body, hash, function(err) {
@@ -17,22 +46,62 @@ router.post('/user/create', function (req, res) {
     });
 });
 
-router.get('/user/login', function (req, res) {
-    Petbook.getowner(req.body, function(err, owners) {
+router.get('/user/pets', function (req, res) {
+    Petbook.getpetsbyowner(req.body, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
-            if (owners === undefined || owners.length === 0) {
-                res.status(401).send('No such user');
-            } else {
-                bcrypt.compare(req.body.password, owners[0].password, function(err, valid) {
-                    if (valid) {
-                        res.send(true);
-                    } else {
-                        res.status(401).json(err);
-                    }
-                }
-            }
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/pets', function (req, res) {
+    Petbook.getpet(req.body, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows[0]);
+        }
+    });
+});
+
+router.get('/pets/:petname', function (req, res) {
+    Petbook.getpetsbyname(req.params.petname, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.post('/pets', function (req, res) {
+    Petbook.createpet(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.put('/pets', function (req, res) {
+    Petbook.updatepet(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.delete('/pets', function (req, res) {
+    Petbook.deletepet(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
         }
     });
 });
@@ -48,7 +117,7 @@ router.get('/groups', function (req, res) {
 });
 
 router.get('/groups/:groupname', function (req, res) {
-    Petbook.getgroup(req.params.groupname, function(err, rows) {
+    Petbook.getgroupbyname(req.params.groupname, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
