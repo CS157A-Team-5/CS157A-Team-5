@@ -84,7 +84,7 @@ Pets(__name__, weight, age, species)
 
 Owners(__email__, password, name, location)
 
-Parks(__id__, location, hours)
+Parks(__name__, location, hours)
 
 Treats(__manufacturer__, __name__, species)
 
