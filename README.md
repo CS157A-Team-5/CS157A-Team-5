@@ -75,3 +75,38 @@ To help match pets with new friends and to suggest parks to owners, the database
 
 ### Sells (Park-to-Treat)
 Parks can have vending machines or be near stores that sell treats. This can be added by owners who notice a treat being sold, and will be added to this relationship to be shown to other users.
+
+
+## Relational Schemas
+* __bold__ = primary key
+
+Pets(__name__, weight, age, species)
+
+Owners(__email__, password, name, location)
+
+Parks(__name__, __location__, hours)
+
+Treats(__manufacturer__, __name__, species)
+
+Groups(__name__, size, species)
+
+Owner-to-Pet(__owner__, __pet__)
+
+Pet-to-Pet(__pet__, __pet__)
+
+Owner-to-Group(__owner__, __group__)
+
+Owner-to-Park(__owner__, __park__)
+
+Group-to-Park(__group__, __park__)
+
+Pet-to-Treat(__pet__, __treat__)
+
+Park-to-Treat(__park__, __treat__)
+
+insert into parks(name, location, hours) values("", "", ""); 
+
+## Database Pictures
+
+Parks
+![alt-text](./db_assets/parks.png)
