@@ -112,3 +112,9 @@ Parks
 ![alt-text](./db_assets/parks.png)
 Treats
 ![alt-text](./db_assets/Treats.PNG)
+Owner_Parks
+![alt-text](./db_assets/owner_parks.PNG)
+Treat_Parks
+![alt-text](./db_assets/park_treats.PNG)
+Pet_Treats
+![alt-text](./db_assets/pet_treats.PNG)
