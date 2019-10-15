@@ -110,3 +110,5 @@ insert into parks(name, location, hours) values("", "", "");
 
 Parks
 ![alt-text](./db_assets/parks.png)
+Treats
+![alt-text](./db_assets/Treats.PNG)
