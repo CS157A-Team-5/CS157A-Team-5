@@ -80,27 +80,27 @@ Parks can have vending machines or be near stores that sell treats. This can be 
 ## Relational Schemas
 * __bold__ = primary key
 
-Owners(__id__, email, password, name, location)
+owners(__id__, email, password, name, location)
 
-Pets(__id__, name, weight, age, species)
+pets(__id__, name, weight, age, species)
 
-Clubs(__id__, name, size, species)
+clubs(__id__, name, size, species)
 
-Parks(__id__, name, location, hours)
+parks(__id__, name, location, hours)
 
-Treats(__id__, manufacturer, name, species)
+treats(__id__, manufacturer, name, species)
 
-Pet_Pet(__id__, pet1_id, pet2_id)
+pet_pet(__id__, pet1_id, pet2_id)
 
-Owner_Club(__id__, owner_id, club_id)
+owner_club(__id__, owner_id, club_id)
 
-Owner_Park(__id__, owner_id, park_id)
+owner_park(__id__, owner_id, park_id)
 
-Club_Park(__id__, club_id, park_id)
+club_park(__id__, club_id, park_id)
 
-Pet_Treat(__id__, pet_id, treat_id)
+pet_treat(__id__, pet_id, treat_id)
 
-Park_Treat(__id__, park_id, treat_id)
+park_treat(__id__, park_id, treat_id)
 
 insert into parks(name, location, hours) values("", "", ""); 
 
