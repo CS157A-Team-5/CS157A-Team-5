@@ -100,6 +100,7 @@ club_parks (__club_id__, __park_id__)
 
 pet_treats (__pet_id__, __treat_id__)
 
+<<<<<<< b827f835a401fcc5b199cc56fa092f331c211850
 park_treats (__park_id__, __treat_id__) 
 
 ## Database Pictures
@@ -143,3 +144,16 @@ Treat_Park
 Pet_Treat
 
 ![alt-text](./db_assets/pet_treats.PNG)
+=======
+park_treats (__park_id__, __treat_id__)
+
+## Database Pictures
+
+| Parks          | 
+| :----------------- | 
+|![alt-text](./db_assets/parks.png) | 
+
+| Clubs           | Club_Parks         |
+| :----------------- | :----------------- |
+| ![alt-text](./db_assets/clubs.png) | ![alt-text](./db_assets/club_parks.png) |
+>>>>>>> correct table naming and add auto_increment keys
