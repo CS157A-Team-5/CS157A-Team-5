@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS pets(
 	weight INT, 
 	age INT, 
 	species VARCHAR(45), 
-	PRIMARY KEY (name, email), 
-	FOREIGN KEY (email) REFERENCES owners
+	PRIMARY KEY (name, owner_email), 
+	FOREIGN KEY (owner_email) REFERENCES owners(email) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS groups(
