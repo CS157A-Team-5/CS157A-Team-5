@@ -37,7 +37,7 @@ As for access control, we will prevent against SQL injection and other forms of 
 
 ## Database Design
 
-![alt text](https://i.imgur.com/pvgPdis.png)
+![alt text](./dbassets/er_diagram.png)
 
 ### Explanation for entity sets and relationships:
 ### Pets 
@@ -80,29 +80,29 @@ Parks can have vending machines or be near stores that sell treats. This can be 
 ## Relational Schemas
 * __bold__ = primary key
 
-Pets(__name__, weight, age, species)
+Pets(__id__, name, weight, age, species)
 
-Owners(__email__, password, name, location)
+Owners(__id__, email, password, name, location)
 
-Parks(__name__, __location__, hours)
+Parks(__id__, name, location, hours)
 
-Treats(__manufacturer__, __name__, species)
+Treats(__id__, manufacturer, name, species)
 
-Groups(__name__, size, species)
+Groups(__id__, name, size, species)
 
-Owner-to-Pet(__owner__, __pet__)
+Owner-to-Pet(__id__, owner, pet)
 
-Pet-to-Pet(__pet__, __pet__)
+Pet-to-Pet(__id__, pet1_id, pet2_id)
 
-Owner-to-Group(__owner__, __group__)
+Owner-to-Group(__id__, owner, group)
 
-Owner-to-Park(__owner__, __park__)
+Owner-to-Park(__id__, owner, park)
 
-Group-to-Park(__group__, __park__)
+Group-to-Park(__id__, group, park)
 
-Pet-to-Treat(__pet__, __treat__)
+Pet-to-Treat(__id__, pet, treat)
 
-Park-to-Treat(__park__, __treat__)
+Park-to-Treat(__id__, park, treat)
 
 insert into parks(name, location, hours) values("", "", ""); 
 
