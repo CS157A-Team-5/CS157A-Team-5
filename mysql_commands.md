@@ -3,31 +3,37 @@
 
 CREATE DATABASE petbook;
 
-CREATE TABLE IF NOT EXISTS owners(
+USE petbook;
+
+CREATE TABLE owners(
+	id INT NOT NULL AUTO_INCREMENT,
 	email VARCHAR(45) NOT NULL, 
 	password CHAR(60) NOT NULL, 
 	name VARCHAR(45) NOT NULL, 
 	location VARCHAR(100), 
-	PRIMARY KEY (email)
+	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS pets(
+CREATE TABLE pets(
+	id INT NOT NULL AUTO_INCREMENT,
+    owner_id INT NOT NULL,
 	name VARCHAR(45) NOT NULL, 
 	weight INT, 
 	age INT, 
 	species VARCHAR(45), 
-	PRIMARY KEY (name, owner_email), 
-	FOREIGN KEY (owner_email) REFERENCES owners(email) ON DELETE CASCADE
+	PRIMARY KEY (id), 
+	FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS groups(
+CREATE TABLE clubs(
+	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(45) NOT NULL, 
 	size INT NOT NULL, 
 	species VARCHAR(45), 
-	PRIMARY KEY (name)
+	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS parks(
+CREATE TABLE parks(
 	id INT NOT NULL AUTO_INCREMENT, 
 	name VARCHAR(45) NOT NULL, 
 	location VARCHAR(100) NOT NULL, 
@@ -35,13 +41,14 @@ CREATE TABLE IF NOT EXISTS parks(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS treats(
-	mfr VARCHAR(45) NOT NULL, 
+CREATE TABLE treats(
+	id INT NOT NULL AUTO_INCREMENT,
+	manufacturer VARCHAR(45) NOT NULL, 
 	name VARCHAR(45) NOT NULL, 
 	species VARCHAR(45), 
-	PRIMARY KEY (mfr, name)
+	PRIMARY KEY (id)
 );
 
-CREATE USER 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
+CREATE USER IF NOT EXISTS 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
 GRANT ALL PRIVILEGES ON petbook.* TO 'petbook'@'%';
 FLUSH PRIVILEGES;
