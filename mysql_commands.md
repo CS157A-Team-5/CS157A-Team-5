@@ -1,3 +1,4 @@
+```
 # MySQL commands for reference
 ## Setting up your mysql database
 
@@ -109,3 +110,4 @@ CREATE TABLE pet_treat(
 CREATE USER IF NOT EXISTS 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
 GRANT ALL PRIVILEGES ON petbook.* TO 'petbook'@'%';
 FLUSH PRIVILEGES;
+```
