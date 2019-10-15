@@ -30,22 +30,22 @@ var Petbook = {
         return db.query('DELETE FROM pets WHERE email=? AND name=?', [pet.email, pet.name], callback);
     },
 
-    getgroups: function(callback) {
-        return db.query('SELECT name FROM groups', callback);
+    getclubs: function(callback) {
+        return db.query('SELECT name FROM clubs', callback);
     },
-    getgroupbyname: function(name, callback) {
-        return db.query('SELECT * FROM groups WHERE name=?', name, callback);
+    getclubbyname: function(name, callback) {
+        return db.query('SELECT * FROM clubs WHERE name=?', name, callback);
     },
-    creategroup: function (group, callback) {
-        return db.query('INSERT INTO groups(name, size, species) VALUES(?, ?, ?)', 
-            [group.name, group.size, group.species], callback);
+    createclub: function (club, callback) {
+        return db.query('INSERT INTO clubs(name, size, species) VALUES(?, ?, ?)', 
+            [club.name, club.size, club.species], callback);
     },
-    updategroup: function (group, callback) {
-    	return db.query('UPDATE groups SET size=? WHERE name=?', 
-            [group.size, group.name], callback);
+    updateclub: function (club, callback) {
+    	return db.query('UPDATE clubs SET size=? WHERE name=?', 
+            [club.size, club.name], callback);
     },
-    deletegroup: function (group, callback) {
-    	return db.query('DELETE FROM groups WHERE name=?', group.name, callback);
+    deleteclub: function (club, callback) {
+    	return db.query('DELETE FROM clubs WHERE name=?', club.name, callback);
     },
 }
 

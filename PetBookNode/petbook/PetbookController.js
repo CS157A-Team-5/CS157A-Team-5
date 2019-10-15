@@ -10,7 +10,7 @@ var Petbook = require('./Petbook');
  * 
  * user calls require owner interface
  * pets calls require pet interface
- * groups calls require group interface
+ * clubs calls require club interface
  * parks calls require park interface
  */
 
@@ -106,8 +106,8 @@ router.delete('/pets', function (req, res) {
     });
 });
 
-router.get('/groups', function (req, res) {
-    Petbook.getgroups(function(err, rows) {
+router.get('/clubs', function (req, res) {
+    Petbook.getclubs(function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -116,8 +116,8 @@ router.get('/groups', function (req, res) {
     });
 });
 
-router.get('/groups/:groupname', function (req, res) {
-    Petbook.getgroupbyname(req.params.groupname, function(err, rows) {
+router.get('/clubs/:clubname', function (req, res) {
+    Petbook.getclubbyname(req.params.clubname, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -126,8 +126,8 @@ router.get('/groups/:groupname', function (req, res) {
     });
 });
 
-router.post('/groups', function (req, res) {
-    Petbook.creategroup(req.body, function(err, count) {
+router.post('/clubs', function (req, res) {
+    Petbook.createclub(req.body, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -136,8 +136,8 @@ router.post('/groups', function (req, res) {
     });
 });
 
-router.put('/groups', function (req, res) {
-    Petbook.updategroup(req.body, function(err, count) {
+router.put('/clubs', function (req, res) {
+    Petbook.updateclub(req.body, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -146,8 +146,8 @@ router.put('/groups', function (req, res) {
     });
 });
 
-router.delete('/groups', function (req, res) {
-    Petbook.deletegroup(req.body, function(err, count) {
+router.delete('/clubs', function (req, res) {
+    Petbook.deleteclub(req.body, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
