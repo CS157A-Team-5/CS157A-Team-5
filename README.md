@@ -37,7 +37,7 @@ As for access control, we will prevent against SQL injection and other forms of 
 
 ## Database Design
 
-![alt text](./dbassets/er_diagram.png)
+![alt text](./db_assets/er_diagram.png)
 
 ### Explanation for entity sets and relationships:
 ### Pets 
