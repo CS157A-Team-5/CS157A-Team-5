@@ -109,23 +109,3 @@ CREATE TABLE pet_treat(
 CREATE USER IF NOT EXISTS 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
 GRANT ALL PRIVILEGES ON petbook.* TO 'petbook'@'%';
 FLUSH PRIVILEGES;
-
-
-## Commands that use auto_increment ids and correct naming
-create database petbook;
-
-create table pets(id int not null auto_increment, name varchar(45) not null, weight int, age int, species varchar(45), primary key(id), foreign key(id) references owners(id));
-
-create table owners(id int not null auto_increment, email varchar(45) not null, password char(60) not null, name varchar(45) not null, primary key(id));
-
-create table clubs(id int not null auto_increment, name varchar(45), size int, species varchar(45), primary key(id));
-
-create table parks(id int not null auto_increment, name varchar(45), location varchar(100) not null, hours varchar(45), primary key(id));
-
-create table treats(id int not null auto_increment, manufacturer varchar(45) not null, name varchar(45) not null, species varchar(45), primary key(id));
-
-create table clubs_parks(id int not null auto_increment, club_id int not null, park_id int not null, primary key(id), foreign key (club_id) references clubs(id), foreign key (park_id) references parks(id));
-
-
-### To retroactively add the auto increment id
-alter table clubs add id int not null auto_increment primary key first;    
