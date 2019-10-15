@@ -44,7 +44,7 @@ As for access control, we will prevent against SQL injection and other forms of 
 The database needs to store the data of each pet, holding some attributes to help describe the pet. Pets are weak entity sets so they require an owner.
 
 ### Owners
-The database needs to store data of the owners of the pets, allowing them to claim ownership of pets and join groups they may be interested in.
+The database needs to store data of the owners of the pets, allowing them to claim ownership of pets and join clubs they may be interested in.
 
 ### Parks
 Parks will be stored in a database describing their location and if they have a specific species they are targeting, such as a dog park.
@@ -52,8 +52,8 @@ Parks will be stored in a database describing their location and if they have a 
 ### Treats
 Pets may have treats that they prefer, and certain parks may have nearby stores that sell some of those treats. This provides another metric owners can use to pick which park they want to visit.
 
-### Groups
-People can be a part of groups that hold special interests or represent a certain region, so we need to maintain a database of groups that owners can join.
+### Clubs
+People can be a part of clubs that hold special interests or represent a certain region, so we need to maintain a database of clubs that owners can join.
 
 ### Owns (Owner-to-Pet)
 All pets registered in our application must have owners, so the database needs to store that information as a relationship.
@@ -61,14 +61,14 @@ All pets registered in our application must have owners, so the database needs t
 ### Friends (Pet-to-Pet)
 One of the primary goals of PetBook is to allow pets to meet and befriend new pets, so our database will store these relationships to facilitate play dates and visits between pets.
 
-### In (Owner-to-Group)
-Owners can be in groups of people that meet together so their pets can interact, so we need to store which groups an owner has joined.
+### In (Owner-to-Club)
+Owners can be in clubs of people that meet together so their pets can interact, so we need to store which clubs an owner has joined.
 
 ### Nearby (Owner-to-Park)
-Owners can select parks that are near where they live, allowing them to find relevant groups and other owners, so we store this relationship to the Parks table.
+Owners can select parks that are near where they live, allowing them to find relevant clubs and other owners, so we store this relationship to the Parks table.
 
-### MeetsAt (Group-to-Park)
-Groups can set up meetings at certain parks, which will be stored in our database as a relationship that can later be expanded to have reccurring meets.
+### MeetsAt (Club-to-Park)
+Clubs can set up meetings at certain parks, which will be stored in our database as a relationship that can later be expanded to have reccurring meets.
 
 ### Likes (Pet-to-Treat) 
 To help match pets with new friends and to suggest parks to owners, the database will store which treats have been defined by their owner as something that a given pet likes.
@@ -92,15 +92,15 @@ Treats(__id__, manufacturer, name, species)
 
 Pet_Pet(__id__, pet1_id, pet2_id)
 
-Owner_Club(__id__, owner, group)
+Owner_Club(__id__, owner_id, club_id)
 
-Owner_Park(__id__, owner, park)
+Owner_Park(__id__, owner_id, park_id)
 
-Club_Park(__id__, group, park)
+Club_Park(__id__, club_id, park_id)
 
-Pet_Treat(__id__, pet, treat)
+Pet_Treat(__id__, pet_id, treat_id)
 
-Park_Treat(__id__, park, treat)
+Park_Treat(__id__, park_id, treat_id)
 
 insert into parks(name, location, hours) values("", "", ""); 
 
