@@ -80,27 +80,27 @@ Parks can have vending machines or be near stores that sell treats. This can be 
 ## Relational Schemas
 * __bold__ = primary key
 
-pets (__id__, name, weight, age, species)
+owners(__id__, email, password, name, location)
 
-owners (__id__, email, password, name, location)
+pets(__id__, name, weight, age, species)
 
-clubs (__id__, name, size, species)
+clubs(__id__, name, size, species)
 
-parks (__id__, name, location, hours)
+parks(__id__, name, location, hours)
 
-treats (__id__, manufacturer, name, species)
+treats(__id__, manufacturer, name, species)
 
-pet_friends (__pet_id__, __friend_id__)
+pet_pet(__id__, pet1_id, pet2_id)
 
-owner_clubs (__owner_id__, __club_id__)
+owner_club(__id__, owner_id, club_id)
 
-owner_parks (__owner_id__, __park_id__)
+owner_park(__id__, owner_id, park_id)
 
-club_parks (__club_id__, __park_id__)
+club_park(__id__, club_id, park_id)
 
-pet_treats (__pet_id__, __treat_id__)
+pet_treat(__id__, pet_id, treat_id)
 
-park_treats (__park_id__, __treat_id__) 
+park_treat(__id__, park_id, treat_id)
 
 ## Database Pictures
 
@@ -128,11 +128,12 @@ Pet_Pet
 
 ![alt-text](./db_assets/pet_pet.png)
 
-Owner_Club (To be added)
+Owner_Club
 
 ![alt-text](./db_assets/owner_club.png)
 
 Club_Parks
+
 ![alt-text](./db_assets/club_parks.png)
 
 Owner_Park
