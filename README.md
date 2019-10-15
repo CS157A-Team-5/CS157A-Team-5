@@ -80,29 +80,27 @@ Parks can have vending machines or be near stores that sell treats. This can be 
 ## Relational Schemas
 * __bold__ = primary key
 
+Owners(__id__, email, password, name, location)
+
 Pets(__id__, name, weight, age, species)
 
-Owners(__id__, email, password, name, location)
+Clubs(__id__, name, size, species)
 
 Parks(__id__, name, location, hours)
 
 Treats(__id__, manufacturer, name, species)
 
-Groups(__id__, name, size, species)
+Pet_Pet(__id__, pet1_id, pet2_id)
 
-Owner-to-Pet(__id__, owner, pet)
+Owner_Club(__id__, owner, group)
 
-Pet-to-Pet(__id__, pet1_id, pet2_id)
+Owner_Park(__id__, owner, park)
 
-Owner-to-Group(__id__, owner, group)
+Club_Park(__id__, group, park)
 
-Owner-to-Park(__id__, owner, park)
+Pet_Treat(__id__, pet, treat)
 
-Group-to-Park(__id__, group, park)
-
-Pet-to-Treat(__id__, pet, treat)
-
-Park-to-Treat(__id__, park, treat)
+Park_Treat(__id__, park, treat)
 
 insert into parks(name, location, hours) values("", "", ""); 
 
@@ -132,14 +130,18 @@ Pet_Pet
 
 ![alt-text](./db_assets/pet_pet.png)
 
-Owner_Parks
+Owner_Club (To be added)
+
+![alt-text](./db_assets/owner_club.png)
+
+Owner_Park
 
 ![alt-text](./db_assets/owner_parks.PNG)
 
-Treat_Parks
+Treat_Park
 
 ![alt-text](./db_assets/park_treats.PNG)
 
-Pet_Treats
+Pet_Treat
 
 ![alt-text](./db_assets/pet_treats.PNG)
