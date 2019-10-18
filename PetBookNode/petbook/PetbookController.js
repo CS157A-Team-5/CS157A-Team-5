@@ -15,20 +15,20 @@ var Petbook = require('./Petbook');
  */
 
 router.get('/user/login', function (req, res) {
-    Petbook.getowner(req.body, function(err, owner) {
+    Petbook.getowner(req.params.id, function(err, owner) {
         if(err) {
             res.status(400).json(err);
         } else {
             if (owner === undefined || owner.length === 0) {
                 res.status(401).send('No such user');
             } else {
-                bcrypt.compare(req.body.password, owner[0].password, function(err, valid) {
+                bcrypt.compare(req.params.password, owner[0].password, function(err, valid) {
                     if (valid) {
                         res.json(owner[0]);
                     } else {
                         res.status(401).json(err);
                     }
-                }
+                });
             }
         }
     });
@@ -46,8 +46,8 @@ router.post('/user/create', function (req, res) {
     });
 });
 
-router.get('/user/pets', function (req, res) {
-    Petbook.getpetsbyowner(req.body, function(err, rows) {
+router.get('/user/pets/:owner_id', function (req, res) {
+    Petbook.getpetsbyowner(req.params.owner_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -96,8 +96,8 @@ router.put('/pets', function (req, res) {
     });
 });
 
-router.delete('/pets', function (req, res) {
-    Petbook.deletepet(req.body, function(err, count) {
+router.delete('/pets/:pet_id', function (req, res) {
+    Petbook.deletepet(req.params.pet_id, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -107,17 +107,17 @@ router.delete('/pets', function (req, res) {
 });
 
 router.get('/clubs', function (req, res) {
-    Petbook.getclubs(function(err, rows) {
+    Petbook.getclubs(req.body, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(rows);
+            res.json(rows[0]);
         }
     });
 });
 
-router.get('/clubs/:clubname', function (req, res) {
-    Petbook.getclubbyname(req.params.clubname, function(err, rows) {
+router.get('/clubs/:club_name', function (req, res) {
+    Petbook.getclubbyname(req.params.club_name, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -146,8 +146,51 @@ router.put('/clubs', function (req, res) {
     });
 });
 
-router.delete('/clubs', function (req, res) {
-    Petbook.deleteclub(req.body, function(err, count) {
+router.delete('/clubs/:club_id', function (req, res) {
+    Petbook.deleteclub(req.params.club_id, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.get('/friendships/:pet_id', function (req, res) {
+    Petbook.getfriendsbypet(req.params.pet_id, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/friendships', function (req, res) {
+    Petbook.getfriendship(req.body, function(err, id) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            if (id === 0)
+                res.send(0)
+            else
+                res.json(id[0]);
+        }
+    });
+});
+
+router.post('/friendships', function (req, res) {
+    Petbook.getfriendship(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.delete('/friendships/:friendship_id', function (req, res) {
+    Petbook.deletefriendship(req.params.friendship_id, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {

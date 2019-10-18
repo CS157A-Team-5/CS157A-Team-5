@@ -1,37 +1,37 @@
 export interface Pet {
-	id: Number;
-	owner_id: Number;
-	name: String;
-	weight: Number
-	age: Number;
-	species: String;
+	id: number;
+	owner_id: number;
+	name: string;
+	weight: number
+	age: number;
+	species: string;
 }
 
 export interface Owner {
-	id: Number;
-	email: String;
-	password: String;
-	name: String;
-	location: String;
+	id: number;
+	email: string;
+	password: string;
+	name: string;
+	location: string;
 }
 
 export interface Club {
-	id: Number;
-	name: String;
-	species: String;
-	size: Number;
+	id: number;
+	name: string;
+	species: string;
+	size: number;
 }
 
 export interface Park {
-	id: Number;
-	name: String;
-	location: String;
-	hours: String;
+	id: number;
+	name: string;
+	location: string;
+	hours: string;
 }
 
 export interface Treat {
-	id: Number;
-	manufacturer: String;
-	name: String;
-	species: String;
+	id: number;
+	manufacturer: string;
+	name: string;
+	species: string;
 }

@@ -19,10 +19,10 @@ export class PetbookComponent implements OnInit {
   }
 
   getPets() {
-  	this.petbookService.getPets().subscribe((res: Pet[])=>{
+  	this.petbookService.getPetsByName('Annie').subscribe((res: Pet[])=>{
     	this.pets = res;
 		console.log(this.pets);
-	});
+    });
   }
 
   createPet(model: Pet) {
@@ -37,7 +37,7 @@ export class PetbookComponent implements OnInit {
 
   deletePet(model: Pet) {
   	console.log(model);
-  	this.petbookService.deletePet(model);
+  	this.petbookService.deletePet(100);
   }
 
 }
