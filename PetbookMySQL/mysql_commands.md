@@ -25,7 +25,7 @@ CREATE TABLE pets(
 	age INT,
 	species VARCHAR(45),
 	PRIMARY KEY (id),
-	FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE
+	FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE	
 );
 
 CREATE TABLE clubs(
@@ -57,8 +57,8 @@ CREATE TABLE pet_pet(
 	pet1_id INT NOT NULL,
     pet2_id INT NOT NULL,
 	PRIMARY KEY (id),
-    FOREIGN KEY (pet1_id) REFERENCES pets(id),
-    FOREIGN KEY (pet2_id) REFERENCES pets(id)
+    FOREIGN KEY (pet1_id) REFERENCES pets(id) ON DELETE CASCADE,
+    FOREIGN KEY (pet2_id) REFERENCES pets(id) ON DELETE CASCADE
 );
 
 CREATE TABLE owner_club(
@@ -66,8 +66,8 @@ CREATE TABLE owner_club(
 	owner_id INT NOT NULL,
     club_id INT NOT NULL,
 	PRIMARY KEY (id),
-    FOREIGN KEY (owner_id) REFERENCES owners(id),
-    FOREIGN KEY (club_id) REFERENCES clubs(id)
+    FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE,
+    FOREIGN KEY (club_id) REFERENCES clubs(id) ON DELETE CASCADE
 );
 
 CREATE TABLE owner_park(
@@ -75,8 +75,8 @@ CREATE TABLE owner_park(
 	owner_id INT NOT NULL,
     park_id INT NOT NULL,
 	PRIMARY KEY (id),
-    FOREIGN KEY (owner_id) REFERENCES owners(id),
-    FOREIGN KEY (park_id) REFERENCES parks(id)
+    FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE,
+    FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE
 );
 
 CREATE TABLE club_park(
@@ -84,8 +84,8 @@ CREATE TABLE club_park(
 	club_id INT NOT NULL,
     park_id INT NOT NULL,
 	PRIMARY KEY (id),
-    FOREIGN KEY (club_id) REFERENCES clubs(id),
-    FOREIGN KEY (park_id) REFERENCES parks(id)
+    FOREIGN KEY (club_id) REFERENCES clubs(id) ON DELETE CASCADE,
+    FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE
 );
 
 CREATE TABLE park_treat(
@@ -94,8 +94,8 @@ CREATE TABLE park_treat(
 	treat_id INT NOT NULL,
 	cost DECIMAL(5,2),
 	PRIMARY KEY (id),
-    FOREIGN KEY (park_id) REFERENCES parks(id),
-    FOREIGN KEY (treat_id) REFERENCES treats(id)
+    FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE,
+    FOREIGN KEY (treat_id) REFERENCES treats(id) ON DELETE CASCADE
 );
 
 CREATE TABLE pet_treat(
@@ -103,8 +103,8 @@ CREATE TABLE pet_treat(
     pet_id INT NOT NULL,
 	treat_id INT NOT NULL,
 	PRIMARY KEY (id),
-    FOREIGN KEY (pet_id) REFERENCES pets(id),
-    FOREIGN KEY (treat_id) REFERENCES treats(id)
+    FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE,
+    FOREIGN KEY (treat_id) REFERENCES treats(id) ON DELETE CASCADE
 );
 
 CREATE USER IF NOT EXISTS 'petbook'@'%' IDENTIFIED WITH mysql_native_password BY 'petbook!Node.js';
