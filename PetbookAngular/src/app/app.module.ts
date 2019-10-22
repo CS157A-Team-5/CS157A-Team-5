@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -38,6 +39,7 @@ import { RegistrationComponent } from './registration/registration.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatMenuModule,
     RouterModule.forRoot([
       { path: '', component: DashboardComponent },
       { path: 'login', component: LoginComponent},

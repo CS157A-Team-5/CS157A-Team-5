@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  /**
+   * Currently, if user == true show dashboard
+   * else if user == false reroute to login page
+   */
+  user = true; 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -17,10 +22,10 @@ export class DashboardComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
-
-  showLogin() {
-    this.router.navigate(['login']);
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
   }
 
+  routeToLogin() {
+    this.router.navigate(['login']);
+  }
 }
