@@ -15,12 +15,14 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PetbookComponent } from './petbook/petbook.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    PetbookComponent
+    PetbookComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { PetbookComponent } from './petbook/petbook.component';
     MatListModule,
     RouterModule.forRoot([
       { path: '', component: DashboardComponent },
+      { path: 'login', component: LoginComponent},
     ]),
   ],
   providers: [],
