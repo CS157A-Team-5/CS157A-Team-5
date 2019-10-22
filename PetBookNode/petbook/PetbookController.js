@@ -110,7 +110,7 @@ router.delete('/pets/:pet_id', function (req, res) {
 });
 
 router.get('/clubs', function (req, res) {
-    Petbook.getclubs(req.query.club_id, function(err, rows) {
+    Petbook.getclub(req.query.club_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
