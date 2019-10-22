@@ -15,7 +15,7 @@ var Petbook = require('./Petbook');
  */
 
 router.get('/user/login', function (req, res) {
-    Petbook.getowner(req.params.id, function(err, owner) {
+    Petbook.getowner(req.params.email, function(err, owner) {
         if(err) {
             res.status(400).json(err);
         } else {

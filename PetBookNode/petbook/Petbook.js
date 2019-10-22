@@ -1,8 +1,8 @@
 var db = require('../db');
 
 var Petbook = {
-    getowner: function(owner_id, hash, callback) {
-        return db.query('SELECT * FROM owners WHERE id=?', owner_id, callback);
+    getowner: function(email, hash, callback) {
+        return db.query('SELECT * FROM owners WHERE email=?', email, callback);
     },
     createowner: function(owner, hash, callback) {
         return db.query('INSERT INTO owners(email, password, name, location) VALUES(?, ?, ?, ?)', 
