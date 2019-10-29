@@ -16,7 +16,7 @@ export class PetbookService {
 	url = 'http://localhost:3000/api/';
 	
 	getOwnerLogin(data: Owner, returnURL?: string): Observable<Owner> {
-		return this.http.get<Owner>((this.url + 'user/login'), {params: {id: String(data.id), password: data.password}});
+		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}});
 	}
 
 	createOwner(data: Owner, returnURL?: string) {

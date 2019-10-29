@@ -1,8 +1,8 @@
 var db = require('../db');
 
 var Petbook = {
-    getowner: function(owner_id, hash, callback) {
-        return db.query('SELECT * FROM owners WHERE id=?', owner_id, callback);
+    getowner: function(email, callback) {
+        return db.query('SELECT * FROM owners WHERE email=?', email, callback);
     },
     createowner: function(owner, hash, callback) {
         return db.query('INSERT INTO owners(email, password, name, location) VALUES(?, ?, ?, ?)', 
@@ -41,8 +41,8 @@ var Petbook = {
             [club.name, club.size, club.species], callback);
     },
     updateclub: function(club, callback) {
-    	return db.query('UPDATE clubs SET name=?, size=? WHERE id=?', 
-            [club.name, club.size, club.id], callback);
+    	return db.query('UPDATE clubs SET name=?, species=?, size=? WHERE id=?', 
+            [club.name, club.species, club.size, club.id], callback);
     },
     deleteclub: function(club_id, callback) {
     	return db.query('DELETE FROM clubs WHERE id=?', club_id, callback);
