@@ -19,7 +19,7 @@ body {
   flex-direction: row;
 }
 
-router-outlet + * {
+router-outlet+* {
   padding: 0 16px;
 }
 
@@ -56,7 +56,7 @@ p {
 
 a {
   cursor: pointer;
-  color: #1976d2;
+  color: #3f51b5;
   text-decoration: none;
 }
 
@@ -104,7 +104,7 @@ button {
   border-radius: 2px;
   font-size: 14px;
   cursor: pointer;
-  background-color: #1976d2;
+  background-color: #3f51b5;
   color: white;
   border: none;
 }
@@ -119,6 +119,12 @@ button:hover {
 button:disabled {
   opacity: 0.5;
   cursor: auto;
+}
+
+.button-center {
+  margin: 5% auto 0;
+  display: flex;
+  margin-bottom: 20px;
 }
 
 /* Material */
