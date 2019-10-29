@@ -107,7 +107,6 @@ button {
   background-color: #1976d2;
   color: white;
   border: none;
-  margin: 10px;
 }
 
 .button:hover,
@@ -120,4 +119,28 @@ button:hover {
 button:disabled {
   opacity: 0.5;
   cursor: auto;
+}
+
+/* Material */
+
+.mat-card {
+  text-align: -webkit-center;
+  margin: 20px;
+}
+
+.mat-form-field {
+  margin: 10px;
+}
+
+/* Components */
+
+app-dashboard,
+app-petbook,
+app-login,
+app-registration {
+  width: var(--content-width);
+  min-height: fit-content;
+  position: relative;
+  max-width: 1000px;
+  margin: 5% auto 0;
 }
