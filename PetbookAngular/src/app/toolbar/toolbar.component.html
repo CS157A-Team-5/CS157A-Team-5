@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['login']">Login</button>
+    <button mat-menu-item [routerLink]="['registration']">Registration</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+  <span id="site-title">Petbook</span>
+</mat-toolbar>
