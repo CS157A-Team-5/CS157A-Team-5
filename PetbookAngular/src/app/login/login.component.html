@@ -1,10 +1,48 @@
 <div class="login-page">
-  <h1>Login</h1>
-  <p>Welcome to Petbook! Login to access your profile.</p>
-  <div>
-    <button class="button-center" (click)="login()">Login</button>
-  </div>
+  <!-- <h1>Welcome to Petbook! Login to access your profile.</h1>  -->
+  <mat-card>
+  <mat-card-title>
+    Login
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <table>      
+        <!-- email form -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="email" matInput placeholder="Email" autocomplete="on" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- password form -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="password" matInput placeholder="Password" autocomplete="url" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- Login button -->
+        <tr>
+          <td colspan="2" style="padding-inline-start: 10px;">
+            <button type="submit" (click)="login()" style="text-align: center">Login</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+</mat-card>
+
   <div>
     <button class="button-center" (click)="register()">New User Registration</button>
   </div>
 </div>
+
+
+
+
