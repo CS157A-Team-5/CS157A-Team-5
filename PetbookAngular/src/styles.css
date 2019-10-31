@@ -1,3 +1,152 @@
-/* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Global Styles */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #616161;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+router-outlet+* {
+  padding: 0 16px;
+}
+
+#site-title {
+  font-size: 28px;
+  font-weight: lighter;
+  color: white;
+  margin: 0;
+  text-align: left;
+}
+
+/* Text */
+
+h1 {
+  font-size: 32px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+h3 {
+  padding-right: 10px;
+}
+
+p {
+  font-size: 14px;
+}
+
+/* Hyperlink */
+
+a {
+  cursor: pointer;
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Input */
+
+input {
+  font-size: 14px;
+  border-radius: 2px;
+  padding: 8px;
+  margin: 16px;
+  border: 1px solid #bdbdbd;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Unordered List */
+
+ul {
+  padding-inline-start: 30px;
+  padding-inline-end: 10px;
+}
+
+/* Table */
+
+table {
+  width: 100%;
+}
+
+/* Button */
+
+.button,
+button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+}
+
+.button:hover,
+button:hover {
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+.button:disabled,
+button:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.button-center {
+  margin: 5% auto 0;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/* Material */
+
+.mat-card {
+  text-align: -webkit-center;
+  margin: 20px;
+}
+
+.mat-form-field {
+  margin: 10px;
+}
+
+/* Components */
+
+app-dashboard,
+app-petbook,
+app-login,
+app-registration {
+  width: var(--content-width);
+  min-height: fit-content;
+  position: relative;
+  max-width: 1000px;
+  margin: 5% auto 0;
+}

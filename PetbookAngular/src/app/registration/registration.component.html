@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-title>
+    Register for Petbook
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <table>
+        <br />
+        <!-- name -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="name" matInput placeholder="Name" autocomplete="on" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- location form -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="location" matInput placeholder="City, State" autocomplete="off" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- email form -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="email" matInput placeholder="Email" autocomplete="on" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- password form -->
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input formControlName="password" matInput placeholder="Password" autocomplete="url" />
+            </mat-form-field>
+          </td>
+        </tr>
+        <br />
+
+        <!-- Submit button -->
+        <tr>
+          <td colspan="2" style="padding-inline-start: 10px;">
+            <button type="submit" (click)="onSubmit()" style="text-align: center">Submit</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card-content>
+</mat-card>
