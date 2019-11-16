@@ -14,4 +14,10 @@
 </mat-card>
 </div>
 
+<ul *ngFor = 'let pet of pets | async'>
+  <span>
+    {{pet.name}},{{pet.species}}, {{pet.age}}, {{pet.weight}}
+  </span>
+</ul>
+
 

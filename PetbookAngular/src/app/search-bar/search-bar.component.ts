@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { PetbookService } from '../petbook.service';
+import { Pet } from '../petbook.interface';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,7 +15,9 @@ export class SearchBarComponent {
     searchPetOrClub: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router) { }
+  pets: Pet[];
+
+  constructor(private router: Router, private petService: PetbookService) { }
 
   onSearch() {
     if (!this.searchForm.valid) {
@@ -21,7 +25,7 @@ export class SearchBarComponent {
       return;
     }
 
-    //api call
+    this.pets = this.petService.getPetsByName(this.searchForm.value.searchPetOrClub);
 
     console.log("Search successful");
   }
