@@ -12,10 +12,10 @@ import { Pet } from '../petbook.interface';
 export class SearchBarComponent {
 
   searchForm = new FormGroup({
-    searchPetOrClub: new FormControl('', [Validators.required]),
+    searchPet: new FormControl('', [Validators.required]),
   });
 
-  pets: Pet[];
+  pets;  //: Pet[];    //I had an error when I included : Pet[]
 
   constructor(private router: Router, private petService: PetbookService) { }
 
@@ -25,7 +25,7 @@ export class SearchBarComponent {
       return;
     }
 
-    this.pets = this.petService.getPetsByName(this.searchForm.value.searchPetOrClub);
+    this.pets = this.petService.getPetsByName(this.searchForm.value.searchPet);
 
     console.log("Search successful");
   }

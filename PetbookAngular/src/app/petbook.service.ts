@@ -20,7 +20,7 @@ export class PetbookService {
     console.log("Success");
 		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}})
     .pipe(map(userDetails => {
-      localStorage.setItem('currentUserID', userDetails.id);
+      localStorage.setItem('currentUserID', userDetails.id.toString());
       return userDetails;
     }));
 	}
