@@ -5,9 +5,9 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.json());
 var Petbook = require('./Petbook');
 
-/* All calls require respective object 
+/* All calls require respective object
  * interface unless solely param based.
- * 
+ *
  * user calls require owner interface
  * pets calls require pet interface
  * clubs calls require club interface
@@ -59,8 +59,8 @@ router.get('/user/pets/:owner_id', function (req, res) {
     });
 });
 
-router.get('/pets', function (req, res) {
-    Petbook.getpet(req.query.pet_id, function(err, rows) {
+router.get('/pets/id/:pet_id', function (req, res) {
+    Petbook.getpet(req.params.pet_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -69,8 +69,28 @@ router.get('/pets', function (req, res) {
     });
 });
 
-router.get('/pets/:petname', function (req, res) {
+router.get('/pets/name/:petname', function (req, res) {
     Petbook.getpetsbyname(req.params.petname, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/pets/location/:location', function (req, res) {
+    Petbook.getpetsbylocation(req.params.location, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/pets/club/:club_id', function (req, res) {
+    Petbook.getpetsbyclub(req.params.club_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -109,8 +129,8 @@ router.delete('/pets/:pet_id', function (req, res) {
     });
 });
 
-router.get('/clubs', function (req, res) {
-    Petbook.getclub(req.query.club_id, function(err, rows) {
+router.get('/clubs/id/:club_id', function (req, res) {
+    Petbook.getclub(req.params.club_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -119,12 +139,32 @@ router.get('/clubs', function (req, res) {
     });
 });
 
-router.get('/clubs/:club_name', function (req, res) {
+router.get('/clubs/name/:club_name', function (req, res) {
     Petbook.getclubbyname(req.params.club_name, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
             res.json(rows);
+        }
+    });
+});
+
+router.post('/clubs/join', function (req, res) {
+    Petbook.joinclub(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
+router.post('/clubs/leave', function (req, res) {
+    Petbook.leaveclub(req.body, function(err, count) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(req.body);
         }
     });
 });
@@ -183,7 +223,7 @@ router.get('/friendships', function (req, res) {
 });
 
 router.post('/friendships', function (req, res) {
-    Petbook.getfriendship(req.body, function(err, count) {
+    Petbook.addfriendship(req.body, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {

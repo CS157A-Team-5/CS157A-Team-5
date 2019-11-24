@@ -11,10 +11,10 @@ import { Owner, Pet, Club, Park, Treat } from './petbook.interface';
  */
 
 @Injectable()
-export class PetbookService { 
+export class PetbookService {
 	constructor(private http: HttpClient, private router: Router) { }
 	url = 'http://localhost:3000/api/';
-	
+
 	getOwnerLogin(data: Owner, returnURL?: string): Observable<Owner> {
 		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}});
 	}
@@ -37,11 +37,19 @@ export class PetbookService {
 	}
 
 	getPet(petID: number, returnURL?: string): Observable<Pet> {
-		return this.http.get<Pet>((this.url + 'pets'), {params: {pet_id: String(petID)}});
+		return this.http.get<Pet>((this.url + 'pets/id/' + petID));
 	}
-	
+
 	getPetsByName(name: string): Observable<Pet[]> {
-		return this.http.get<Pet[]>(this.url + 'pets/' + name);
+		return this.http.get<Pet[]>(this.url + 'pets/name/' + name);
+	}
+
+	getPetsByLocation(location: string): Observable<Pet[]> {
+		return this.http.get<Pet[]>(this.url + 'pets/location/' + location);
+	}
+
+	getPetsByClub(clubID: number): Observable<Pet[]> {
+		return this.http.get<Pet[]>(this.url + 'pets/club/' + clubID);
 	}
 
 	createPet(data: Pet, returnURL?: string) {
@@ -84,11 +92,37 @@ export class PetbookService {
 	}
 
 	getClub(clubID: number): Observable<Club> {
-		return this.http.get<Club>((this.url + 'clubs'), {params: {club_id: String(clubID)}});
+		return this.http.get<Club>((this.url + 'clubs/id/' + clubID));
 	}
-	
+
 	getClubsByName(name: string): Observable<Club[]> {
-		return this.http.get<Club[]>(this.url + 'clubs/' + name);
+		return this.http.get<Club[]>(this.url + 'clubs/name/' + name);
+	}
+
+	joinClub(ownerID: number, clubID: number, returnURL?: string) {
+		this.http.post((this.url + 'clubs/join'), {owner_id: String(ownerID), club_id:String(clubID)}).subscribe(
+			res => {
+				console.log(ownerID + " joined club " + clubID);
+				if (returnURL !== undefined)
+					this.router.navigateByUrl(returnURL);
+			},
+			err => {
+				console.log('Error: ', err);
+			}
+		);
+	}
+
+	leaveClub(ownerID: number, clubID: number, returnURL?: string) {
+		this.http.post((this.url + 'clubs/leave'), {owner_id: String(ownerID), club_id:String(clubID)}).subscribe(
+			res => {
+				console.log(ownerID + " left club " + clubID);
+				if (returnURL !== undefined)
+					this.router.navigateByUrl(returnURL);
+			},
+			err => {
+				console.log('Error: ', err);
+			}
+		);
 	}
 
 	createClub(data: Club, returnURL: string) {
@@ -135,7 +169,8 @@ export class PetbookService {
 	}
 
 	getFriendshipValid(pet1ID: number, pet2ID: number): Observable<Number> {
-		return this.http.get<Number>((this.url + 'friendships'), {params: {pet1_id: String(pet1ID), pet2_id: String(pet2ID)}});
+		return this.http.get<Number>((this.url + 'friendships'),
+			{params: {pet1_id: String(pet1ID), pet2_id: String(pet2ID)}});
 	}
 
 	addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
