@@ -26,7 +26,13 @@ var Petbook = {
             '(SELECT owner_id AS o_id FROM owner_club WHERE club_id=?)' +
             'WHERE owner_id = o_id',
             club_id, callback);
-    }
+    },
+    getpetsbypark: function (park_id, callback) {
+        return db.query('SELECT p.* FROM pets AS p, ' +
+            '(SELECT owner_id AS o_id FROM owner_park WHERE park_id=?)' +
+            'WHERE owner_id = o_id',
+            park_id, callback);
+    },
     createpet: function(pet, callback) {
         return db.query('INSERT INTO pets(owner_id, name, weight, age, species) VALUES(?, ?, ?, ?)',
             [pet.owner_id, pet.name, pet.age, pet.species], callback);
@@ -44,6 +50,9 @@ var Petbook = {
     },
     getclubbyname: function(name, callback) {
         return db.query('SELECT * FROM clubs WHERE name LIKE ?', (name + '%'), callback);
+    },
+    getclubbyowner: function(owner_id, callback) {
+        return db.query('SELECT club_id FROM owner_club WHERE owner_id=?', owner_id, callback);
     },
     joinclub: function (data, callback) {
         return db.query('INSERT INTO owner_club(owner_id, club_id) VALUES(?, ?)',

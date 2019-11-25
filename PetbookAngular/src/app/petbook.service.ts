@@ -52,6 +52,10 @@ export class PetbookService {
 		return this.http.get<Pet[]>(this.url + 'pets/club/' + clubID);
 	}
 
+	getPetsByPark(parkID: number): Observable<Pet[]> {
+		return this.http.get<Pet[]>(this.url + 'pets/park/' + parkID);
+	}
+
 	createPet(data: Pet, returnURL?: string) {
 		this.http.post((this.url + 'pets'), data).subscribe(
 			res => {
@@ -97,6 +101,10 @@ export class PetbookService {
 
 	getClubsByName(name: string): Observable<Club[]> {
 		return this.http.get<Club[]>(this.url + 'clubs/name/' + name);
+	}
+
+	getClubsByOwner(ownerID: string): Observable<Club[]> {
+		return this.http.get<Club[]>(this.url + 'clubs/owner/' + ownerID);
 	}
 
 	joinClub(ownerID: number, clubID: number, returnURL?: string) {

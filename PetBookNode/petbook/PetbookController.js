@@ -99,6 +99,16 @@ router.get('/pets/club/:club_id', function (req, res) {
     });
 });
 
+router.get('/pets/park/:park_id', function (req, res) {
+    Petbook.getpetsbyclub(req.params.park_id, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
 router.post('/pets', function (req, res) {
     Petbook.createpet(req.body, function(err, count) {
         if(err) {
@@ -141,6 +151,16 @@ router.get('/clubs/id/:club_id', function (req, res) {
 
 router.get('/clubs/name/:club_name', function (req, res) {
     Petbook.getclubbyname(req.params.club_name, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/clubs/owner/:owner_id', function (req, res) {
+    Petbook.getclubbyowner(req.params.owner_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
