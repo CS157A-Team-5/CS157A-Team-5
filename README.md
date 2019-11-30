@@ -73,9 +73,6 @@ Clubs can set up meetings at certain parks, which will be stored in our database
 ### Likes (Pet-to-Treat) 
 To help match pets with new friends and to suggest parks to owners, the database will store which treats have been defined by their owner as something that a given pet likes.
 
-### Sells (Park-to-Treat)
-Parks can have vending machines or be near stores that sell treats. This can be added by owners who notice a treat being sold, and will be added to this relationship to be shown to other users.
-
 
 ## Relational Schemas
 * __bold__ = primary key
@@ -100,7 +97,6 @@ club_park(__id__, club_id, park_id)
 
 pet_treat(__id__, pet_id, treat_id)
 
-park_treat(__id__, park_id, treat_id)
 
 ## Database Pictures
 
@@ -139,10 +135,6 @@ Club_Parks
 Owner_Park
 
 ![alt-text](./db_assets/owner_parks.PNG)
-
-Treat_Park
-
-![alt-text](./db_assets/park_treats.PNG)
 
 Pet_Treat
 

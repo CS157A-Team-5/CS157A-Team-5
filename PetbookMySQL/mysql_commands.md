@@ -88,16 +88,6 @@ CREATE TABLE club_park(
     FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE park_treat(
-	id INT NOT NULL AUTO_INCREMENT,
-    park_id INT NOT NULL,
-	treat_id INT NOT NULL,
-	cost DECIMAL(5,2),
-	PRIMARY KEY (id),
-    FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE,
-    FOREIGN KEY (treat_id) REFERENCES treats(id) ON DELETE CASCADE
-);
-
 CREATE TABLE pet_treat(
 	id INT NOT NULL AUTO_INCREMENT,
     pet_id INT NOT NULL,

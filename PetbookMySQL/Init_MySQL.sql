@@ -87,16 +87,6 @@ CREATE TABLE club_park(
     FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE park_treat(
-    id INT NOT NULL AUTO_INCREMENT,
-    park_id INT NOT NULL,
-    treat_id INT NOT NULL,
-    cost DECIMAL(5,2),
-    PRIMARY KEY (id),
-    FOREIGN KEY (park_id) REFERENCES parks(id) ON DELETE CASCADE,
-    FOREIGN KEY (treat_id) REFERENCES treats(id) ON DELETE CASCADE
-);
-
 CREATE TABLE pet_treat(
     id INT NOT NULL AUTO_INCREMENT,
     pet_id INT NOT NULL,
@@ -304,22 +294,3 @@ VALUES
     (6, 1), 
     (3, 3), 
     (3, 2);
-
-INSERT INTO park_treat
-    (park_id, treat_id, cost)
-VALUES
-    (4, 7, 4.99),
-    (1, 6, 11.99), 
-    (1, 8, 7.99),     
-    (13, 10, 3.59), 
-    (13, 13, 7.99), 
-    (11, 7, 4.99), 
-    (11, 1, 16.99), 
-    (10, 4, 2.49), 
-    (10, 3, 2.99), 
-    (5, 14, 9.99), 
-    (5, 12, 20.99), 
-    (6, 6, 11.99), 
-    (6, 10, 3.59), 
-    (3, 11, 5.99), 
-    (3, 9, 16.99);
