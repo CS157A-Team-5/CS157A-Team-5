@@ -17,6 +17,8 @@ body {
 .container {
   display: flex;
   flex-direction: row;
+  height: 100vh;
+  width: 100vw;
 }
 
 router-outlet+* {
@@ -150,4 +152,21 @@ app-search-bar{
   position: relative;
   max-width: 1000px;
   margin: 5% auto 0;
+}
+
+app-dashboard {
+  margin-top: 0;
+}
+
+app-toolbar {
+  width: 100%;
+}
+
+.dashboard {
+  display: flex;
+  background-color: #e1e1e1;
+  padding: 20px 20px;
+  max-width: 960px;
+  min-height: 100%;
+  height: auto;
 }

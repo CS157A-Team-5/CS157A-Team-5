@@ -15,6 +15,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -52,6 +53,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent},
       { path: 'login', component: LoginComponent},

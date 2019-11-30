@@ -1,36 +1,92 @@
-<ul class="list-group" *ngIf="pets">
-	<li *ngFor="let p of pets" class="list-group-item">
-		{{p.id}}, {{p.name}}, {{p.species}}, {{p.age}}
-	</li>
-</ul>
+<div style="display: flex; flex-direction: row;">
+  <div style="flex-direction: column;">
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title>Pets</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul class="list-group" *ngIf="pets" style="text-align: left;">
+          <ul *ngFor="let p of pets" class="list-group-item" role="listitem">
+            <h3>{{p.name}}</h3>
+            <li>{{p.species}}</li>
+            <li>{{p.age}} years old</li>
+            <li>{{p.weight}} pounds</li>
+          </ul>
+        </ul>
+      </mat-card-content>
+    </mat-card>
 
-<h2>New Pet</h2>
-<form #petCreateForm="ngForm" (ngSubmit) = "createPet(petCreateForm.value)"> 
-   <input type="text" name="name" placeholder="Name" ngModel> 
-   <br/> 
-   <input type="text" name="species" placeholder="Species" ngModel> 
-   <br/> 
-   <input type="text" name="age" placeholder="Age" ngModel> 
-   <br/> 
-   <input type="submit" value="submit"> 
-</form>
-
-<h2>Update Pet</h2>
-<form #petUpdateForm="ngForm" (ngSubmit) = "updatePet(petUpdateForm.value)"> 
-   <input type="text" name="id" placeholder="ID" ngModel> 
-   <br/> 
-   <input type="text" name="name" placeholder="Name" ngModel> 
-   <br/> 
-   <input type="text" name="species" placeholder="Species" ngModel> 
-   <br/> 
-   <input type="text" name="age" placeholder="Age" ngModel> 
-   <br/> 
-   <input type="submit" value="submit"> 
-</form>
-
-<!-- <h2>Delete Pet</h2>
-<form #petDeleteForm="ngForm" (ngSubmit) = "deletePet(petDeleteForm.value)"> 
-   <input type="text" name="id" placeholder="ID" ngModel> 
-   <br/> 
-   <input type="submit" value="submit"> 
-</form> -->
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            New Pet
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form #petCreateForm="ngForm" (ngSubmit)="createPet(petCreateForm.value)">
+          <input type="text" name="name" placeholder="Name" ngModel>
+          <br />
+          <input type="text" name="species" placeholder="Species" ngModel>
+          <br />
+          <input type="text" name="age" placeholder="Age" ngModel>
+          <br />
+          <button type="submit" value="submit">Submit</button>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Update A Pet
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form #petUpdateForm="ngForm" (ngSubmit)="updatePet(petUpdateForm.value)">
+          <input type="text" name="id" placeholder="ID" ngModel>
+          <br />
+          <input type="text" name="name" placeholder="Name" ngModel>
+          <br />
+          <input type="text" name="species" placeholder="Species" ngModel>
+          <br />
+          <input type="text" name="age" placeholder="Age" ngModel>
+          <br />
+          <button type="submit" value="submit">Submit</button>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Remove Pet
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form #petDeleteForm="ngForm" (ngSubmit)="deletePet(petDeleteForm.value)">
+          <input type="text" name="id" placeholder="ID" ngModel>
+          <br />
+          <input type="submit" value="submit">
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
+  <div style="flex-direction: column;">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Friends</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-container *ngIf="friends | async as friends_list">
+          <ul class="list-group" *ngIf="friends_list.length > 0">
+            <li *ngFor="let friend of friends_list">
+              {{friend[0].name}}
+            </li>
+          </ul>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Clubs</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
