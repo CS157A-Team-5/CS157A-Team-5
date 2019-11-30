@@ -143,7 +143,8 @@ button:disabled {
 app-dashboard,
 app-petbook,
 app-login,
-app-registration {
+app-registration,
+app-search-bar{
   width: var(--content-width);
   min-height: fit-content;
   position: relative;

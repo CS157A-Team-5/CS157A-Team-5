@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Owner, Pet, Club, Park, Treat } from './petbook.interface';
+import { map } from 'rxjs/operators';
 
 /* All get calls will usually only require id.
  * All post calls should have the interface saturated except id.
@@ -16,17 +17,30 @@ export class PetbookService {
 	url = 'http://localhost:3000/api/';
 
 	getOwnerLogin(data: Owner, returnURL?: string): Observable<Owner> {
-		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}});
+    console.log("Success");
+		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}})
+    .pipe(map(userDetails => {
+      localStorage.setItem('currentUserID', userDetails.id.toString());
+      return userDetails;
+    }));
 	}
+
+  getCurrentStorageStatus(): string {
+    return localStorage.getItem('currentUserID');
+  }
+
+  logOutUser() {
+    localStorage.removeItem('currentUserID');
+  }
 
 	createOwner(data: Owner, returnURL?: string) {
 		this.http.post((this.url + 'user/create'), data).subscribe(
 			res => {
 				console.log("Created " + data);
-				if (returnURL !== undefined)
+				if (returnURL !== undefined)          
 					this.router.navigateByUrl(returnURL);
 			},
-			err => {
+			err => {        
 				console.log('Error: ', err);
 			}
 		);

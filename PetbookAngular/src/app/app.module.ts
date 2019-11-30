@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PetbookService } from './petbook.service';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PetbookService } from './petbook.service';
     PetbookComponent,
     LoginComponent,
     RegistrationComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { PetbookService } from './petbook.service';
       { path: '', component: DashboardComponent },
       { path: 'login', component: LoginComponent},
       { path: 'registration', component: RegistrationComponent},
+      { path: 'search', component: SearchBarComponent},
     ]),
   ],
   providers: [PetbookService],

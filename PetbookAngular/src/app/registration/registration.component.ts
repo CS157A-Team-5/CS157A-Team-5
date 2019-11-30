@@ -41,6 +41,7 @@ export class RegistrationComponent {
       location: formValue.location
     };
 
+    console.log(newOwner);
     this.petbookService.createOwner(newOwner, 'login');
     // Need to fix routing to login post createOwner(), temporarily reroute to login
 
