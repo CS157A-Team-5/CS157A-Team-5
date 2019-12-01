@@ -49,7 +49,7 @@ export class LoginComponent {
     },
     ()=>{
       console.log("http request finished");
-      this.router.navigate(['/']);
+      this.router.navigate(['home']);
     }
     );
   }
