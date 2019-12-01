@@ -53,9 +53,10 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     MatFormFieldModule,
     MatInputModule,
     RouterModule.forRoot([
-      { path: '', component: DashboardComponent },
+      { path: '', component: LoginComponent},
       { path: 'login', component: LoginComponent},
       { path: 'registration', component: RegistrationComponent},
+      { path: 'home', component: DashboardComponent },
       { path: 'search', component: SearchBarComponent},
     ]),
   ],
