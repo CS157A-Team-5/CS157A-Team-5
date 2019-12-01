@@ -29,6 +29,13 @@ export class PetbookService {
 		return localStorage.getItem('currentUserID');
 	}
 
+	isLoggedIn(): boolean {
+		if (this.getCurrentStorageStatus() != null) {
+			return true;
+		}
+		return false;
+	}
+
 	logOutUser() {
 		localStorage.removeItem('currentUserID');
 	}
