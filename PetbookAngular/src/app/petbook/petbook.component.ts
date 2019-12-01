@@ -12,17 +12,21 @@ import { forkJoin, combineLatest, Observable } from 'rxjs';
 export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
+  clubs: Observable<any[]>;
+  currentUserID;
 
   constructor(private petbookService: PetbookService) {
+    this.currentUserID = +this.petbookService.getCurrentStorageStatus();
     this.getPets();
   }
 
   getPets() {
-    this.petbookService.getPetsByName('S')
+    this.petbookService.getPetsByOwner(this.currentUserID)
       .subscribe((res: Pet[]) => {
         this.pets = res;
         console.log(this.pets);
         this.getFriends();
+        this.getClubs();
       });
   }
 
@@ -35,8 +39,13 @@ export class PetbookComponent {
     this.friends = combineLatest(queryFriendsResults);
   }
 
+  getClubs() {
+    this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
+  }
+
   createPet(model: Pet) {
     console.log(model);
+    model.owner_id = this.currentUserID;
     this.petbookService.createPet(model);
   }
 

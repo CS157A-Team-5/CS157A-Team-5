@@ -30,6 +30,8 @@
           <br />
           <input type="text" name="age" placeholder="Age" ngModel>
           <br />
+          <input type="text" name="weight" placeholder="Weight" ngModel>
+          <br />
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
@@ -48,6 +50,8 @@
           <br />
           <input type="text" name="age" placeholder="Age" ngModel>
           <br />
+          <input type="text" name="weight" placeholder="Weight" ngModel>
+          <br />
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
@@ -65,7 +69,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  
+
   <div style="flex-direction: column;">
     <mat-card>
       <mat-card-header>
@@ -86,6 +90,13 @@
         <mat-card-title>Clubs</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <ng-container *ngIf="clubs | async as clubs_list">
+          <ul class="list-group" *ngIf="clubs_list.length > 0">
+            <li *ngFor="let club of clubs_list">
+              {{club[0].name}}
+            </li>
+          </ul>
+        </ng-container>
       </mat-card-content>
     </mat-card>
   </div>
