@@ -17,12 +17,13 @@ export class PetbookService {
 	url = 'http://localhost:3000/api/';
 
 	getOwnerLogin(data: Owner, returnURL?: string): Observable<Owner> {
-    console.log("Success");
-		return this.http.get<Owner>((this.url + 'user/login'), {params: {email: String(data.email), password: data.password}})
-    .pipe(map(userDetails => {
-      localStorage.setItem('currentUserID', userDetails.id.toString());
-      return userDetails;
-    }));
+
+		console.log("Success");
+		return this.http.get<Owner>((this.url + 'user/login'), { params: { email: String(data.email), password: data.password } })
+			.pipe(map(userDetails => {
+				localStorage.setItem('currentUserID', userDetails.id.toString());
+				return userDetails;
+			}));
 	}
 
   getCurrentStorageStatus(): string {
@@ -122,7 +123,7 @@ export class PetbookService {
 	}
 
 	joinClub(ownerID: number, clubID: number, returnURL?: string) {
-		this.http.post((this.url + 'clubs/join'), {owner_id: String(ownerID), club_id:String(clubID)}).subscribe(
+		this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
 			res => {
 				console.log(ownerID + " joined club " + clubID);
 				if (returnURL !== undefined)
@@ -135,7 +136,7 @@ export class PetbookService {
 	}
 
 	leaveClub(ownerID: number, clubID: number, returnURL?: string) {
-		this.http.post((this.url + 'clubs/leave'), {owner_id: String(ownerID), club_id:String(clubID)}).subscribe(
+		this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
 			res => {
 				console.log(ownerID + " left club " + clubID);
 				if (returnURL !== undefined)
@@ -192,11 +193,11 @@ export class PetbookService {
 
 	getFriendshipValid(pet1ID: number, pet2ID: number): Observable<Number> {
 		return this.http.get<Number>((this.url + 'friendships'),
-			{params: {pet1_id: String(pet1ID), pet2_id: String(pet2ID)}});
+			{ params: { pet1_id: String(pet1ID), pet2_id: String(pet2ID) } });
 	}
 
 	addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
-		this.http.post((this.url + 'friendships'), {pet1_id: String(pet1ID), pet2_id: String(pet2ID)}).subscribe(
+		this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }).subscribe(
 			res => {
 				console.log("Created friendship: " + pet1ID + " and " + pet2ID);
 				if (returnURL !== undefined)

@@ -3,11 +3,11 @@
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['login']">Login</button>
-    <button mat-menu-item [routerLink]="['registration']">Registration</button>
+    <button mat-menu-item [routerLink]="['home']">Dashboard</button>
     <button mat-menu-item [routerLink]="['search']">Search</button>
+    <button mat-menu-item (click)="logoutUser()">Logout</button>
   </mat-menu>
-  <a [routerLink]="['/']">
+  <a [routerLink]="['home']">
     <span id="site-title">Petbook</span>
   </a>
 </mat-toolbar>

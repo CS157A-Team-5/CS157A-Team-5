@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PetbookService } from '../petbook.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private petbookService: PetbookService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logoutUser() {
+    this.petbookService.logOutUser();
+    this.router.navigate(['login']);
   }
 
 }
