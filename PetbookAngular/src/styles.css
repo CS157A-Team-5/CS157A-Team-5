@@ -175,3 +175,7 @@ app-toolbar {
   position: absolute; 
   right: 1em
 }
+
+.left-align {
+  text-align: left;
+}
