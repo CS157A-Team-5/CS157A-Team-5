@@ -34,12 +34,12 @@ var Petbook = {
             park_id, callback);
     },
     createpet: function(pet, callback) {
-        return db.query('INSERT INTO pets(owner_id, name, weight, age, species) VALUES(?, ?, ?, ?)',
-            [pet.owner_id, pet.name, pet.age, pet.species], callback);
+        return db.query('INSERT INTO pets(owner_id, name, weight, age, species) VALUES(?, ?, ?, ?, ?)',
+            [pet.owner_id, pet.name, pet.weight, pet.age, pet.species], callback);
     },
     updatepet: function(pet, callback) {
-        return db.query('UPDATE pets SET weight=?, age=? WHERE id=?)',
-            [pet.weight, pet.age, pet.id], callback);
+        return db.query('UPDATE pets SET name=?, weight=?, age=?, species=? WHERE id=?',
+            [pet.name, pet.weight, pet.age, pet.species, pet.id], callback);
     },
     deletepet: function(pet_id, callback) {
         return db.query('DELETE FROM pets WHERE id=?', pet_id, callback);
