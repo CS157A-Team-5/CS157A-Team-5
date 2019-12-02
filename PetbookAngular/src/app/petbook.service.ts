@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Owner, Pet, Club, Park, Treat } from './petbook.interface';
+import { Owner, Pet, Club } from './petbook.interface';
 import { map } from 'rxjs/operators';
 
 /* All get calls will usually only require id.
@@ -17,7 +17,7 @@ export class PetbookService {
   url = 'http://localhost:3000/api/';
 
   getOwnerLogin(data: Owner, returnURL?: string): Observable<Owner> {
-    console.log("Success");
+    console.log('Success');
     return this.http.get<Owner>((this.url + 'user/login'), { params: { email: String(data.email), password: data.password } })
       .pipe(map(userDetails => {
         localStorage.setItem('currentUserID', userDetails.id.toString());
@@ -43,9 +43,10 @@ export class PetbookService {
   createOwner(data: Owner, returnURL?: string) {
     this.http.post((this.url + 'user/create'), data).subscribe(
       res => {
-        console.log("Created " + data);
-        if (returnURL !== undefined)
+        console.log('Created ' + data);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -77,12 +78,17 @@ export class PetbookService {
     return this.http.get<Pet[]>(this.url + 'pets/park/' + parkID);
   }
 
+  getPetsBySpecies(species: string): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.url + 'pets/species/' + species);
+  }
+
   createPet(data: Pet, returnURL?: string) {
     this.http.post((this.url + 'pets'), data).subscribe(
       res => {
-        console.log("Created " + data);
-        if (returnURL !== undefined)
+        console.log('Created ' + data);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -93,9 +99,10 @@ export class PetbookService {
   updatePet(data: Pet, returnURL?: string) {
     this.http.put(this.url + 'pets', data).subscribe(
       res => {
-        console.log("Updated " + data);
-        if (returnURL !== undefined)
+        console.log('Updated ' + data);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -106,9 +113,10 @@ export class PetbookService {
   deletePet(petID: number, returnURL?: string) {
     this.http.delete(this.url + 'pets/' + petID).subscribe(
       res => {
-        console.log("Deleted " + petID);
-        if (returnURL !== undefined)
+        console.log('Deleted ' + petID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -131,9 +139,10 @@ export class PetbookService {
   joinClub(ownerID: number, clubID: number, returnURL?: string) {
     this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
       res => {
-        console.log(ownerID + " joined club " + clubID);
-        if (returnURL !== undefined)
+        console.log(ownerID + ' joined club ' + clubID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -144,9 +153,10 @@ export class PetbookService {
   leaveClub(ownerID: number, clubID: number, returnURL?: string) {
     this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
       res => {
-        console.log(ownerID + " left club " + clubID);
-        if (returnURL !== undefined)
+        console.log(ownerID + ' left club ' + clubID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -157,9 +167,10 @@ export class PetbookService {
   createClub(data: Club, returnURL: string) {
     this.http.post((this.url + 'clubs'), data).subscribe(
       res => {
-        console.log("Created " + data);
-        if (returnURL !== undefined)
+        console.log('Created ' + data);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -170,9 +181,10 @@ export class PetbookService {
   updateClub(data: Club, returnURL?: string) {
     this.http.put(this.url + 'clubs', data).subscribe(
       res => {
-        console.log("Updated " + data);
-        if (returnURL !== undefined)
+        console.log('Updated ' + data);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -183,9 +195,10 @@ export class PetbookService {
   deleteClub(clubID: number, returnURL?: string) {
     this.http.delete(this.url + 'clubs/' + clubID).subscribe(
       res => {
-        console.log("Deleted " + clubID);
-        if (returnURL !== undefined)
+        console.log('Deleted ' + clubID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -197,17 +210,18 @@ export class PetbookService {
     return this.http.get<Pet[]>(this.url + 'friendships/' + petID);
   }
 
-  getFriendshipValid(pet1ID: number, pet2ID: number): Observable<Number> {
-    return this.http.get<Number>((this.url + 'friendships'),
+  getFriendshipValid(pet1ID: number, pet2ID: number): Observable<number> {
+    return this.http.get<number>((this.url + 'friendships'),
       { params: { pet1_id: String(pet1ID), pet2_id: String(pet2ID) } });
   }
 
   addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
     this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }).subscribe(
       res => {
-        console.log("Created friendship: " + pet1ID + " and " + pet2ID);
-        if (returnURL !== undefined)
+        console.log('Created friendship: ' + pet1ID + ' and ' + pet2ID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);
@@ -215,12 +229,13 @@ export class PetbookService {
     );
   }
 
-  deleteFriendship(friendship_id: number, returnURL?: string) {
-    this.http.delete((this.url + 'friendships/' + friendship_id)).subscribe(
+  deleteFriendship(friendshipID: number, returnURL?: string) {
+    this.http.delete((this.url + 'friendships/' + friendshipID)).subscribe(
       res => {
-        console.log("Removed friendship: " + friendship_id);
-        if (returnURL !== undefined)
+        console.log('Removed friendship: ' + friendshipID);
+        if (returnURL !== undefined) {
           this.router.navigateByUrl(returnURL);
+        }
       },
       err => {
         console.log('Error: ', err);

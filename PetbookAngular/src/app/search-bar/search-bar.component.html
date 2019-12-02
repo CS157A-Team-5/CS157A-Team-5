@@ -1,28 +1,103 @@
 <div class="search-page">
   <mat-card>
-  <mat-card-title>
-    Search
-  </mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="form-inline"> 
-      <div style="text-align: center; margin-top: 10px">
-        <input type="search" formControlName="searchPet" class="search-input" />
-        <button type="button" (click)="onSearch()" class="go-button">Go</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+    <mat-card-title>
+      Search
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="form-inline">
+        <div style="text-align: center; margin-top: 10px">
+          <input type="search" formControlName="searchTerm" class="search-input" />
+          <button type="button" (click)="onSearch()" class="go-button">Go</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
 
-<ul *ngFor = 'let pet of pets | async'>
+<ul *ngFor='let pet of pets | async'>
   <mat-card>
     <mat-card-header>
-      <mat-card-title> {{pet.name}} <button type="button" (click)="onConnect()" class="connect-button" style ="position: absolute; right: 1em">Connect</button> </mat-card-title>
+      <mat-card-title>
+        {{pet.name}}
+        <button (click)="onConnect()" class="connect-button">
+          Connect
+        </button>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p style = "text-align: left; margin-left: 1.1em">Species: {{pet.species}} <br> Age: {{pet.age}} <br> Weight: {{pet.weight}} </p>
+      <p style="text-align: left; margin-left: 1.1em">
+        Species: {{pet.species}}
+        <br>
+        Age: {{pet.age}}
+        <br>
+        Weight: {{pet.weight}}
+      </p>
     </mat-card-content>
   </mat-card>
 </ul>
 
+<ul *ngFor='let pet of petsAtLocation | async'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{pet.name}}
+        <button (click)="onConnect()" class="connect-button">
+          Connect
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="text-align: left; margin-left: 1.1em">
+        Location: {{searchForm.value.searchTerm}}
+        <br>
+        Species: {{pet.species}}
+        <br>
+        Age: {{pet.age}}
+        <br>
+        Weight: {{pet.weight}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ul>
 
+<ul *ngFor='let pet of petsBySpecies | async'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{pet.name}}
+        <button (click)="onConnect()" class="connect-button">
+          Connect
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="text-align: left; margin-left: 1.1em">
+        Species: {{pet.species}}
+        <br>
+        Age: {{pet.age}}
+        <br>
+        Weight: {{pet.weight}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ul>
+
+<ul *ngFor='let club of clubs | async'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Club: {{club.name}}
+        <button (click)="onJoin()" class="connect-button">
+          Join
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="text-align: left; margin-left: 1.1em">
+        Species: {{club.species}}
+        <br>
+        Number of members: {{club.size}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ul>
