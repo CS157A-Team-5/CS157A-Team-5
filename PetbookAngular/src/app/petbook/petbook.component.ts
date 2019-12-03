@@ -43,14 +43,16 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log(this.currentUserID);    
-    this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
-    console.log(this.clubs.length);
+    console.log(this.currentUserID);
+    this.petbookService.getClubsByOwner(this.currentUserID).subscribe((res: Club[]) => {
+      this.clubs = res;
+      console.log(this.clubs);
+    });
   }
 
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);    
+    console.log(model);
     console.log(model.id);
     this.petbookService.createClub(model, 'home');
     //trying to get the correct id of the club because model.id is not defined so I can't use it
@@ -58,7 +60,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');  
+      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');
     },
     err =>{
       console.log(err);
@@ -69,7 +71,7 @@ export class PetbookComponent {
     });
   }
 
-  updateClub(model: Club) {    
+  updateClub(model: Club) {
     console.log(model);
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
@@ -81,8 +83,8 @@ export class PetbookComponent {
       err =>{
         console.log(err);
       }
-    )    
-    
+    )
+
   }
 
   leaveClub(club: Club) {
@@ -92,7 +94,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');  
+      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
@@ -101,7 +103,7 @@ export class PetbookComponent {
       console.log("http request finished");
       this.router.navigate(['home']);
     });
-    
+
   }
 
   searchClub() {
