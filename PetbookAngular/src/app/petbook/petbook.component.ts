@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PetbookService } from '../petbook.service';
-import { Pet, Club } from '../petbook.interface';
+import { Pet, Club, Owner } from '../petbook.interface';
 import { forkJoin, combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
   clubs: Observable<any[]>;
+  suggestions: Observable<Pet[]>;
   currentUserID;
   openCreatePanel = false;
   openUpdatePanel = false;
@@ -30,7 +31,8 @@ export class PetbookComponent {
         this.pets = res;
         console.log(this.pets);
         this.getFriends();
-        this.getClubs();        
+        this.getClubs();
+        this.getFriendshipSuggestions();
       });
   }
 
@@ -43,10 +45,30 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log("Therse are the clubs for user", this.currentUserID);    
-    this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
-    this.clubs.subscribe(result => {console.log("size is: ", result.length)});
-    console.log(this.currentUserID); 
+    console.log(this.currentUserID);
+    this.petbookService.getClubsByOwner(this.currentUserID).subscribe((res: Club[]) => {
+      this.clubs = res;
+      console.log(this.clubs);
+    });
+  }
+
+  getFriendshipSuggestions() {
+    const querySuggestionResults = [];
+    let location = '';
+    this.petbookService.getOwnerLocation(this.currentUserID)
+      .subscribe((res: Owner) => {
+        location = res.location;
+      },
+      () => {},
+      () => {
+        for (const pet of this.pets) {
+          querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
+            this.currentUserID,
+            location,
+            pet.species));
+        }
+        this.friends = combineLatest(querySuggestionResults);
+      });
   }
 
   createClub(model: Club) {
@@ -68,27 +90,7 @@ export class PetbookComponent {
     }); 
   }
 
-  /*createClub(model: Club) {
-    model.size = 1;
-    this.petbookService.createClub(model, 'home');
-    this.getClubId(model);
-    const res = this.petbookService.getClubsByName(club.name);
-    res.subscribe(
-    data=> {
-      console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, clubId, 'home');
-    },
-    err =>{
-      console.log(err);
-    },
-    ()=>{
-      console.log("http request finished");
-    });    
-    //this.petbookService.joinClub(this.currentUserID, this.getClubId(model), 'home');
-    location.reload;
-  }*/
-
-  updateClub(model: Club) {    
+  updateClub(model: Club) {
     console.log(model);
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
@@ -103,6 +105,7 @@ export class PetbookComponent {
       ()=>{
         location.reload();
       });          
+
   }
 
   leaveClub(club: Club) {
@@ -112,7 +115,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');  
+      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
@@ -121,7 +124,7 @@ export class PetbookComponent {
       console.log("http request finished");
       location.reload();
     });
-    
+
   }
 
   searchClub() {
@@ -130,7 +133,7 @@ export class PetbookComponent {
 
   createPet(model: Pet) {
     model.owner_id = this.currentUserID;
-    this.petbookService.createPet(model);
+    this.petbookService.createPet(model).subscribe();
     this.getPets();
     this.openCreatePanel = !this.openCreatePanel;
     window.alert('You successfully added your new pet ' + model.name);
@@ -139,14 +142,14 @@ export class PetbookComponent {
   updatePet(model: Pet) {
     model.owner_id = this.currentUserID;
     model.id = +model.id;
-    this.petbookService.updatePet(model);
+    this.petbookService.updatePet(model).subscribe();
     this.getPets();
     this.openUpdatePanel = !this.openUpdatePanel;
     window.alert('You successfully updated your pet ' + model.name);
   }
 
   deletePet(model: Pet) {
-    this.petbookService.deletePet(+model.id);
+    this.petbookService.deletePet(+model.id).subscribe();
     this.getPets();
     this.openDeletePanel = !this.openDeletePanel;
     window.alert('You successfully removed your pet ' + model.name);
