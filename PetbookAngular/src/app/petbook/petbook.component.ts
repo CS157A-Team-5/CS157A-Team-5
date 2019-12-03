@@ -46,8 +46,10 @@ export class PetbookComponent {
 
   getClubs() {
     console.log(this.currentUserID);
-    this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
-    console.log(this.clubs.length);
+    this.petbookService.getClubsByOwner(this.currentUserID).subscribe((res: Club[]) => {
+      this.clubs = res;
+      console.log(this.clubs);
+    });
   }
 
   getFriendshipSuggestions() {
