@@ -104,23 +104,23 @@ FLUSH PRIVILEGES;
 # controlpoint159safe!
 
 INSERT INTO owners
-    (email, password, name)
+    (email, password, name, location)
 VALUES
-    ('sherzodr@msn.com', '0CC175B9C0F1B6A831C399E269772661', 'Miguel'),
-    ('liedra@msn.com', '92EB5FFEE6AE2FEC3AD71C777531578F', 'Katarina'),
-    ('zavadsky@me.com', '4A8A08F09D37B73795649038408B5F33', 'Leo'),
-    ('ismail@comcast.net', '8277E0910D750195B448797616E091AD', 'Josie'),
-    ('jbarta@outlook.com', 'E1671797C52E15F763380B45E841EC32', 'Jack'),
-    ('martink@comcast.net', '8FA14CDD754F91CC6554C9E71929CCE7', 'Steve'),
-    ('crandall@gmail.com', 'B2F5FF47436671B6E533D8DC3614845D', 'Alisa'),
-    ('gilmoure@verizon.net', '2510C39011C5BE704182423E3A695E91', 'Bryan'),
-    ('martyloo@icloud.com', '865C0C0B4AB0E063E5CAA3387C1A8741', 'Nina'),
-    ('philb@comcast.net', '363B122C528F54DF4A0446B6BAB05515', 'Anna'),
-    ('rmcfarla@comcast.net', '8CE4B16B22B58894AA86C421E8759DF3', 'Paul'),
-    ('dawnsong@yahoo.ca', '2DB95E8E1A9267B7A1188556B2013B33', 'Lili'),
-    ('feamster@msn.com', '6F8F57715090DA2632453988D9A1501B', 'Eddy'),
-    ('panolex@mac.com', '7B8B965AD4BCA0E41AB51DE7B31363A1', 'Julia'),
-    ('danny@mac.com', 'D95679752134A2D9EB61DBD7B91C4BCC', 'Chloe');
+    ('sherzodr@msn.com', '0CC175B9C0F1B6A831C399E269772661', 'Miguel', ''),
+    ('liedra@msn.com', '92EB5FFEE6AE2FEC3AD71C777531578F', 'Katarina', ''),
+    ('zavadsky@me.com', '4A8A08F09D37B73795649038408B5F33', 'Leo', ''),
+    ('ismail@comcast.net', '8277E0910D750195B448797616E091AD', 'Josie', ''),
+    ('jbarta@outlook.com', 'E1671797C52E15F763380B45E841EC32', 'Jack', ''),
+    ('martink@comcast.net', '8FA14CDD754F91CC6554C9E71929CCE7', 'Steve', ''),
+    ('crandall@gmail.com', 'B2F5FF47436671B6E533D8DC3614845D', 'Alisa', ''),
+    ('gilmoure@verizon.net', '2510C39011C5BE704182423E3A695E91', 'Bryan', ''),
+    ('martyloo@icloud.com', '865C0C0B4AB0E063E5CAA3387C1A8741', 'Nina', ''),
+    ('philb@comcast.net', '363B122C528F54DF4A0446B6BAB05515', 'Anna', ''),
+    ('rmcfarla@comcast.net', '8CE4B16B22B58894AA86C421E8759DF3', 'Paul', ''),
+    ('dawnsong@yahoo.ca', '2DB95E8E1A9267B7A1188556B2013B33', 'Lili', ''),
+    ('feamster@msn.com', '6F8F57715090DA2632453988D9A1501B', 'Eddy', ''),
+    ('panolex@mac.com', '7B8B965AD4BCA0E41AB51DE7B31363A1', 'Julia', ''),
+    ('danny@mac.com', 'D95679752134A2D9EB61DBD7B91C4BCC', 'Chloe', '');
 
 INSERT INTO pets
   (name, weight, age, species, owner_id)
