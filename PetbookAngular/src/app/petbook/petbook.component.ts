@@ -43,14 +43,14 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log(this.currentUserID);    
+    console.log(this.currentUserID);
     this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
     console.log(this.clubs.length);
   }
 
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);    
+    console.log(model);
     console.log(model.id);
     this.petbookService.createClub(model, 'home');
     //trying to get the correct id of the club because model.id is not defined so I can't use it
@@ -58,7 +58,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');  
+      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');
     },
     err =>{
       console.log(err);
@@ -69,7 +69,7 @@ export class PetbookComponent {
     });
   }
 
-  updateClub(model: Club) {    
+  updateClub(model: Club) {
     console.log(model);
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
@@ -81,8 +81,7 @@ export class PetbookComponent {
       err =>{
         console.log(err);
       }
-    )    
-    
+    );
   }
 
   leaveClub(club: Club) {
@@ -92,7 +91,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');  
+      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
@@ -101,7 +100,7 @@ export class PetbookComponent {
       console.log("http request finished");
       this.router.navigate(['home']);
     });
-    
+
   }
 
   searchClub() {
@@ -110,7 +109,7 @@ export class PetbookComponent {
 
   createPet(model: Pet) {
     model.owner_id = this.currentUserID;
-    this.petbookService.createPet(model);
+    this.petbookService.createPet(model).subscribe();
     this.getPets();
     this.openCreatePanel = !this.openCreatePanel;
     window.alert('You successfully added your new pet ' + model.name);
@@ -119,14 +118,14 @@ export class PetbookComponent {
   updatePet(model: Pet) {
     model.owner_id = this.currentUserID;
     model.id = +model.id;
-    this.petbookService.updatePet(model);
+    this.petbookService.updatePet(model).subscribe();
     this.getPets();
     this.openUpdatePanel = !this.openUpdatePanel;
     window.alert('You successfully updated your pet ' + model.name);
   }
 
   deletePet(model: Pet) {
-    this.petbookService.deletePet(+model.id);
+    this.petbookService.deletePet(+model.id).subscribe();
     this.getPets();
     this.openDeletePanel = !this.openDeletePanel;
     window.alert('You successfully removed your pet ' + model.name);
