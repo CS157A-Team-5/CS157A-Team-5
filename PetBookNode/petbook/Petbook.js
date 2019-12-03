@@ -93,6 +93,18 @@ var Petbook = {
     deletefriendship: function(friendship_id, callback) {
         return db.query('DELETE FROM pet_pet AS pp WHERE pp.id=?',
             friendship_id, callback);
+    },
+    getsuggestions: function(data, callback) {
+        return db.query('SELECT id, name, ' +
+	          'IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) + IF(club_id=?, 1, 0) AS common ' +
+            'FROM pets ' +
+            'NATURAL JOIN ( ' +
+            '	SELECT owners.id AS owner_id, owners.location, owner_club.club_id ' +
+            '    FROM owners, owner_club ' +
+            '    WHERE owners.id=owner_club.owner_id ' +
+            ') as owner_info ' +
+            'ORDER BY common DESC ' +
+            'LIMIT 20;', [data.location, data.species, data.club_id], callback);
     }
 }
 
