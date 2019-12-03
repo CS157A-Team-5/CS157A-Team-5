@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PetbookService } from '../petbook.service';
 import { Pet, Club } from '../petbook.interface';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -19,8 +20,13 @@ export class SearchBarComponent {
   petsAtLocation: Observable<Pet[]>;
   clubs: Observable<Club[]>;
   petsBySpecies: Observable<Pet[]>;
+  currentUserID: number;
+  currentUserPets: Observable<Pet[]>;
 
-  constructor(private petService: PetbookService) { }
+  constructor(private petService: PetbookService, private router: Router) {
+    this.currentUserID = +this.petService.getCurrentStorageStatus();
+    this.currentUserPets = this.petService.getPetsByOwner(this.currentUserID);
+  }
 
   onSearch() {
     if (!this.searchForm.valid) {
@@ -36,6 +42,17 @@ export class SearchBarComponent {
     this.petsBySpecies = this.petService.getPetsBySpecies(term);
 
     console.log('Search successful');
+  }
+
+  onConnect(currentPet: Pet, petToFriend: Pet) {
+    console.log('Pets to friend ', currentPet, petToFriend);
+    this.petService.addFriendship(currentPet.id, petToFriend.id);
+    window.alert(currentPet.name + ' is now following ' + petToFriend.name);
+  }
+
+  onJoin(clubToJoin: Club) {
+    this.petService.joinClub(this.currentUserID, clubToJoin.id);
+    window.alert('You are now part of the ' + clubToJoin.name + ' club!');
   }
 
 }

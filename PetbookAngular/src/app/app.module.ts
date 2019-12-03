@@ -16,7 +16,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -56,7 +55,6 @@ import { AuthGuard } from './authGuard';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatDividerModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'login', component: LoginComponent },
