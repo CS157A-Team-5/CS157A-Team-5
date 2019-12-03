@@ -87,45 +87,15 @@ export class PetbookService {
   }
 
   createPet(data: Pet, returnURL?: string) {
-    this.http.post((this.url + 'pets'), data).subscribe(
-      res => {
-        console.log('Created ' + data);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'pets'), data);
   }
 
   updatePet(data: Pet, returnURL?: string) {
-    this.http.put(this.url + 'pets', data).subscribe(
-      res => {
-        console.log('Updated ' + data);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.put(this.url + 'pets', data);
   }
 
   deletePet(petID: number, returnURL?: string) {
-    this.http.delete(this.url + 'pets/' + petID).subscribe(
-      res => {
-        console.log('Deleted ' + petID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.delete(this.url + 'pets/' + petID);
   }
 
   getClub(clubID: number): Observable<Club> {
@@ -141,17 +111,7 @@ export class PetbookService {
   }
 
   joinClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
-      res => {
-        console.log(ownerID + ' joined club ' + clubID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) });
   }
 
   leaveClub(ownerID: number, clubID: number, returnURL?: string) {
@@ -163,17 +123,7 @@ export class PetbookService {
   }
 
   updateClub(data: Club, returnURL?: string) {
-    this.http.put(this.url + 'clubs', data).subscribe(
-      res => {
-        console.log('Updated ' + data);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.put(this.url + 'clubs', data);
   }
 
   deleteClub(clubID: number, returnURL?: string) {
