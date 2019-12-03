@@ -100,7 +100,17 @@ router.get('/pets/club/:club_id', function (req, res) {
 });
 
 router.get('/pets/park/:park_id', function (req, res) {
-    Petbook.getpetsbyclub(req.params.park_id, function(err, rows) {
+    Petbook.getpetsbypark(req.params.park_id, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
+router.get('/pets/species/:pet_species', function (req, res) {
+    Petbook.getpetsbyspecies(req.params.pet_species, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {

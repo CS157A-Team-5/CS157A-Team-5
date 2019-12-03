@@ -11,7 +11,6 @@ var Petbook = {
     getpetsbyowner: function(owner_id, callback) {
         return db.query('SELECT * FROM pets WHERE owner_id=?', owner_id, callback);
     },
-
     getpet: function(pet_id, callback) {
         return db.query('SELECT * FROM pets WHERE id=?', pet_id, callback);
     },
@@ -19,7 +18,7 @@ var Petbook = {
         return db.query('SELECT * FROM pets WHERE name LIKE ?', (name + '%'), callback);
     },
     getpetsbylocation: function (location, callback) {
-        return db.query('SELECT p.* FROM pets AS p, owners WHERE location=?', location, callback);
+        return db.query('SELECT p.* FROM pets AS p, owners WHERE location=? AND p.owner_id = owners.id', location, callback);
     },
     getpetsbyclub: function (club_id, callback) {
         return db.query('SELECT p.* FROM pets AS p, ' +
@@ -33,13 +32,16 @@ var Petbook = {
             'WHERE owner_id = o_id',
             park_id, callback);
     },
+    getpetsbyspecies: function(species, callback) {
+        return db.query('SELECT * FROM pets WHERE species LIKE ?', (species + '%'), callback);
+    },
     createpet: function(pet, callback) {
-        return db.query('INSERT INTO pets(owner_id, name, weight, age, species) VALUES(?, ?, ?, ?)',
-            [pet.owner_id, pet.name, pet.age, pet.species], callback);
+        return db.query('INSERT INTO pets(owner_id, name, weight, age, species) VALUES(?, ?, ?, ?, ?)',
+            [pet.owner_id, pet.name, pet.weight, pet.age, pet.species], callback);
     },
     updatepet: function(pet, callback) {
-        return db.query('UPDATE pets SET weight=?, age=? WHERE id=?)',
-            [pet.weight, pet.age, pet.id], callback);
+        return db.query('UPDATE pets SET name=?, weight=?, age=?, species=? WHERE id=?',
+            [pet.name, pet.weight, pet.age, pet.species, pet.id], callback);
     },
     deletepet: function(pet_id, callback) {
         return db.query('DELETE FROM pets WHERE id=?', pet_id, callback);
