@@ -44,9 +44,12 @@
     <mat-card-header>
       <mat-card-title>
         {{pet.name}}
-        <button (click)="onConnect(pet)" class="connect-button">
-          Connect
-        </button>
+        <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
+        <mat-menu #petSelection="matMenu">
+          <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
+          <button mat-menu-item *ngFor='let currentPet of currentUserPets | async'
+            (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
+        </mat-menu>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -68,9 +71,12 @@
     <mat-card-header>
       <mat-card-title>
         {{pet.name}}
-        <button (click)="onConnect(pet)" class="connect-button">
-          Connect
-        </button>
+        <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
+        <mat-menu #petSelection="matMenu">
+          <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
+          <button mat-menu-item *ngFor='let currentPet of currentUserPets | async'
+            (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
+        </mat-menu>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
