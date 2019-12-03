@@ -95,8 +95,12 @@ var Petbook = {
             [data.pet1_id, data.pet2_id], callback);
     },
     addfriendship: function(data, callback) {
-        return db.query('INSERT INTO pet_pet(pet1_id, pet2_id) VALUES(?, ?)',
-            [data.pet1_id, data.pet2_id], callback);
+        return db.query('INSERT INTO pet_pet (pet1_id, pet2_id) ' +
+            'SELECT ?, ? FROM DUAL ' +
+            'WHERE NOT EXISTS ( ' +
+                'SELECT * FROM pet_pet WHERE pet1_id=? AND pet2_id=?' +
+            ') LIMIT 1',
+            [data.pet1_id, data.pet2_id, data.pet1_id, data.pet2_id], callback);
     },
     deletefriendship: function(friendship_id, callback) {
         return db.query('DELETE FROM pet_pet AS pp WHERE pp.id=?',
