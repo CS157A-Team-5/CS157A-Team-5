@@ -70,23 +70,21 @@ export class PetbookComponent {
 
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);
-    console.log(model.id);
-    this.petbookService.createClub(model, 'home');
-    //trying to get the correct id of the club because model.id is not defined so I can't use it
+    console.log(model);    
+    this.petbookService.createClub(model, 'home');    
     const res = this.petbookService.getClubsByName(model.name);
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');
+      this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
     },
     ()=>{
       console.log("http request finished");
-      this.router.navigate(['home']);
-    });
+      location.reload();
+    }); 
   }
 
   updateClub(model: Club) {
@@ -100,9 +98,10 @@ export class PetbookComponent {
       },
       err =>{
         console.log(err);
-      }
-    )
-
+      },
+      ()=>{
+        location.reload();
+      });
   }
 
   leaveClub(club: Club) {
@@ -119,7 +118,7 @@ export class PetbookComponent {
     },
     ()=>{
       console.log("http request finished");
-      this.router.navigate(['home']);
+      location.reload();
     });
 
   }

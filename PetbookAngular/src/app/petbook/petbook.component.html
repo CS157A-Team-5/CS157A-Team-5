@@ -94,10 +94,11 @@
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="clubs | async as clubs_list">
-          <ul class="list-group" *ngIf="clubs_list.length > 0">
+          <ul class="list-group" *ngIf="clubs_list.length > 0"> 
             <div *ngFor="let club of clubs_list">
               <p style = "text-align: left"> {{club.name}} <button name="leave-button" type="button" value="club" (click)= "leaveClub(club)" style ="position: absolute; right: 1em">Leave</button>
               <br>
+              <p style = "text-align: left">ID# {{club.id}}</p>
               <br>
             </div>
           </ul>
