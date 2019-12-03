@@ -102,8 +102,7 @@ export class PetbookComponent {
       err =>{
         console.log(err);
       }
-    )
-
+    );
   }
 
   leaveClub(club: Club) {
@@ -131,7 +130,7 @@ export class PetbookComponent {
 
   createPet(model: Pet) {
     model.owner_id = this.currentUserID;
-    this.petbookService.createPet(model);
+    this.petbookService.createPet(model).subscribe();
     this.getPets();
     this.openCreatePanel = !this.openCreatePanel;
     window.alert('You successfully added your new pet ' + model.name);
@@ -140,14 +139,14 @@ export class PetbookComponent {
   updatePet(model: Pet) {
     model.owner_id = this.currentUserID;
     model.id = +model.id;
-    this.petbookService.updatePet(model);
+    this.petbookService.updatePet(model).subscribe();
     this.getPets();
     this.openUpdatePanel = !this.openUpdatePanel;
     window.alert('You successfully updated your pet ' + model.name);
   }
 
   deletePet(model: Pet) {
-    this.petbookService.deletePet(+model.id);
+    this.petbookService.deletePet(+model.id).subscribe();
     this.getPets();
     this.openDeletePanel = !this.openDeletePanel;
     window.alert('You successfully removed your pet ' + model.name);
