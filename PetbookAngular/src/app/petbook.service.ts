@@ -87,15 +87,45 @@ export class PetbookService {
   }
 
   createPet(data: Pet, returnURL?: string) {
-    return this.http.post((this.url + 'pets'), data);
+    this.http.post((this.url + 'pets'), data).subscribe(
+      res => {
+        console.log('Created ' + data);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   updatePet(data: Pet, returnURL?: string) {
-    return this.http.put(this.url + 'pets', data);
+    this.http.put(this.url + 'pets', data).subscribe(
+      res => {
+        console.log('Updated ' + data);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   deletePet(petID: number, returnURL?: string) {
-    this.http.delete(this.url + 'pets/' + petID);
+    this.http.delete(this.url + 'pets/' + petID).subscribe(
+      res => {
+        console.log('Deleted ' + petID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   getClub(clubID: number): Observable<Club> {
@@ -111,23 +141,73 @@ export class PetbookService {
   }
 
   joinClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) });
+    this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
+      res => {
+        console.log(ownerID + ' joined club ' + clubID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   leaveClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) });
+    this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
+      res => {
+        console.log(ownerID + ' left club ' + clubID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   createClub(data: Club, returnURL: string) {
-    return this.http.post((this.url + 'clubs'), data);
+    this.http.post((this.url + 'clubs'), data).subscribe(
+      res => {
+        console.log('Created ' + data);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   updateClub(data: Club, returnURL?: string) {
-    return this.http.put(this.url + 'clubs', data);
+    this.http.put(this.url + 'clubs', data).subscribe(
+      res => {
+        console.log('Updated ' + data);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   deleteClub(clubID: number, returnURL?: string) {
-    return this.http.delete(this.url + 'clubs/' + clubID);
+    this.http.delete(this.url + 'clubs/' + clubID).subscribe(
+      res => {
+        console.log('Deleted ' + clubID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   getFriendsByPet(petID: number): Observable<Pet[]> {
@@ -140,11 +220,31 @@ export class PetbookService {
   }
 
   addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
-    this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
+    this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }).subscribe(
+      res => {
+        console.log('Created friendship: ' + pet1ID + ' and ' + pet2ID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
   deleteFriendship(friendshipID: number, returnURL?: string) {
-    this.http.delete((this.url + 'friendships/' + friendshipID));
+    this.http.delete((this.url + 'friendships/' + friendshipID)).subscribe(
+      res => {
+        console.log('Removed friendship: ' + friendshipID);
+        if (returnURL !== undefined) {
+          this.router.navigateByUrl(returnURL);
+        }
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
   }
 
 	getFriendshipSuggestions(owner_id: number, location: string, species: string): Observable<Pet[]> {
