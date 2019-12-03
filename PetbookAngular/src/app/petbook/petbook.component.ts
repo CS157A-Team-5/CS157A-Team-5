@@ -61,20 +61,19 @@ export class PetbookComponent {
           querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
             this.currentUserID, String(res), pet.species, (20 / this.pets.length)));
         }
-        const s_id = new Set();
+        const sID = new Set();
         combineLatest(querySuggestionResults).subscribe(
           data => {
             data.forEach(pet => {
               (pet as Array<Pet>).forEach(suggest => {
-                if (!s_id.has(suggest.id))
+                if (!sID.has(suggest.id)) {
                   this.suggestions.push(suggest);
-                s_id.add(suggest.id)
+                }
+                sID.add(suggest.id);
               });
             });
-          }
-        );
-      }
-      );
+          });
+      });
   }
 
   createClub(model: Club) {
@@ -84,14 +83,14 @@ export class PetbookComponent {
     const res = this.petbookService.getClubsByName(model.name);
     res.subscribe(
       data => {
-        console.log("this is the data ", data);
+        console.log('this is the data ', data);
         this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
       },
       err => {
         console.log(err);
       },
       () => {
-        console.log("http request finished");
+        console.log('http request finished');
         location.reload();
       });
   }
@@ -101,7 +100,7 @@ export class PetbookComponent {
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
       data => {
-        console.log("this is data ", data);
+        console.log('this is data ', data);
         model.size = data.size;
         this.petbookService.updateClub(model);
       },
@@ -114,19 +113,19 @@ export class PetbookComponent {
   }
 
   leaveClub(club: Club) {
-    console.log("i got pressed ", club);
+    console.log('i got pressed ', club);
     console.log(club.name);
     const res = this.petbookService.getClubsByName(club.name);
     res.subscribe(
       data => {
-        console.log("this is the data ", data);
+        console.log('this is the data ', data);
         this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
       },
       err => {
         console.log(err);
       },
       () => {
-        console.log("http request finished");
+        console.log('http request finished');
         location.reload();
       });
 

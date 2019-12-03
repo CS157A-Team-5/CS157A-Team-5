@@ -70,6 +70,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
+
   <div style="flex-direction: column;">
     <mat-card>
       <mat-card-header>
@@ -80,29 +81,29 @@
           <ul *ngFor="let friendArray of friends" class="list-group-item" role="listitem">
             <div *ngFor="let friend of friendArray">
               <li *ngIf="friend">
-                  {{friend.name}}
+                {{friend.name}}
                 <!-- <a href="pet/{{friend.id}}">{{friend.name}}</a> -->
               </li>
             </div>
           </ul>
         </ul>
       </mat-card-content>
-<<<<<<< 8f9bc1b40ef8989eb5bde7c570cc6278c9b51af5
+    </mat-card>
+
+    <mat-card>
       <mat-card-header>
         <mat-card-title>Suggestions</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ng-container *ngIf="suggestions">
+        <ul *ngIf="suggestions">
           <ul class="left-align" *ngIf="suggestions.length > 0">
             <div *ngFor="let s of suggestions">
               <li *ngIf="s">{{s.name}}</li>
               <!-- <a href="pet/{{s.id}}">{{s.name}}</a> -->
             </div>
           </ul>
-        </ng-container>
+        </ul>
       </mat-card-content>
-=======
->>>>>>> fix friends observable
     </mat-card>
   </div>
 
@@ -115,8 +116,9 @@
         <ng-container *ngIf="clubs | async as clubs_list">
           <ul class="list-group" *ngIf="clubs_list.length > 0">
             <div *ngFor="let club of clubs_list">
-              <p class="left-align"> {{club.name}} <button name="leave-button" type="button" value="club"
-                  (click)="leaveClub(club)" style="position: absolute; right: 1em">Leave</button>
+              <p class="left-align"> {{club.name}}
+                <button name="leave-button" type="button" value="club" (click)="leaveClub(club)"
+                  style="position: absolute; right: 1em">Leave</button>
                 <br>
                 <p class="left-align">ID# {{club.id}}</p>
                 <br>
@@ -126,6 +128,7 @@
       </mat-card-content>
       <button type="button" (click)="searchClub()" class="leave-button">Find clubs!</button>
     </mat-card>
+    
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -159,5 +162,4 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-
 </div>
