@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PetbookService } from '../petbook.service';
 import { Pet, Club } from '../petbook.interface';
 import { Observable } from 'rxjs';
-import { Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { FriendRequestComponent } from '../friend-request/friend-request.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,9 +21,11 @@ export class SearchBarComponent {
   clubs: Observable<Club[]>;
   petsBySpecies: Observable<Pet[]>;
   currentUserID: number;
+  currentUserPets: Observable<Pet[]>;
 
-  constructor(private petService: PetbookService, private overlay: Overlay) { 
+  constructor(private petService: PetbookService, private router: Router) {
     this.currentUserID = +this.petService.getCurrentStorageStatus();
+    this.currentUserPets = this.petService.getPetsByOwner(this.currentUserID);
   }
 
   onSearch() {
@@ -44,10 +44,10 @@ export class SearchBarComponent {
     console.log('Search successful');
   }
 
-  onConnect(petToFriend: Pet) {
-    const overlayRef = this.overlay.create();
-    const friendRequestPortal = new ComponentPortal(FriendRequestComponent);
-    overlayRef.attach(friendRequestPortal);
+  onConnect(currentPet: Pet, petToFriend: Pet) {
+    console.log('Pets to friend ', currentPet, petToFriend);
+    this.petService.addFriendship(currentPet.id, petToFriend.id);
+    window.alert(currentPet.name + ' is now friends with ' + petToFriend.name);
   }
 
   onJoin(clubToJoin: Club) {
