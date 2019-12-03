@@ -15,6 +15,9 @@ export class PetbookComponent {
   friends: Observable<any[]>;
   clubs: Observable<any[]>;
   currentUserID;
+  openCreatePanel = false;
+  openUpdatePanel = false;
+  openDeletePanel = false;
 
   constructor(private router: Router, private petbookService: PetbookService) {
     this.currentUserID = +this.petbookService.getCurrentStorageStatus();
@@ -36,7 +39,6 @@ export class PetbookComponent {
     for (const pet of this.pets) {
       queryFriendsResults.push(this.petbookService.getFriendsByPet(pet.id));
     }
-
     this.friends = combineLatest(queryFriendsResults);
   }
 
@@ -127,19 +129,27 @@ export class PetbookComponent {
   }
 
   createPet(model: Pet) {
-    console.log(model);
     model.owner_id = this.currentUserID;
     this.petbookService.createPet(model);
+    this.getPets();
+    this.openCreatePanel = !this.openCreatePanel;
+    window.alert('You successfully added your new pet ' + model.name);
   }
 
   updatePet(model: Pet) {
-    console.log(model);
+    model.owner_id = this.currentUserID;
+    model.id = +model.id;
     this.petbookService.updatePet(model);
+    this.getPets();
+    this.openUpdatePanel = !this.openUpdatePanel;
+    window.alert('You successfully updated your pet ' + model.name);
   }
 
   deletePet(model: Pet) {
-    console.log(model);
-    this.petbookService.deletePet(100);
+    this.petbookService.deletePet(+model.id);
+    this.getPets();
+    this.openDeletePanel = !this.openDeletePanel;
+    window.alert('You successfully removed your pet ' + model.name);
   }
 
 }

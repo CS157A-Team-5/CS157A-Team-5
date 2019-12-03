@@ -170,3 +170,12 @@ app-toolbar {
   min-height: 100%;
   height: auto;
 }
+
+.connect-button {
+  position: absolute; 
+  right: 1em
+}
+
+.left-align {
+  text-align: left;
+}
