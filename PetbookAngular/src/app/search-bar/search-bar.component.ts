@@ -47,11 +47,12 @@ export class SearchBarComponent {
   onConnect(currentPet: Pet, petToFriend: Pet) {
     console.log('Pets to friend ', currentPet, petToFriend);
     this.petService.addFriendship(currentPet.id, petToFriend.id);
-    window.alert(currentPet.name + ' is now friends with ' + petToFriend.name);
+    window.alert(currentPet.name + ' is now following ' + petToFriend.name);
   }
 
   onJoin(clubToJoin: Club) {
     this.petService.joinClub(this.currentUserID, clubToJoin.id);
+    window.alert('You are now part of the ' + clubToJoin.name + ' club!');
   }
 
 }

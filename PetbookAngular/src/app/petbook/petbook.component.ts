@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PetbookService } from '../petbook.service';
 import { Pet, Club, Owner } from '../petbook.interface';
-import { forkJoin, combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class PetbookComponent {
   pets: Pet[];
-  friends: Observable<any[]>;
+  friends: [Pet[]];
   clubs: Observable<any[]>;
   suggestions: Pet[];
   currentUserID;
@@ -41,7 +41,10 @@ export class PetbookComponent {
     for (const pet of this.pets) {
       queryFriendsResults.push(this.petbookService.getFriendsByPet(pet.id));
     }
-    this.friends = combineLatest(queryFriendsResults);
+    combineLatest(queryFriendsResults).subscribe((friendResults: [Pet[]]) => {
+      this.friends = friendResults;
+      console.log(this.friends);
+    });
   }
 
   getClubs() {
@@ -56,7 +59,7 @@ export class PetbookComponent {
       .subscribe((res) => {
         for (const pet of this.pets) {
           querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
-            this.currentUserID, String(res), pet.species, (20/this.pets.length)));
+            this.currentUserID, String(res), pet.species, (20 / this.pets.length)));
         }
         const s_id = new Set();
         combineLatest(querySuggestionResults).subscribe(
@@ -71,7 +74,7 @@ export class PetbookComponent {
           }
         );
       }
-    );
+      );
   }
 
   createClub(model: Club) {
@@ -80,32 +83,32 @@ export class PetbookComponent {
     this.petbookService.createClub(model, 'home');
     const res = this.petbookService.getClubsByName(model.name);
     res.subscribe(
-    data=> {
-      console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
-    },
-    err =>{
-      console.log(err);
-    },
-    ()=>{
-      console.log("http request finished");
-      location.reload();
-    });
+      data => {
+        console.log("this is the data ", data);
+        this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log("http request finished");
+        location.reload();
+      });
   }
 
   updateClub(model: Club) {
     console.log(model);
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
-      data=> {
+      data => {
         console.log("this is data ", data);
         model.size = data.size;
         this.petbookService.updateClub(model);
       },
-      err =>{
+      err => {
         console.log(err);
       },
-      ()=>{
+      () => {
         location.reload();
       });
   }
@@ -115,17 +118,17 @@ export class PetbookComponent {
     console.log(club.name);
     const res = this.petbookService.getClubsByName(club.name);
     res.subscribe(
-    data=> {
-      console.log("this is the data ", data);
-      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
-    },
-    err =>{
-      console.log(err);
-    },
-    ()=>{
-      console.log("http request finished");
-      location.reload();
-    });
+      data => {
+        console.log("this is the data ", data);
+        this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log("http request finished");
+        location.reload();
+      });
 
   }
 
