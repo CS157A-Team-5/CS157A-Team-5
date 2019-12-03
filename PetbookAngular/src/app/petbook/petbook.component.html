@@ -96,7 +96,7 @@
         <ng-container *ngIf="suggestions">
           <ul class="left-align" *ngIf="suggestions.length > 0">
             <div *ngFor="let s of suggestions">
-              <li *ngIf="s">{{s.name}}</li>
+              <li *ngIf="s"><a href="pet/{{s.id}}">{{s.name}}</a></li>
             </div>
           </ul>
         </ng-container>
