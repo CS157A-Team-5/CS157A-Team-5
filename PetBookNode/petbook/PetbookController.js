@@ -38,7 +38,7 @@ router.get('/user/login', function (req, res) {
 });
 
 router.get('/user/location/:owner_id', function (req, res) {
-    Petbook.getuserlocation(req.params.owner_id, function(err, rows) {
+    Petbook.getownerlocation(req.params.owner_id, function(err, rows) {
         if(err) {
             res.status(400).json(err);
         } else {
