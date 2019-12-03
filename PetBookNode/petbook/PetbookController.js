@@ -37,6 +37,16 @@ router.get('/user/login', function (req, res) {
     });
 });
 
+router.get('user/location/:owner_id', function (req, res) {
+    Petbook.getuserlocation(req.params.owner_id, function(err, rows) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(rows[0])
+        }
+    });
+});
+
 router.post('/user/create', function (req, res) {
     bcrypt.hash(req.body.password, 10, function(err, hash) {
         Petbook.createowner(req.body, hash, function(err) {
