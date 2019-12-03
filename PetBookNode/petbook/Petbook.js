@@ -98,16 +98,15 @@ var Petbook = {
             friendship_id, callback);
     },
     getsuggestions: function(data, callback) {
-        return db.query('SELECT pets.*, ' +
+        return db.query('SELECT pets.* ' +
             'FROM pets ' +
             'NATURAL JOIN ( ' +
-            '	SELECT owners.id AS owner_id, owners.location, owner_club.club_id ' +
-            '    FROM owners, owner_club ' +
-            '    WHERE owners.id=owner_club.owner_id ' +
+            '	SELECT owners.id AS owner_id, owners.location ' +
+            '    FROM owners ' +
             ') as owner_info ' +
-            'WHERE owner_id <> ?' +
+            'WHERE owner_id <> ? ' +
             'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) DESC ' +
-            'LIMIT 20;', [data.location, data.species, data.club_id, data.owner_id], callback);
+            'LIMIT ?', [data.owner_id, data.location, data.species, data.count], callback);
     }
 }
 

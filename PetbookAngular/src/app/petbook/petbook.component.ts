@@ -14,7 +14,7 @@ export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
   clubs: Observable<any[]>;
-  suggestions: Observable<Pet[]>;
+  suggestions: Pet[];
   currentUserID;
   openCreatePanel = false;
   openUpdatePanel = false;
@@ -32,7 +32,7 @@ export class PetbookComponent {
         console.log(this.pets);
         this.getFriends();
         this.getClubs();
-        // this.getFriendshipSuggestions();
+        this.getFriendshipSuggestions();
       });
   }
 
@@ -51,27 +51,33 @@ export class PetbookComponent {
 
   getFriendshipSuggestions() {
     const querySuggestionResults = [];
-    let location = '';
+    this.suggestions = [];
     this.petbookService.getOwnerLocation(this.currentUserID)
-      .subscribe((res: Owner) => {
-        location = res.location;
-      },
-      () => {},
-      () => {
+      .subscribe((res) => {
         for (const pet of this.pets) {
           querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
-            this.currentUserID,
-            location,
-            pet.species));
+            this.currentUserID, String(res), pet.species, (20/this.pets.length)));
         }
-        this.friends = combineLatest(querySuggestionResults);
-      });
+        const s_id = new Set();
+        combineLatest(querySuggestionResults).subscribe(
+          data => {
+            data.forEach(pet => {
+              pet.forEach(suggest => {
+                if (!s_id.has(suggest.id))
+                  this.suggestions.push(suggest);
+                s_id.add(suggest.id)
+              });
+            });
+          }
+        );
+      }
+    );
   }
 
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);    
-    this.petbookService.createClub(model, 'home');    
+    console.log(model);
+    this.petbookService.createClub(model, 'home');
     const res = this.petbookService.getClubsByName(model.name);
     res.subscribe(
     data=> {
@@ -84,7 +90,7 @@ export class PetbookComponent {
     ()=>{
       console.log("http request finished");
       location.reload();
-    }); 
+    });
   }
 
   updateClub(model: Club) {
