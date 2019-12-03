@@ -107,19 +107,9 @@ export class PetbookComponent {
   leaveClub(club: Club) {
     console.log('i got pressed ', club);
     console.log(club.name);
-    const res = this.petbookService.getClubsByName(club.name);
-    res.subscribe(
-      data => {
-        console.log('this is the data ', data);
-        this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log('http request finished');
-        location.reload();
-      });
+    this.petbookService.leaveClub(this.currentUserID, club.id, 'home').subscribe(() => {
+      location.reload();
+    });
 
   }
 
