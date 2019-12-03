@@ -78,7 +78,8 @@
       </mat-card-header>
       <mat-card-content>
         <ul class="left-align" *ngIf="friends">
-          <ul *ngFor="let friendArray of friends" class="list-group-item" role="listitem">
+          <ul *ngFor="let friendArray of friends; let i = index" class="list-group-item" role="listitem">
+            <h3>{{pets[i].name}}</h3>
             <div *ngFor="let friend of friendArray">
               <li *ngIf="friend">
                 {{friend.name}}
@@ -128,7 +129,7 @@
       </mat-card-content>
       <button type="button" (click)="searchClub()" class="leave-button">Find clubs!</button>
     </mat-card>
-    
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
