@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PetbookService } from '../petbook.service';
-import { Pet, Club } from '../petbook.interface';
+import { Pet, Club, Owner } from '../petbook.interface';
 import { forkJoin, combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
   clubs: Observable<any[]>;
+  suggestions: Observable<Pet[]>;
   currentUserID;
   openCreatePanel = false;
   openUpdatePanel = false;
@@ -31,6 +32,7 @@ export class PetbookComponent {
         console.log(this.pets);
         this.getFriends();
         this.getClubs();
+        this.getFriendshipSuggestions();
       });
   }
 
@@ -48,6 +50,25 @@ export class PetbookComponent {
       this.clubs = res;
       console.log(this.clubs);
     });
+  }
+
+  getFriendshipSuggestions() {
+    const querySuggestionResults = [];
+    let location = '';
+    this.petbookService.getOwnerLocation(this.currentUserID)
+      .subscribe((res: Owner) => {
+        location = res.location;
+      },
+      () => {},
+      () => {
+        for (const pet of this.pets) {
+          querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
+            this.currentUserID,
+            location,
+            pet.species));
+        }
+        this.friends = combineLatest(querySuggestionResults);
+      });
   }
 
   createClub(model: Club) {
