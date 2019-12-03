@@ -106,7 +106,7 @@ var Petbook = {
             ') as owner_info ' +
             'WHERE owner_id <> ? ' +
             'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) DESC ' +
-            'LIMIT ?', [data.owner_id, data.location, data.species, data.count], callback);
+            'LIMIT ?', [data.owner_id, data.location, data.species, parseInt(data.count)], callback);
     }
 }
 
