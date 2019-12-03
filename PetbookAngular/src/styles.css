@@ -127,56 +127,112 @@ button:disabled {
 .button-center {
   margin: 5% auto 0;
   display: flex;
-  margin-bottom: 20px;
 }
-
-/* Material */
 
 .mat-card {
   text-align: -webkit-center;
   margin: 20px;
 }
 
-.mat-form-field {
-  margin: 10px;
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* Components */
-
 app-dashboard,
+app-toolbar,
+app-search-bar,
 app-petbook,
 app-login,
-app-registration,
-app-search-bar{
+app-registration {
   width: var(--content-width);
   min-height: fit-content;
   position: relative;
-  max-width: 1000px;
   margin: 5% auto 0;
 }
 
-app-dashboard {
-  margin-top: 0;
-}
-
 app-toolbar {
+  margin: 0 auto 0;
   width: 100%;
 }
 
-.dashboard {
-  display: flex;
-  background-color: #e1e1e1;
-  padding: 20px 20px;
-  max-width: 960px;
-  min-height: 100%;
-  height: auto;
+app-login {
+  margin: 0 auto 0;
+  min-height: fit-content;
+  position: relative;
+  width: 100%;
+  padding: 25px;
+  background: url(./assets/kitten-laying.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+app-search-bar {
+  margin: 0 auto 0;
+  min-height: fit-content;
+  position: relative;
+  width: 100%;
+  padding: 25px;
+  background: url(./assets/dog-face.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+app-dashboard {
+  margin: 0 auto 0;
+  min-height: fit-content;
+  position: relative;
+  width: 100%;
+  padding: 25px;
+  background: url(./assets/leaves.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .connect-button {
-  position: absolute; 
+  position: absolute;
   right: 1em
 }
 
 .left-align {
   text-align: left;
+}
+
+.login-page {
+  width: var(--content-width);
+  max-width: 350px;
+  margin: 5% auto 0;
+}
+
+.search-page {
+  width: var(--content-width);
+  max-width: 350px;
+  margin: 5% auto 0;
+}
+
+.dashboard {
+  display: flex;
+}
+
+.center-list {
+  -webkit-padding-start: 10px;
+  padding-inline-start: 10px;
+  -webkit-padding-end: 10px;
+  padding-inline-end: 10px;
+}
+
+.is-aligned {
+  align-items: center;
+  padding: 8px 16px;
 }

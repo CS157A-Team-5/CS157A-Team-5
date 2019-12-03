@@ -12,9 +12,9 @@
       </form>
     </mat-card-content>
   </mat-card>
-</div>
 
-<ul *ngFor='let pet of pets | async'>
+
+<ul class="center-list" *ngFor='let pet of pets | async'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -39,7 +39,7 @@
   </mat-card>
 </ul>
 
-<ul *ngFor='let pet of petsAtLocation | async'>
+<ul class="center-list" *ngFor='let pet of petsAtLocation | async'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -63,7 +63,7 @@
   </mat-card>
 </ul>
 
-<ul *ngFor='let pet of petsBySpecies | async'>
+<ul class="center-list" *ngFor='let pet of petsBySpecies | async'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -85,7 +85,7 @@
   </mat-card>
 </ul>
 
-<ul *ngFor='let club of clubs | async'>
+<ul class="center-list" *ngFor='let club of clubs | async'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -104,3 +104,4 @@
     </mat-card-content>
   </mat-card>
 </ul>
+</div>

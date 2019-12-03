@@ -9,8 +9,8 @@
       <table>      
         <!-- email form -->
         <tr>
-          <td colspan="2">
-            <mat-form-field>
+          <td class="is-aligned">
+            <mat-form-field style="width: 100%;">
               <input formControlName="email" matInput placeholder="Email" autocomplete="on" />
             </mat-form-field>
           </td>
@@ -19,8 +19,8 @@
 
         <!-- password form -->
         <tr>
-          <td colspan="2">
-            <mat-form-field>
+          <td class="is-aligned">
+            <mat-form-field style="width: 100%;">
               <input formControlName="password" matInput placeholder="Password" autocomplete="url" />
             </mat-form-field>
           </td>
@@ -29,8 +29,8 @@
 
         <!-- Login button -->
         <tr>
-          <td colspan="2" style="padding-inline-start: 10px;">
-            <button type="submit" (click)="login()" style="text-align: center">Login</button>
+          <td>
+            <button class="button-center" type="submit" (click)="login()">Login</button>
           </td>
         </tr>
       </table>
