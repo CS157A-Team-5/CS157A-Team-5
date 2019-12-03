@@ -25,6 +25,10 @@ export class PetbookService {
       }));
   }
 
+	getOwnerLocation(owner_id: string): Observable<Owner> {
+		return this.http.get<Owner>(this.url + 'user/location/' + owner_id);
+	}
+
   getCurrentStorageStatus(): string {
     return localStorage.getItem('currentUserID');
   }
@@ -141,5 +145,10 @@ export class PetbookService {
 
   deleteFriendship(friendshipID: number, returnURL?: string) {
     this.http.delete((this.url + 'friendships/' + friendshipID));
+  }
+
+	getFriendshipSuggestions(owner_id: number, location: string, species: string): Observable<Pet[]> {
+    return this.http.get<Pet[]>((this.url + 'suggestions'),
+      { params: { location: location, species: species, owner_id: String(owner_id) } });
   }
 }
