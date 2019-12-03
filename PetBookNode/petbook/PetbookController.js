@@ -282,7 +282,7 @@ router.delete('/friendships/:friendship_id', function (req, res) {
     });
 });
 
-router.get('/suggestions' function(req, res) {
+router.get('/suggestions', function(req, res) {
     Petbook.getsuggestions(req.query, function(err, res) {
         if(err) {
             res.status(400).json(err);
