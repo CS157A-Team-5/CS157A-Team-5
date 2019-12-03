@@ -209,7 +209,6 @@ router.post('/clubs/leave', function (req, res) {
         if (err) {
             res.status(400).json(err);
         } else {
-          console.log(club[0]);
           if (club[0].size <= 1) {
               Petbook.deleteclub(req.body.club_id, function(err, count) {
                   if(err) {
