@@ -242,4 +242,9 @@ export class PetbookService {
       }
     );
   }
+
+	getFriendshipSuggestions(location: string, species: string, club_id: number): Observable<Pet[]> {
+    return this.http.get<number>((this.url + 'suggestions'),
+      { params: { location: location, species: species, club_id: String(club_id) } });
+  }
 }

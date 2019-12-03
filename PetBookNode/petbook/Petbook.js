@@ -95,15 +95,14 @@ var Petbook = {
             friendship_id, callback);
     },
     getsuggestions: function(data, callback) {
-        return db.query('SELECT id, name, ' +
-	          'IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) + IF(club_id=?, 1, 0) AS common ' +
+        return db.query('SELECT pets.*, ' +
             'FROM pets ' +
             'NATURAL JOIN ( ' +
             '	SELECT owners.id AS owner_id, owners.location, owner_club.club_id ' +
             '    FROM owners, owner_club ' +
             '    WHERE owners.id=owner_club.owner_id ' +
             ') as owner_info ' +
-            'ORDER BY common DESC ' +
+            'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) + IF(club_id=?, 1, 0) DESC ' +
             'LIMIT 20;', [data.location, data.species, data.club_id], callback);
     }
 }
