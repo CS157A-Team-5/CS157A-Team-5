@@ -65,7 +65,7 @@ var Petbook = {
 
     },
     leaveclub: function (data, callback) {
-        return db.query('DELETE FROM owner_club WHERE owner_id=? AND club_id=?'
+        return db.query('DELETE FROM owner_club WHERE owner_id=? AND club_id=?',
             [data.owner_id, data.club_id], callback);
 
     },
