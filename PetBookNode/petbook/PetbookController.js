@@ -194,27 +194,51 @@ router.post('/clubs/join', function (req, res) {
         if(err) {
             res.status(400).json(err);
         } else {
+            Petbook.clubchange(req.body.club_id, 1, function(err, count) {
+                if(err) {
+                    res.status(400).json(err);
+                }
+            });
             res.json(req.body);
         }
     });
 });
 
 router.post('/clubs/leave', function (req, res) {
-    Petbook.leaveclub(req.body, function(err, count) {
-        if(err) {
+    Petbook.getclub(req.body.club_id, function(err, club) {
+        if (err) {
             res.status(400).json(err);
         } else {
-            res.json(req.body);
+          console.log(club[0]);
+          if (club[0].size <= 1) {
+              Petbook.deleteclub(req.body.club_id, function(err, count) {
+                  if(err) {
+                      res.status(400).json(err);
+                  } else {
+                      Petbook.clubchange(req.body.club_id, -1);
+                      res.json(req.body);
+                  }
+              });
+          } else {
+              Petbook.leaveclub(req.body, function(err, count) {
+                  if(err) {
+                      res.status(400).json(err);
+                  } else {
+                      Petbook.clubchange(req.body.club_id, -1);
+                      res.json(req.body);
+                  }
+              });
+          }
         }
     });
 });
 
 router.post('/clubs', function (req, res) {
-    Petbook.createclub(req.body, function(err, count) {
+    Petbook.createclub(req.body, function(err, club) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(req.body);
+            res.json(club.insertId);
         }
     });
 });

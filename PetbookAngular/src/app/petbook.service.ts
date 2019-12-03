@@ -155,31 +155,11 @@ export class PetbookService {
   }
 
   leaveClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) }).subscribe(
-      res => {
-        console.log(ownerID + ' left club ' + clubID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) });
   }
 
   createClub(data: Club, returnURL: string) {
-    this.http.post((this.url + 'clubs'), data).subscribe(
-      res => {
-        console.log('Created ' + data);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'clubs'), data);
   }
 
   updateClub(data: Club, returnURL?: string) {
