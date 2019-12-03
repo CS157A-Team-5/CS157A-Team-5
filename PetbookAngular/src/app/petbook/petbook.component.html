@@ -5,7 +5,7 @@
         <mat-card-title>Pets</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ul class="list-group" *ngIf="pets" style="text-align: left;">
+        <ul class="left-align" *ngIf="pets" style="text-align: left;">
           <ul *ngFor="let p of pets" class="list-group-item" role="listitem">
             <h3>{{p.name}}</h3>
             <li>{{p.species}}</li>
@@ -77,7 +77,7 @@
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="friends | async as friends_list">
-          <ul class="list-group" *ngIf="friends_list.length > 0">
+          <ul class="left-align" *ngIf="friends_list.length > 0">
             <div *ngFor="let friend of friends_list">
               <li *ngIf="friend[0]">{{friend[0].name}}</li>
             </div>
@@ -91,9 +91,9 @@
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="clubs | async as clubs_list">
-          <ul class="list-group" *ngIf="clubs_list.length > 0">
+          <ul class="left-align" *ngIf="clubs_list.length > 0">
             <div *ngFor="let club of clubs_list">
-              <li *ngIf="club[0]">{{club[0].name}}</li>
+              <li *ngIf="club">{{club.name}}</li>
             </div>
           </ul>
         </ng-container>
