@@ -48,7 +48,6 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log(this.currentUserID);
     this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
   }
 
@@ -78,39 +77,35 @@ export class PetbookComponent {
 
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);
     this.petbookService.createClub(model, 'home').subscribe((club_id) => {
-        this.petbookService.joinClub(this.currentUserID, Number(club_id));
+        this.petbookService.joinClub(this.currentUserID, Number(club_id)).subscribe(() => {
+            this.getClubs();
+          },
+          (err) => { console.log(err); }
+        );
       },
-      () => { console.log("Error joining the created club"); },
-      () => { location.reload(); }
+      (err) => { console.log(err); }
     );
   }
 
   updateClub(model: Club) {
-    console.log(model);
-    const clubToUpdate = this.petbookService.getClub(model.id);
-    clubToUpdate.subscribe(
+    this.petbookService.getClub(model.id).subscribe(
       data => {
-        console.log('this is data ', data);
         model.size = data.size;
-        this.petbookService.updateClub(model);
+        this.petbookService.updateClub(model).subscribe(() => {
+          this.getClubs();
+        },
+        (err) => { console.log(err); }
+      );
       },
-      err => {
-        console.log(err);
-      },
-      () => {
-        location.reload();
-      });
+      (err) => { console.log(err); }
+    );
   }
 
   leaveClub(club: Club) {
-    console.log('i got pressed ', club);
-    console.log(club.name);
     this.petbookService.leaveClub(this.currentUserID, club.id, 'home').subscribe(() => {
-      location.reload();
+      this.getClubs();
     });
-
   }
 
   searchClub() {
@@ -119,26 +114,29 @@ export class PetbookComponent {
 
   createPet(model: Pet) {
     model.owner_id = this.currentUserID;
-    this.petbookService.createPet(model);
-    this.getPets();
-    this.openCreatePanel = !this.openCreatePanel;
-    window.alert('You successfully added your new pet ' + model.name);
+    this.petbookService.createPet(model).subscribe(() => {
+        this.getPets();
+      },
+      (err) => { console.log(err); }
+    );
   }
 
   updatePet(model: Pet) {
     model.owner_id = this.currentUserID;
     model.id = +model.id;
-    this.petbookService.updatePet(model);
-    this.getPets();
-    this.openUpdatePanel = !this.openUpdatePanel;
-    window.alert('You successfully updated your pet ' + model.name);
+    this.petbookService.updatePet(model).subscribe(() => {
+        this.getPets();
+      },
+      (err) => { console.log(err); }
+    );
   }
 
   deletePet(model: Pet) {
-    this.petbookService.deletePet(+model.id);
-    this.getPets();
-    this.openDeletePanel = !this.openDeletePanel;
-    window.alert('You successfully removed your pet ' + model.name);
+    this.petbookService.deletePet(model.id).subscribe(() => {
+        this.getPets();
+      },
+      (err) => { console.log(err); }
+    );
   }
 
 }
