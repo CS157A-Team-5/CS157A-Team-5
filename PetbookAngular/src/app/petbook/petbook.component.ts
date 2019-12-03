@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
-  clubs: Observable<any[]>;
+  clubs: Club[];
   suggestions: Observable<Pet[]>;
   currentUserID;
   openCreatePanel = false;
@@ -81,7 +81,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');
+      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home').subscribe();
     },
     err =>{
       console.log(err);
@@ -99,7 +99,7 @@ export class PetbookComponent {
       data=> {
         console.log("this is data ", data);
         model.size = data.size;
-        this.petbookService.updateClub(model);
+        this.petbookService.updateClub(model).subscribe();
       },
       err =>{
         console.log(err);

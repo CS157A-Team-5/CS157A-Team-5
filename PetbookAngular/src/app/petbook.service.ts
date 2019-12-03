@@ -95,7 +95,7 @@ export class PetbookService {
   }
 
   deletePet(petID: number, returnURL?: string) {
-    this.http.delete(this.url + 'pets/' + petID);
+    return this.http.delete(this.url + 'pets/' + petID);
   }
 
   getClub(clubID: number): Observable<Club> {
@@ -111,11 +111,11 @@ export class PetbookService {
   }
 
   joinClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) });
+    return this.http.post((this.url + 'clubs/join'), { owner_id: String(ownerID), club_id: String(clubID) });
   }
 
   leaveClub(ownerID: number, clubID: number, returnURL?: string) {
-    this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) });
+    return this.http.post((this.url + 'clubs/leave'), { owner_id: String(ownerID), club_id: String(clubID) });
   }
 
   createClub(data: Club, returnURL: string) {
@@ -140,11 +140,11 @@ export class PetbookService {
   }
 
   addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
-    this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
+    return this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
   }
 
   deleteFriendship(friendshipID: number, returnURL?: string) {
-    this.http.delete((this.url + 'friendships/' + friendshipID));
+    return this.http.delete((this.url + 'friendships/' + friendshipID));
   }
 
 	getFriendshipSuggestions(owner_id: number, location: string, species: string): Observable<Pet[]> {
