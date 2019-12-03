@@ -79,20 +79,12 @@ export class PetbookComponent {
   createClub(model: Club) {
     model.size = 1;
     console.log(model);
-    this.petbookService.createClub(model, 'home');
-    const res = this.petbookService.getClubsByName(model.name);
-    res.subscribe(
-      data => {
-        console.log('this is the data ', data);
-        this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
+    this.petbookService.createClub(model, 'home').subscribe((club_id) => {
+        this.petbookService.joinClub(this.currentUserID, Number(club_id));
       },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log('http request finished');
-        location.reload();
-      });
+      () => { console.log("Error joining the created club"); },
+      () => { location.reload(); }
+    );
   }
 
   updateClub(model: Club) {

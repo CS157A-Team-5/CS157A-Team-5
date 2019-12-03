@@ -210,11 +210,11 @@ router.post('/clubs/leave', function (req, res) {
 });
 
 router.post('/clubs', function (req, res) {
-    Petbook.createclub(req.body, function(err, count) {
+    Petbook.createclub(req.body, function(err, club) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(req.body);
+            res.json(club.insertId);
         }
     });
 });
