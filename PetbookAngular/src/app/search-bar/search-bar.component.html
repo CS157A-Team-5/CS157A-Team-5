@@ -19,7 +19,7 @@
     <mat-card-header>
       <mat-card-title>
         {{pet.name}}
-        <button (click)="onConnect()" class="connect-button">
+        <button (click)="onConnect(pet)" class="connect-button">
           Connect
         </button>
       </mat-card-title>
@@ -41,7 +41,7 @@
     <mat-card-header>
       <mat-card-title>
         {{pet.name}}
-        <button (click)="onConnect()" class="connect-button">
+        <button (click)="onConnect(pet)" class="connect-button">
           Connect
         </button>
       </mat-card-title>
@@ -65,7 +65,7 @@
     <mat-card-header>
       <mat-card-title>
         {{pet.name}}
-        <button (click)="onConnect()" class="connect-button">
+        <button (click)="onConnect(pet)" class="connect-button">
           Connect
         </button>
       </mat-card-title>
@@ -87,7 +87,7 @@
     <mat-card-header>
       <mat-card-title>
         Club: {{club.name}}
-        <button (click)="onJoin()" class="connect-button">
+        <button (click)="onJoin(club)" class="connect-button">
           Join
         </button>
       </mat-card-title>
@@ -101,3 +101,9 @@
     </mat-card-content>
   </mat-card>
 </ul>
+
+<div class="cdk-overlay-container">
+    <div id="cdk-overlay-0" class="cdk-overlay-pane" dir="ltr">
+      <app-friend-request></app-friend-request>
+    </div>
+  </div>

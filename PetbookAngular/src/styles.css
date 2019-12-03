@@ -1,6 +1,7 @@
 /* Global Styles */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 * {
   font-family: 'Roboto', Arial, sans-serif;

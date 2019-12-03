@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -27,6 +28,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PetbookService } from './petbook.service';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AuthGuard } from './authGuard';
+import { FriendRequestComponent } from './friend-request/friend-request.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AuthGuard } from './authGuard';
     LoginComponent,
     RegistrationComponent,
     ToolbarComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    FriendRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { AuthGuard } from './authGuard';
     MatInputModule,
     MatExpansionModule,
     MatDividerModule,
+    OverlayModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'login', component: LoginComponent },
