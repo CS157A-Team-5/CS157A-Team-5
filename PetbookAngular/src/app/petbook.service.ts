@@ -153,12 +153,12 @@ export class PetbookService {
 			res => {
 				console.log("Created " + data);
 				if (returnURL !== undefined)
-					this.router.navigateByUrl(returnURL);
+					this.router.navigateByUrl(returnURL);        
 			},
 			err => {
 				console.log('Error: ', err);
 			}
-		);
+		); 
 	}
 
 	updateClub(data: Club, returnURL?: string) {

@@ -4,10 +4,13 @@
     "\\PetbookAngular",
     "\\PetbookAngular\\src",
     "\\PetbookAngular\\src\\app",
-    "\\PetbookMySQL",
+    "\\PetbookAngular\\src\\app\\login",
+    "\\PetbookAngular\\src\\app\\petbook",
+    "\\PetbookAngular\\src\\app\\registration",
+    "\\PetbookAngular\\src\\app\\search-bar",
     "\\PetBookNode",
     "\\PetBookNode\\petbook"
   ],
-  "SelectedNode": "\\PetBookNode\\petbook\\Petbook.js",
+  "SelectedNode": "\\PetbookAngular\\src\\app\\toolbar",
   "PreviewInSolutionExplorer": false
 }

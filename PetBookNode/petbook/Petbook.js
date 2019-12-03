@@ -52,8 +52,7 @@ var Petbook = {
         return db.query('SELECT * FROM clubs WHERE name LIKE ?', (name + '%'), callback);
     },
     getclubbyowner: function(owner_id, callback) {
-        //return db.query('SELECT club_id FROM owner_club WHERE owner_id=?', owner_id, callback);
-		return db.query('SELECT name, species, size FROM clubs JOIN owner_club USING(id) WHERE owner_id=?', owner_id, callback);
+		return db.query('SELECT * FROM clubs WHERE id IN (SELECT club_id FROM owner_club WHERE owner_id=?)', owner_id, callback);
     },
     joinclub: function (data, callback) {
         return db.query('INSERT INTO owner_club(owner_id, club_id) VALUES(?, ?)',

@@ -27,7 +27,7 @@ export class PetbookComponent {
         this.pets = res;
         console.log(this.pets);
         this.getFriends();
-        this.getClubs();
+        this.getClubs();        
       });
   }
 
@@ -41,31 +41,50 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log(this.currentUserID);    
+    console.log("Therse are the clubs for user", this.currentUserID);    
     this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
-    console.log(this.clubs.length);
+    this.clubs.subscribe(result => {console.log("size is: ", result.length)});
+    console.log(this.currentUserID); 
   }
 
   createClub(model: Club) {
     model.size = 1;
     console.log(model);    
-    console.log(model.id);
-    this.petbookService.createClub(model, 'home');
-    //trying to get the correct id of the club because model.id is not defined so I can't use it
+    this.petbookService.createClub(model, 'home');    
     const res = this.petbookService.getClubsByName(model.name);
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');  
+      this.petbookService.joinClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
     },
     ()=>{
       console.log("http request finished");
-      this.router.navigate(['home']);
-    });
+      location.reload();
+    }); 
   }
+
+  /*createClub(model: Club) {
+    model.size = 1;
+    this.petbookService.createClub(model, 'home');
+    this.getClubId(model);
+    const res = this.petbookService.getClubsByName(club.name);
+    res.subscribe(
+    data=> {
+      console.log("this is the data ", data);
+      this.petbookService.joinClub(this.currentUserID, clubId, 'home');
+    },
+    err =>{
+      console.log(err);
+    },
+    ()=>{
+      console.log("http request finished");
+    });    
+    //this.petbookService.joinClub(this.currentUserID, this.getClubId(model), 'home');
+    location.reload;
+  }*/
 
   updateClub(model: Club) {    
     console.log(model);
@@ -78,9 +97,10 @@ export class PetbookComponent {
       },
       err =>{
         console.log(err);
-      }
-    )    
-    
+      },
+      ()=>{
+        location.reload();
+      });          
   }
 
   leaveClub(club: Club) {
@@ -97,7 +117,7 @@ export class PetbookComponent {
     },
     ()=>{
       console.log("http request finished");
-      this.router.navigate(['home']);
+      location.reload();
     });
     
   }
