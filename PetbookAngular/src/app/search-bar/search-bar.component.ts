@@ -51,7 +51,8 @@ export class SearchBarComponent {
   }
 
   onJoin(clubToJoin: Club) {
-    this.petService.joinClub(this.currentUserID, clubToJoin.id);
+    this.petService.joinClub(this.currentUserID, clubToJoin.id).subscribe(() => {},
+    (err) => { console.log(err) });
     window.alert('You are now part of the ' + clubToJoin.name + ' club!');
   }
 
