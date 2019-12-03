@@ -5,19 +5,20 @@
         <mat-card-title>Pets</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ul class="list-group" *ngIf="pets" style="text-align: left;">
+        <ul class="left-align" *ngIf="pets" style="text-align: left;">
           <ul *ngFor="let p of pets" class="list-group-item" role="listitem">
             <h3>{{p.name}}</h3>
             <li>{{p.species}}</li>
             <li>{{p.age}} years old</li>
             <li>{{p.weight}} pounds</li>
+            <li>ID# {{p.id}}</li>
           </ul>
         </ul>
       </mat-card-content>
     </mat-card>
 
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="openCreatePanel" (opened)="openCreatePanel = true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             New Pet
@@ -30,12 +31,12 @@
           <br />
           <input type="text" name="age" placeholder="Age" ngModel>
           <br />
-          <input type="text" name="weight" placeholder="Weight" ngModel>
+          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
           <br />
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="openUpdatePanel" (opened)="openUpdatePanel = true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Update A Pet
@@ -50,12 +51,12 @@
           <br />
           <input type="text" name="age" placeholder="Age" ngModel>
           <br />
-          <input type="text" name="weight" placeholder="Weight" ngModel>
+          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
           <br />
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="openDeletePanel" (opened)="openDeletePanel = true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Remove Pet
@@ -64,12 +65,11 @@
         <form #petDeleteForm="ngForm" (ngSubmit)="deletePet(petDeleteForm.value)">
           <input type="text" name="id" placeholder="ID" ngModel>
           <br />
-          <input type="submit" value="submit">
+          <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-
   <div style="flex-direction: column;">
     <mat-card>
       <mat-card-header>
@@ -77,10 +77,10 @@
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="friends | async as friends_list">
-          <ul class="list-group" *ngIf="friends_list.length > 0">
-            <li *ngFor="let friend of friends_list">
-              {{friend[0].name}}
-            </li>
+          <ul class="left-align" *ngIf="friends_list.length > 0">
+            <div *ngFor="let friend of friends_list">
+              <li *ngIf="friend[0]">{{friend[0].name}}</li>
+            </div>
           </ul>
         </ng-container>
       </mat-card-content>

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
 import { PetbookService } from '../petbook.service';
-import { Pet } from '../petbook.interface';
+import { Pet, Club } from '../petbook.interface';
+import { Observable, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,12 +12,15 @@ import { Pet } from '../petbook.interface';
 export class SearchBarComponent {
 
   searchForm = new FormGroup({
-    searchPet: new FormControl('', [Validators.required]),
+    searchTerm: new FormControl('', [Validators.required]),
   });
 
-  pets;  //: Pet[];    //I had an error when I included : Pet[]
+  pets: Observable<Pet[]>;
+  petsAtLocation: Observable<Pet[]>;
+  clubs: Observable<Club[]>;
+  petsBySpecies: Observable<Pet[]>;
 
-  constructor(private router: Router, private petService: PetbookService) { }
+  constructor(private petService: PetbookService) { }
 
   onSearch() {
     if (!this.searchForm.valid) {
@@ -25,9 +28,14 @@ export class SearchBarComponent {
       return;
     }
 
-    this.pets = this.petService.getPetsByName(this.searchForm.value.searchPet);
+    const term = this.searchForm.value.searchTerm;
 
-    console.log("Search successful");
+    this.pets = this.petService.getPetsByName(term);
+    this.petsAtLocation = this.petService.getPetsByLocation(term);
+    this.clubs = this.petService.getClubsByName(term);
+    this.petsBySpecies = this.petService.getPetsBySpecies(term);
+
+    console.log('Search successful');
   }
 
 }
