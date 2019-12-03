@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PetbookService } from '../petbook.service';
-import { Pet, Club } from '../petbook.interface';
+import { Pet, Club, Owner } from '../petbook.interface';
 import { forkJoin, combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class PetbookComponent {
   pets: Pet[];
   friends: Observable<any[]>;
   clubs: Observable<any[]>;
+  suggestions: Observable<Pet[]>;
   currentUserID;
   openCreatePanel = false;
   openUpdatePanel = false;
@@ -31,6 +32,7 @@ export class PetbookComponent {
         console.log(this.pets);
         this.getFriends();
         this.getClubs();
+        this.getFriendshipSuggestions();
       });
   }
 
@@ -43,14 +45,33 @@ export class PetbookComponent {
   }
 
   getClubs() {
-    console.log(this.currentUserID);    
+    console.log(this.currentUserID);
     this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
     console.log(this.clubs.length);
   }
 
+  getFriendshipSuggestions() {
+    const querySuggestionResults = [];
+    let location = '';
+    this.petbookService.getOwnerLocation(this.currentUserID)
+      .subscribe((res: Owner) => {
+        location = res.location;
+      },
+      () => {},
+      () => {
+        for (const pet of this.pets) {
+          querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
+            this.currentUserID,
+            location,
+            pet.species));
+        }
+        this.friends = combineLatest(querySuggestionResults);
+      });
+  }
+
   createClub(model: Club) {
     model.size = 1;
-    console.log(model);    
+    console.log(model);
     console.log(model.id);
     this.petbookService.createClub(model, 'home');
     //trying to get the correct id of the club because model.id is not defined so I can't use it
@@ -58,7 +79,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');  
+      this.petbookService.joinClub(this.currentUserID, data[data.length - 1].id, 'home');
     },
     err =>{
       console.log(err);
@@ -69,7 +90,7 @@ export class PetbookComponent {
     });
   }
 
-  updateClub(model: Club) {    
+  updateClub(model: Club) {
     console.log(model);
     const clubToUpdate = this.petbookService.getClub(model.id);
     clubToUpdate.subscribe(
@@ -81,8 +102,8 @@ export class PetbookComponent {
       err =>{
         console.log(err);
       }
-    )    
-    
+    )
+
   }
 
   leaveClub(club: Club) {
@@ -92,7 +113,7 @@ export class PetbookComponent {
     res.subscribe(
     data=> {
       console.log("this is the data ", data);
-      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');  
+      this.petbookService.leaveClub(this.currentUserID, data[0].id, 'home');
     },
     err =>{
       console.log(err);
@@ -101,7 +122,7 @@ export class PetbookComponent {
       console.log("http request finished");
       this.router.navigate(['home']);
     });
-    
+
   }
 
   searchClub() {

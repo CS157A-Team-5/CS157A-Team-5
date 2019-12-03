@@ -4,6 +4,9 @@ var Petbook = {
     getowner: function(email, callback) {
         return db.query('SELECT * FROM owners WHERE email=?', email, callback);
     },
+    getownerlocation: function(owner_id, callback) {
+        return db.query('SELECT location FROM owners WHERE id=?', owner_id, callback);
+    },
     createowner: function(owner, hash, callback) {
         return db.query('INSERT INTO owners(email, password, name, location) VALUES(?, ?, ?, ?)',
             [owner.email, hash, owner.name, owner.location], callback);
@@ -93,6 +96,18 @@ var Petbook = {
     deletefriendship: function(friendship_id, callback) {
         return db.query('DELETE FROM pet_pet AS pp WHERE pp.id=?',
             friendship_id, callback);
+    },
+    getsuggestions: function(data, callback) {
+        return db.query('SELECT pets.*, ' +
+            'FROM pets ' +
+            'NATURAL JOIN ( ' +
+            '	SELECT owners.id AS owner_id, owners.location, owner_club.club_id ' +
+            '    FROM owners, owner_club ' +
+            '    WHERE owners.id=owner_club.owner_id ' +
+            ') as owner_info ' +
+            'WHERE owner_id <> ?' +
+            'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) DESC ' +
+            'LIMIT 20;', [data.location, data.species, data.club_id, data.owner_id], callback);
     }
 }
 
