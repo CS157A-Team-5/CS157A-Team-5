@@ -32,7 +32,7 @@ export class PetbookComponent {
         console.log(this.pets);
         this.getFriends();
         this.getClubs();
-        this.getFriendshipSuggestions();
+        // this.getFriendshipSuggestions();
       });
   }
 
@@ -46,10 +46,7 @@ export class PetbookComponent {
 
   getClubs() {
     console.log(this.currentUserID);
-    this.petbookService.getClubsByOwner(this.currentUserID).subscribe((res: Club[]) => {
-      this.clubs = res;
-      console.log(this.clubs);
-    });
+    this.clubs = this.petbookService.getClubsByOwner(this.currentUserID);
   }
 
   getFriendshipSuggestions() {
