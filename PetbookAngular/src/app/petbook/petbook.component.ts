@@ -62,7 +62,7 @@ export class PetbookComponent {
         combineLatest(querySuggestionResults).subscribe(
           data => {
             data.forEach(pet => {
-              pet.forEach(suggest => {
+              (pet as Array<Pet>).forEach(suggest => {
                 if (!s_id.has(suggest.id))
                   this.suggestions.push(suggest);
                 s_id.add(suggest.id)
