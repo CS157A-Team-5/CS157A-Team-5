@@ -52,27 +52,30 @@ export class PetbookComponent {
   }
 
   getFriendshipSuggestions() {
-    const querySuggestionResults = [];
     this.suggestions = [];
+    const querySuggestionResults = [];
+    const species_count = {};
+    let max_species = '';
+    let max_count = -1;
+    this.pets.forEach((p) => {
+      species_count[p.species] = 1 + (species_count[p.species] ? species_count[p.species] : 0);
+    });
+    for (var species in species_count) {
+      if (species_count[species] > max_count) {
+        max_count = species_count[species]
+        max_species = species;
+      }
+    }
+    console.log("Most owned species is: " + max_species);
     this.petbookService.getOwnerLocation(this.currentUserID)
       .subscribe((res) => {
-        for (const pet of this.pets) {
-          querySuggestionResults.push(this.petbookService.getFriendshipSuggestions(
-            this.currentUserID, String(res), pet.species, (20 / this.pets.length)));
-        }
-        const sID = new Set();
-        combineLatest(querySuggestionResults).subscribe(
-          data => {
-            data.forEach(pet => {
-              (pet as Array<Pet>).forEach(suggest => {
-                if (!sID.has(suggest.id)) {
-                  this.suggestions.push(suggest);
-                }
-                sID.add(suggest.id);
-              });
+        this.petbookService.getFriendshipSuggestions(this.currentUserID, String(res), max_species, 20)
+        .subscribe((data) => {
+            data.forEach(suggest => {
+              this.suggestions.push(suggest);
             });
-          });
-      });
+        });
+    });
   }
 
   createClub(model: Club) {
