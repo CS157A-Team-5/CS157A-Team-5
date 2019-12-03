@@ -25,8 +25,8 @@ export class PetbookService {
       }));
   }
 
-	getOwnerLocation(owner_id: string): Observable<Owner> {
-		return this.http.get<Owner>(this.url + 'user/location/' + owner_id);
+	getOwnerLocation(owner_id: string) {
+		return this.http.get(this.url + 'user/location/' + owner_id);
 	}
 
   getCurrentStorageStatus(): string {
@@ -247,8 +247,8 @@ export class PetbookService {
     );
   }
 
-	getFriendshipSuggestions(owner_id: number, location: string, species: string): Observable<Pet[]> {
+	getFriendshipSuggestions(owner_id: number, location: string, species: string, count: number): Observable<Pet[]> {
     return this.http.get<Pet[]>((this.url + 'suggestions'),
-      { params: { location: location, species: species, owner_id: String(owner_id) } });
+      { params: { location: location, species: species, owner_id: String(owner_id), count: String(count) } });
   }
 }

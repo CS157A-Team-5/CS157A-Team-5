@@ -42,7 +42,7 @@ router.get('/user/location/:owner_id', function (req, res) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(rows[0])
+            res.json(rows[0].location);
         }
     });
 });
@@ -283,11 +283,11 @@ router.delete('/friendships/:friendship_id', function (req, res) {
 });
 
 router.get('/suggestions', function(req, res) {
-    Petbook.getsuggestions(req.query, function(err, res) {
+    Petbook.getsuggestions(req.query, function(err, pets) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(res);
+            res.json(pets);
         }
     });
 })

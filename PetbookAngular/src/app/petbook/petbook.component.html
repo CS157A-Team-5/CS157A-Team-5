@@ -84,7 +84,20 @@
           </ul>
         </ng-container>
       </mat-card-content>
-    </mat-card>    
+      <mat-card-header>
+        <mat-card-title>Suggestions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-container *ngIf="suggestions">
+          <ul class="left-align" *ngIf="suggestions.length > 0">
+            <div *ngFor="let s of suggestions">
+              <li *ngIf="s">{{s.name}}</li>
+              <!-- <a href="pet/{{s.id}}">{{s.name}}</a> -->
+            </div>
+          </ul>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <div style="flex-direction: column;">
@@ -94,7 +107,7 @@
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="clubs | async as clubs_list">
-          <ul class="list-group" *ngIf="clubs_list.length > 0"> 
+          <ul class="list-group" *ngIf="clubs_list.length > 0">
             <div *ngFor="let club of clubs_list">
               <p style = "text-align: left"> {{club.name}} <button name="leave-button" type="button" value="club" (click)= "leaveClub(club)" style ="position: absolute; right: 1em">Leave</button>
               <br>
@@ -136,10 +149,8 @@
           <br />
           <button type="submit" value="submit">Submit</button>
         </form>
-      </mat-expansion-panel>      
-    </mat-accordion>      
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
-  
+
 </div>
-
-
