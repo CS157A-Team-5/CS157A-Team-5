@@ -16,16 +16,18 @@ export class SearchBarComponent {
     searchTerm: new FormControl('', [Validators.required]),
   });
 
-  pets: Observable<Pet[]>;
+  pets: Pet[];
   petsAtLocation: Observable<Pet[]>;
   clubs: Observable<Club[]>;
   petsBySpecies: Observable<Pet[]>;
   currentUserID: number;
   currentUserPets: Observable<Pet[]>;
+  visited: Set<Number>;
 
   constructor(private petService: PetbookService, private router: Router) {
     this.currentUserID = +this.petService.getCurrentStorageStatus();
     this.currentUserPets = this.petService.getPetsByOwner(this.currentUserID);
+    this.visited = new Set();
   }
 
   onSearch() {
@@ -33,13 +35,28 @@ export class SearchBarComponent {
       alert('Please enter in a search.');
       return;
     }
+    this.pets = [];
+    const parsePets = (data) => {
+      data.forEach((pet) => {
+        if (!this.visited.has(pet.id)) {
+          this.visited.add(pet.id);
+          this.pets.push(pet);
+        }
+      });
+    }
 
     const term = this.searchForm.value.searchTerm;
 
-    this.pets = this.petService.getPetsByName(term);
-    this.petsAtLocation = this.petService.getPetsByLocation(term);
+    this.petService.getPetsByName(term).subscribe((data) => {
+      parsePets(data);
+    });
+    this.petService.getPetsByLocation(term).subscribe((data) => {
+      parsePets(data);
+    });
+    this.petService.getPetsBySpecies(term).subscribe((data) => {
+      parsePets(data);
+    });
     this.clubs = this.petService.getClubsByName(term);
-    this.petsBySpecies = this.petService.getPetsBySpecies(term);
 
     console.log('Search successful');
   }
@@ -47,6 +64,7 @@ export class SearchBarComponent {
   onConnect(currentPet: Pet, petToFriend: Pet) {
     console.log('Pets to friend ', currentPet, petToFriend);
     this.petService.addFriendship(currentPet.id, petToFriend.id);
+    currentPet.isDisabled = true;
     window.alert(currentPet.name + ' is now following ' + petToFriend.name);
   }
 

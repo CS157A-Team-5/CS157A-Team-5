@@ -14,7 +14,7 @@
   </mat-card>
 
 
-<ul class="center-list" *ngFor='let pet of pets | async'>
+<ul class="center-list" *ngFor='let pet of pets'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -22,59 +22,7 @@
         <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
         <mat-menu #petSelection="matMenu">
           <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
-          <button mat-menu-item *ngFor='let currentPet of currentUserPets | async'
-            (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
-        </mat-menu>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p style="text-align: left; margin-left: 1.1em">
-        Species: {{pet.species}}
-        <br>
-        Age: {{pet.age}}
-        <br>
-        Weight: {{pet.weight}}
-      </p>
-    </mat-card-content>
-  </mat-card>
-</ul>
-
-<ul class="center-list" *ngFor='let pet of petsAtLocation | async'>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        {{pet.name}}
-        <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
-        <mat-menu #petSelection="matMenu">
-          <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
-          <button mat-menu-item *ngFor='let currentPet of currentUserPets | async'
-            (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
-        </mat-menu>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p style="text-align: left; margin-left: 1.1em">
-        Location: {{searchForm.value.searchTerm}}
-        <br>
-        Species: {{pet.species}}
-        <br>
-        Age: {{pet.age}}
-        <br>
-        Weight: {{pet.weight}}
-      </p>
-    </mat-card-content>
-  </mat-card>
-</ul>
-
-<ul class="center-list" *ngFor='let pet of petsBySpecies | async'>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        {{pet.name}}
-        <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
-        <mat-menu #petSelection="matMenu">
-          <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
-          <button mat-menu-item *ngFor='let currentPet of currentUserPets | async'
+          <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets | async'
             (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
         </mat-menu>
       </mat-card-title>
