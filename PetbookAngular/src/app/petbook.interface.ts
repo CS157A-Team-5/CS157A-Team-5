@@ -5,6 +5,7 @@ export interface Pet {
   weight: number;
   age: number;
   species: string;
+  isDisabled: boolean;
 }
 
 export interface Owner {
