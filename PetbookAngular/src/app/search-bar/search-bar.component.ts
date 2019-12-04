@@ -36,12 +36,11 @@ export class SearchBarComponent {
       return;
     }
     this.pets = [];
-    let self = this;
-    const parsePets = function(data) {
+    const parsePets = (data) => {
       data.forEach((pet) => {
-        if (!self.visited.has(pet.id)) {
-          self.visited.add(pet.id);
-          self.pets.push(pet);
+        if (!this.visited.has(pet.id)) {
+          this.visited.add(pet.id);
+          this.pets.push(pet);
         }
       });
     }
