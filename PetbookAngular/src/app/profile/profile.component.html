@@ -20,11 +20,17 @@
             </mat-menu>
           </div>
           <div *ngIf="pet.owner_id!==currentUserID" style="padding: 10px;">
-            <button [matMenuTriggerFor]="petSelection">Connect</button>
+            <button [matMenuTriggerFor]="petSelection" style="margin: 4px 2px;">Follow</button>
             <mat-menu #petSelection="matMenu">
               <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
               <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
                 (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
+            </mat-menu>
+            <button [matMenuTriggerFor]="petSelectionUnfollow" style="margin: 4px 2px;">Unfollow</button>
+            <mat-menu #petSelectionUnfollow="matMenu">
+              <p style="padding: 10px;">Which pet would you like to unfollow this page?</p>
+              <button mat-menu-item [disabled]="!currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
+                (click)="onDisconnect(currentPet, pet)">{{currentPet.name}}</button>
             </mat-menu>
           </div>
         </ul>

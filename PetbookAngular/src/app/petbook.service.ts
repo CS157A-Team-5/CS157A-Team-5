@@ -153,8 +153,8 @@ export class PetbookService {
     return this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
   }
 
-  deleteFriendship(friendshipID: number, returnURL?: string) {
-    return this.http.delete((this.url + 'friendships/' + friendshipID));
+  deleteFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
+    return this.http.delete((this.url + 'friendships/'), { params: { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }});
   }
 
 	getFriendshipSuggestions(owner_id: number, location: string, species: string, count: number): Observable<Pet[]> {

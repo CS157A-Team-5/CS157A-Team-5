@@ -295,8 +295,8 @@ router.post('/friendships', function (req, res) {
     });
 });
 
-router.delete('/friendships/:friendship_id', function (req, res) {
-    Petbook.deletefriendship(req.params.friendship_id, function(err, count) {
+router.delete('/friendships', function (req, res) {
+    Petbook.deletefriendship(req.params, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {

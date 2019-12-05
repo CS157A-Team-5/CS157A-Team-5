@@ -82,6 +82,13 @@ export class ProfileComponent {
     });
   }
 
+  onDisconnect(currentPet: Pet, petToFriend: Pet) {
+    console.log('Pets to friend ', currentPet, petToFriend);
+    this.petbookService.deleteFriendship(currentPet.id, petToFriend.id).subscribe(() => {
+      currentPet.isDisabled = false;
+    });
+  }
+
   checkFriends(currentPet: Pet, petToFriend: Pet) {
     this.petbookService.getFriendshipValid(currentPet.id, petToFriend.id).subscribe((friends) => {
       currentPet.isDisabled = !!friends;

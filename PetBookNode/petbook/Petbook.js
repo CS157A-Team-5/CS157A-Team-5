@@ -102,9 +102,9 @@ var Petbook = {
             ') LIMIT 1',
             [data.pet1_id, data.pet2_id, data.pet1_id, data.pet2_id], callback);
     },
-    deletefriendship: function(friendship_id, callback) {
-        return db.query('DELETE FROM pet_pet AS pp WHERE pp.id=?',
-            friendship_id, callback);
+    deletefriendship: function(data, callback) {
+        return db.query('DELETE FROM pet_pet AS pp WHERE pet1_id=? AND pet2_id=?',
+            [data.pet1_id, data.pet2_id], callback);
     },
     getsuggestions: function(data, callback) {
         return db.query('SELECT pets.* ' +
