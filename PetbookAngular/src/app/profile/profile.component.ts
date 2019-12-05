@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProfileComponent {
   pet: Pet;
   treats: any[];
+  allTreats: any[];
   pet_id: number;
   currentUserID;
 
@@ -30,6 +31,19 @@ export class ProfileComponent {
   getTreats() {
     this.petbookService.getTreatsByPet(this.pet_id).subscribe((data) => {
       this.treats = data;
+      this.getAllTreats();
+    });
+  }
+
+  getAllTreats() {
+    this.petbookService.getNewTreats(this.pet_id).subscribe((data) => {
+      this.allTreats = data;
+    });
+  }
+
+  addTreat(treatID) {
+    this.petbookService.addTreat(this.pet_id, treatID).subscribe(() => {
+      this.getTreats();
     });
   }
 

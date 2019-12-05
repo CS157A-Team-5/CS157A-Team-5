@@ -315,12 +315,42 @@ router.get('/suggestions', function(req, res) {
     });
 });
 
-router.get('/treats/:pet_id', function(req, res) {
-    Petbook.gettreats(req.params.pet_id, function(err, pets) {
+router.get('/treats/pet/:pet_id', function(req, res) {
+    Petbook.gettreatsbypet(req.params.pet_id, function(err, treats) {
         if(err) {
             res.status(400).json(err);
         } else {
-            res.json(pets);
+            res.json(treats);
+        }
+    });
+});
+
+router.get('/treats/new/:pet_id', function(req, res) {
+    Petbook.getnewtreats(req.params.pet_id, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
+
+router.get('/treats', function(req, res) {
+    Petbook.gettreats(req.body, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
+
+router.post('/treats', function(req, res) {
+    Petbook.addtreat(req.body, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
         }
     });
 });

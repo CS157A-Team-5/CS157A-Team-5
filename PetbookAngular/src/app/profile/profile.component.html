@@ -24,5 +24,28 @@
         </ul>
       </mat-card-content>
     </mat-card>
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title>Treats</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul class="left-align" *ngIf="treats">
+          <ul *ngFor="let t of treats" class="list-group-item" role="listitem">
+            <li>{{t.name}} by {{t.manufacturer}}</li>
+          </ul>
+          <p>
+            <button [matMenuTriggerFor]="treatSelection" class="treat-button">
+              Add treats
+            </button>
+            <mat-menu #treatSelection="matMenu">
+              <p style="padding: 10px;">Which treat would you like to add?</p>
+              <button mat-menu-item *ngFor='let t of allTreats' (click)="addTreat(t.id)">
+                <h4>{{t.name}}</h4><br><p>by {{t.manufacturer}}</p>
+              </button>
+            </mat-menu>
+          </p>
+        </ul>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

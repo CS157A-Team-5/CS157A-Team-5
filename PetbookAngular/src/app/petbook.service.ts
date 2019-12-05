@@ -183,6 +183,15 @@ export class PetbookService {
   }
 
   getTreatsByPet(petID: number): Observable<any[]> {
-    return this.http.get<any[]>((this.url + 'treats/' + petID));
+    return this.http.get<any[]>((this.url + 'treats/pet/' + petID));
+  }
+
+  getNewTreats(petID: number): Observable<any[]> {
+    return this.http.get<any[]>((this.url + 'treats/new/' + petID));
+  }
+
+  addTreat(petID: number, treatID: number) {
+    return this.http.post<any[]>((this.url + 'treats/'),
+      { pet_id: String(petID), treat_id: String(treatID) });
   }
 }

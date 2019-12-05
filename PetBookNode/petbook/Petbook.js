@@ -116,6 +116,16 @@ var Petbook = {
             'WHERE owner_id <> ? ' +
             'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) DESC ' +
             'LIMIT ?', [data.owner_id, data.location, data.species, parseInt(data.count)], callback);
+    },
+    gettreatsbypet: function(pet_id, callback) {
+        return db.query('SELECT * from treats WHERE id IN (SELECT treat_id FROM pet_treat WHERE pet_id=?)', pet_id, callback);
+    },
+    getnewtreats: function(pet_id, callback) {
+        return db.query('SELECT * from treats WHERE id NOT IN (SELECT treat_id FROM pet_treat WHERE pet_id=?)', pet_id, callback);
+    },
+    addtreat: function(data, callback) {
+        return db.query('INSERT INTO pet_treat (pet_id, treat_id) VALUES(?, ?)',
+            [data.pet_id, data.treat_id], callback);
     }
 }
 
