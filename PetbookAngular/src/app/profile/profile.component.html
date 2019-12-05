@@ -1,0 +1,28 @@
+<div style="display: flex; flex-direction: row;">
+  <div style="flex-direction: column;">
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title *ngIf="pet">{{pet.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul class="left-align" *ngIf="pet">
+          <li>{{pet.species}}</li>
+          <li>{{pet.age}} years old</li>
+          <li>{{pet.weight}} pounds</li>
+          <p *ngIf="pet.owner_id===currentUserID">
+            <button [matMenuTriggerFor]="editSelection" class="edit-button">
+              Edit
+            </button>
+            <mat-menu #editSelection="matMenu">
+              <p class="left-align" style="padding: 10px;">What would you like to do with this pet?</p>
+              <br>
+              <button (click)="editPet()">Edit Details</button>
+              <br>
+              <button (click)="deletePet()">Delete Pet</button>
+            </mat-menu>
+          </p>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

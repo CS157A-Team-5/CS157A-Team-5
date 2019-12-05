@@ -7,7 +7,7 @@
       <mat-card-content>
         <ul class="left-align" *ngIf="pets">
           <ul *ngFor="let p of pets" class="list-group-item" role="listitem">
-            <h3>{{p.name}}</h3>
+            <li><h3><a [routerLink]="['/profile',p.id]">{{p.name}}</a></h3></li>
             <li>{{p.species}}</li>
             <li>{{p.age}} years old</li>
             <li>{{p.weight}} pounds</li>
@@ -82,8 +82,7 @@
             <h3>{{pets[i].name}}</h3>
             <div *ngFor="let friend of friendArray">
               <li *ngIf="friend">
-                {{friend.name}}
-                <!-- <a href="pet/{{friend.id}}">{{friend.name}}</a> -->
+                <a [routerLink]="['/profile',friend.id]">{{friend.name}}</a>
               </li>
             </div>
           </ul>
@@ -99,8 +98,9 @@
         <ul *ngIf="suggestions">
           <ul class="left-align" *ngIf="suggestions.length > 0">
             <div *ngFor="let s of suggestions">
-              <li *ngIf="s">{{s.name}}</li>
-              <!-- <a href="pet/{{s.id}}">{{s.name}}</a> -->
+              <li *ngIf="s">
+                <a [routerLink]="['/profile',s.id]">{{s.name}}</a>
+              </li>
             </div>
           </ul>
         </ul>

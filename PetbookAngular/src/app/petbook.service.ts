@@ -181,4 +181,8 @@ export class PetbookService {
     return this.http.get<Pet[]>((this.url + 'suggestions'),
       { params: { location: location, species: species, owner_id: String(owner_id), count: String(count) } });
   }
+
+  getTreatsByPet(petID: number): Observable<Any[]> {
+    return this.http.get<Any[]>((this.url + 'treats/' + petID));
+  }
 }

@@ -25,6 +25,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PetbookService } from './petbook.service';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './authGuard';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AuthGuard } from './authGuard';
     LoginComponent,
     RegistrationComponent,
     ToolbarComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { AuthGuard } from './authGuard';
       { path: 'registration', component: RegistrationComponent },
       { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'search', component: SearchBarComponent, canActivate: [AuthGuard] },
+      { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
     ]),
   ],
   providers: [PetbookService],
