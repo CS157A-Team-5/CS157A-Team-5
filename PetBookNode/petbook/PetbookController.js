@@ -313,6 +313,16 @@ router.get('/suggestions', function(req, res) {
             res.json(pets);
         }
     });
-})
+});
+
+router.get('/treats/:pet_id', function(req, res)) {
+    Petbook.gettreats(req.params.pet_id, function(err, pets) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(pets);
+        }
+    });
+});
 
 module.exports = router;

@@ -8,9 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   pet: Pet;
-  treats: Any[];
+  treats: any[];
   pet_id: number;
   currentUserID;
 
