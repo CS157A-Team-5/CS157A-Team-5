@@ -87,7 +87,7 @@ var Petbook = {
     },
 
     getfriendsbypet: function(pet_id, callback) {
-        return db.query('SELECT * FROM pets INNER JOIN pet_pet AS pp ON pets.id=pp.pet2_id WHERE pp.pet1_id=?',
+        return db.query('SELECT pets.* FROM pets INNER JOIN pet_pet AS pp ON pets.id=pp.pet2_id WHERE pp.pet1_id=?',
             pet_id, callback);
     },
     getfriendship: function(data, callback) {

@@ -27,6 +27,7 @@ export class ProfileComponent {
     this.petbookService.getPet(this.pet_id).subscribe((data) => {
       this.pet = data;
       this.getTreats();
+      console.log(this.pet_id);
     });
   }
 
