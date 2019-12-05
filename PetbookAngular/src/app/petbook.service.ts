@@ -150,31 +150,11 @@ export class PetbookService {
   }
 
   addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
-    this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }).subscribe(
-      res => {
-        console.log('Created friendship: ' + pet1ID + ' and ' + pet2ID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
   }
 
   deleteFriendship(friendshipID: number, returnURL?: string) {
-    this.http.delete((this.url + 'friendships/' + friendshipID)).subscribe(
-      res => {
-        console.log('Removed friendship: ' + friendshipID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.delete((this.url + 'friendships/' + friendshipID));
   }
 
 	getFriendshipSuggestions(owner_id: number, location: string, species: string, count: number): Observable<Pet[]> {

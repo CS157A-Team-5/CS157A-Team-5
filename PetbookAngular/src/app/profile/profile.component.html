@@ -21,6 +21,14 @@
               <button (click)="deletePet()">Delete Pet</button>
             </mat-menu>
           </p>
+          <p *ngIf="pet.owner_id!==currentUserID">
+            <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
+            <mat-menu #petSelection="matMenu">
+              <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
+              <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
+                (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
+            </mat-menu>
+          </p>
         </ul>
         <form *ngIf="editing" #petUpdateForm="ngForm">
           <input type="text" name="name" placeholder="Name" ngModel>

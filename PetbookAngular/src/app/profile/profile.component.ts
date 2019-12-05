@@ -15,18 +15,25 @@ export class ProfileComponent {
   pet_id: number;
   editing;
   currentUserID;
+  currentUserPets: Pet[];
 
   constructor(private route: ActivatedRoute, private router: Router, private petbookService: PetbookService) {
+    this.editing = false;
     this.pet_id = this.route.snapshot.params.id;
     this.currentUserID = +this.petbookService.getCurrentStorageStatus();
+    this.petbookService.getPetsByOwner(this.currentUserID).subscribe((data) => {
+      this.currentUserPets = data;
+    });
     this.getPetInfo();
-    this.editing = false;
   }
 
   getPetInfo() {
     this.petbookService.getPet(this.pet_id).subscribe((data) => {
       this.pet = data;
       this.getTreats();
+      this.currentUserPets.forEach((p) => {
+        this.checkFriends(p, this.pet);
+      });
       console.log(this.pet_id);
     });
   }
@@ -65,6 +72,19 @@ export class ProfileComponent {
   deletePet() {
     this.petbookService.deletePet(this.pet_id).subscribe(() => {
       this.router.navigateByUrl('/home');
+    });
+  }
+
+  onConnect(currentPet: Pet, petToFriend: Pet) {
+    console.log('Pets to friend ', currentPet, petToFriend);
+    this.petbookService.addFriendship(currentPet.id, petToFriend.id).subscribe(() => {
+      currentPet.isDisabled = true;
+    });
+  }
+
+  checkFriends(currentPet: Pet, petToFriend: Pet) {
+    this.petbookService.getFriendshipValid(currentPet.id, petToFriend.id).subscribe((friends) => {
+      currentPet.isDisabled = !!friends;
     });
   }
 

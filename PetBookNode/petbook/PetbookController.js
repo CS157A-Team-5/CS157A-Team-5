@@ -278,9 +278,9 @@ router.get('/friendships', function (req, res) {
             res.status(400).json(err);
         } else {
             if (id === 0)
-                res.send(0)
+                res.send(0);
             else
-                res.json(id[0]);
+                res.json(id.length);
         }
     });
 });

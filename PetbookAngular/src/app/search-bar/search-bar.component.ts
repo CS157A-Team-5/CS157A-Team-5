@@ -26,7 +26,6 @@ export class SearchBarComponent {
 
   constructor(private petService: PetbookService, private router: Router) {
     this.currentUserID = +this.petService.getCurrentStorageStatus();
-    this.currentUserPets = this.petService.getPetsByOwner(this.currentUserID);
     this.visited = new Set();
   }
 
@@ -59,13 +58,6 @@ export class SearchBarComponent {
     this.clubs = this.petService.getClubsByName(term);
 
     console.log('Search successful');
-  }
-
-  onConnect(currentPet: Pet, petToFriend: Pet) {
-    console.log('Pets to friend ', currentPet, petToFriend);
-    this.petService.addFriendship(currentPet.id, petToFriend.id);
-    currentPet.isDisabled = true;
-    window.alert(currentPet.name + ' is now following ' + petToFriend.name);
   }
 
   onJoin(clubToJoin: Club) {
