@@ -296,7 +296,7 @@ router.post('/friendships', function (req, res) {
 });
 
 router.delete('/friendships', function (req, res) {
-    Petbook.deletefriendship(req.params, function(err, count) {
+    Petbook.deletefriendship(req.query, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
