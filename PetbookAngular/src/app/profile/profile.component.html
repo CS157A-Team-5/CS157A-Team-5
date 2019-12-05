@@ -9,26 +9,24 @@
           <li>{{pet.species}}</li>
           <li>{{pet.age}} years old</li>
           <li>{{pet.weight}} pounds</li>
-          <p *ngIf="pet.owner_id===currentUserID">
-            <button [matMenuTriggerFor]="editSelection" class="edit-button">
-              Edit
-            </button>
+          <div *ngIf="pet.owner_id===currentUserID" style="padding: 10px;">
+            <button [matMenuTriggerFor]="editSelection">Edit</button>
             <mat-menu #editSelection="matMenu">
               <p class="left-align" style="padding: 10px;">What would you like to do with this pet?</p>
-              <br>
-              <button (click)="editing=true">Edit Details</button>
-              <br>
-              <button (click)="deletePet()">Delete Pet</button>
+              <div style="padding: 10px">
+                <button (click)="editing=true" style="margin: 4px 2px;">Edit Details</button>
+                <button (click)="deletePet()" style="margin: 4px 2px;">Delete Pet</button>
+              </div>
             </mat-menu>
-          </p>
-          <p *ngIf="pet.owner_id!==currentUserID">
-            <button [matMenuTriggerFor]="petSelection" class="connect-button">Connect</button>
+          </div>
+          <div *ngIf="pet.owner_id!==currentUserID" style="padding: 10px;">
+            <button [matMenuTriggerFor]="petSelection">Connect</button>
             <mat-menu #petSelection="matMenu">
               <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
               <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
                 (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
             </mat-menu>
-          </p>
+          </div>
         </ul>
         <form *ngIf="editing" #petUpdateForm="ngForm">
           <input type="text" name="name" placeholder="Name" ngModel>
@@ -39,8 +37,8 @@
           <br />
           <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
           <br />
-          <button (click)="editPet(petUpdateForm.value)">Submit</button>
-          <button (click)="editing=false">Cancel</button>
+          <button (click)="editPet(petUpdateForm.value)" style="margin: 4px 2px;">Submit</button>
+          <button (click)="editing=false" style="margin: 4px 2px;">Cancel</button>
         </form>
       </mat-card-content>
     </mat-card>
