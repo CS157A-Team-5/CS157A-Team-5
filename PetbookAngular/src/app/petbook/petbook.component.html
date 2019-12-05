@@ -11,7 +11,6 @@
             <li>{{p.species}}</li>
             <li>{{p.age}} years old</li>
             <li>{{p.weight}} pounds</li>
-            <li>ID# {{p.id}}</li>
           </ul>
         </ul>
       </mat-card-content>
@@ -32,38 +31,6 @@
           <input type="text" name="age" placeholder="Age" ngModel>
           <br />
           <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
-          <br />
-          <button type="submit" value="submit">Submit</button>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="openUpdatePanel" (opened)="openUpdatePanel = true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Update A Pet
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form #petUpdateForm="ngForm" (ngSubmit)="updatePet(petUpdateForm.value)">
-          <input type="text" name="id" placeholder="ID" ngModel>
-          <br />
-          <input type="text" name="name" placeholder="Name" ngModel>
-          <br />
-          <input type="text" name="species" placeholder="Species" ngModel>
-          <br />
-          <input type="text" name="age" placeholder="Age" ngModel>
-          <br />
-          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
-          <br />
-          <button type="submit" value="submit">Submit</button>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="openDeletePanel" (opened)="openDeletePanel = true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Remove Pet
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form #petDeleteForm="ngForm" (ngSubmit)="deletePet(petDeleteForm.value)">
-          <input type="text" name="id" placeholder="ID" ngModel>
           <br />
           <button type="submit" value="submit">Submit</button>
         </form>
@@ -121,7 +88,7 @@
                 <button name="leave-button" type="button" value="club" (click)="leaveClub(club)"
                   style="position: absolute; right: 1em">Leave</button>
                 <br>
-                <p class="left-align">ID# {{club.id}}</p>
+                <p class="left-align">Club# {{club.id}}</p>
                 <br>
             </div>
           </ul>

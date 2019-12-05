@@ -13,12 +13,14 @@ export class ProfileComponent {
   treats: any[];
   allTreats: any[];
   pet_id: number;
+  editing;
   currentUserID;
 
   constructor(private route: ActivatedRoute, private router: Router, private petbookService: PetbookService) {
     this.pet_id = this.route.snapshot.params.id;
     this.currentUserID = +this.petbookService.getCurrentStorageStatus();
     this.getPetInfo();
+    this.editing = false;
   }
 
   getPetInfo() {
@@ -47,8 +49,14 @@ export class ProfileComponent {
     });
   }
 
-  editPet() {
-    this.petbookService.updatePet(/* Needs to be implemented */this.pet).subscribe(() => {
+  editPet(model) {
+    model.id = this.pet_id;
+    model.name = model.name ? model.name : this.pet.name;
+    model.species = model.species ? model.species : this.pet.species;
+    model.age = model.age ? model.age : this.pet.age;
+    model.weight = model.weight ? model.weight : this.pet.weight;
+    this.petbookService.updatePet(model).subscribe(() => {
+      this.editing = false;
       this.getPetInfo();
     });
   }

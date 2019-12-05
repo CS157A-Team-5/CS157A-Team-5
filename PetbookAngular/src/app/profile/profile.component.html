@@ -16,12 +16,24 @@
             <mat-menu #editSelection="matMenu">
               <p class="left-align" style="padding: 10px;">What would you like to do with this pet?</p>
               <br>
-              <button (click)="editPet()">Edit Details</button>
+              <button (click)="editing=true">Edit Details</button>
               <br>
               <button (click)="deletePet()">Delete Pet</button>
             </mat-menu>
           </p>
         </ul>
+        <form *ngIf="editing" #petUpdateForm="ngForm">
+          <input type="text" name="name" placeholder="Name" ngModel>
+          <br />
+          <input type="text" name="species" placeholder="Species" ngModel>
+          <br />
+          <input type="text" name="age" placeholder="Age" ngModel>
+          <br />
+          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
+          <br />
+          <button (click)="editPet(petUpdateForm.value)">Submit</button>
+          <button (click)="editing=false">Cancel</button>
+        </form>
       </mat-card-content>
     </mat-card>
     <mat-card style="width: 300px;">
@@ -33,7 +45,7 @@
           <ul *ngFor="let t of treats" class="list-group-item" role="listitem">
             <li>{{t.name}} by {{t.manufacturer}}</li>
           </ul>
-          <p>
+          <p *ngIf="pet.owner_id===currentUserID">
             <button [matMenuTriggerFor]="treatSelection" class="treat-button">
               Add treats
             </button>
