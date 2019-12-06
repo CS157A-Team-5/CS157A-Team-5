@@ -80,7 +80,6 @@ export class SearchBarComponent {
       clubToJoin.isDisabled = true;
     },
     (err) => { console.log(err) });
-    window.alert('You are now part of the ' + clubToJoin.name + ' club!');
   }
 
 }
