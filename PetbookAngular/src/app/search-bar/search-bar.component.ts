@@ -18,15 +18,21 @@ export class SearchBarComponent {
 
   pets: Pet[];
   petsAtLocation: Observable<Pet[]>;
-  clubs: Observable<Club[]>;
+  clubs: Club[];
   petsBySpecies: Observable<Pet[]>;
   currentUserID: number;
   currentUserPets: Observable<Pet[]>;
   visited: Set<Number>;
+  memberOf: Set<Number>;
 
   constructor(private petService: PetbookService, private router: Router) {
     this.currentUserID = +this.petService.getCurrentStorageStatus();
-    this.visited = new Set();
+    this.memberOf = new Set();
+    this.petService.getClubsByOwner(this.currentUserID).subscribe((data) => {
+      data.forEach((club) => {
+        this.memberOf.add(club.id);
+      });
+    });
   }
 
   onSearch() {
@@ -35,6 +41,8 @@ export class SearchBarComponent {
       return;
     }
     this.pets = [];
+    this.clubs = [];
+    this.visited = new Set();
     const parsePets = (data) => {
       data.forEach((pet) => {
         if (!this.visited.has(pet.id)) {
@@ -55,13 +63,22 @@ export class SearchBarComponent {
     this.petService.getPetsBySpecies(term).subscribe((data) => {
       parsePets(data);
     });
-    this.clubs = this.petService.getClubsByName(term);
+    this.petService.getClubsByName(term).subscribe((data) => {
+      data.forEach((club) => {
+        if (!this.memberOf.has(club.id)) {
+          this.clubs.push(club)
+        }
+      });
+    });
 
     console.log('Search successful');
   }
 
   onJoin(clubToJoin: Club) {
-    this.petService.joinClub(this.currentUserID, clubToJoin.id).subscribe(() => {},
+    this.petService.joinClub(this.currentUserID, clubToJoin.id).subscribe(() => {
+      this.memberOf.add(clubToJoin.id);
+      clubToJoin.isDisabled = true;
+    },
     (err) => { console.log(err) });
     window.alert('You are now part of the ' + clubToJoin.name + ' club!');
   }

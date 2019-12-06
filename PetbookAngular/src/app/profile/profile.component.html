@@ -5,10 +5,10 @@
         <mat-card-title *ngIf="pet">{{pet.name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ul class="left-align" *ngIf="pet">
-          <li>{{pet.species}}</li>
-          <li>{{pet.age}} years old</li>
-          <li>{{pet.weight}} pounds</li>
+        <mat-list *ngIf="pet">
+          <mat-list-item>Species: {{pet.species}}</mat-list-item>
+          <mat-list-item>{{pet.age}} years old</mat-list-item>
+          <mat-list-item>{{pet.weight}} pounds</mat-list-item>
           <div *ngIf="pet.owner_id===currentUserID" style="padding: 10px;">
             <button [matMenuTriggerFor]="editSelection">Edit</button>
             <mat-menu #editSelection="matMenu">
@@ -22,18 +22,18 @@
           <div *ngIf="pet.owner_id!==currentUserID" style="padding: 10px;">
             <button [matMenuTriggerFor]="petSelection" style="margin: 4px 2px;">Follow</button>
             <mat-menu #petSelection="matMenu">
-              <p style="padding: 10px;">Which pet would you like to add this friend to?</p>
+              <p style="padding: 20px; margin-top: -10px;">Which pet would you like to add this friend to?</p>
               <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
                 (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
             </mat-menu>
             <button [matMenuTriggerFor]="petSelectionUnfollow" style="margin: 4px 2px;">Unfollow</button>
             <mat-menu #petSelectionUnfollow="matMenu">
-              <p style="padding: 10px;">Which pet would you like to unfollow this page?</p>
+              <p style="padding: 20px; margin-top: -10px;">Which pet would you like to unfollow this page?</p>
               <button mat-menu-item [disabled]="!currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
                 (click)="onDisconnect(currentPet, pet)">{{currentPet.name}}</button>
             </mat-menu>
           </div>
-        </ul>
+        </mat-list>
         <form *ngIf="editing" #petUpdateForm="ngForm">
           <input type="text" name="name" placeholder="Name" ngModel>
           <br />
@@ -48,15 +48,19 @@
         </form>
       </mat-card-content>
     </mat-card>
+  </div>
+
+  <div style="flex-direction: column;">
     <mat-card style="width: 300px;">
       <mat-card-header>
         <mat-card-title>Treats</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ul class="left-align" *ngIf="treats">
-          <ul *ngFor="let t of treats" class="list-group-item" role="listitem">
-            <li>{{t.name}} by {{t.manufacturer}}</li>
-          </ul>
+        <mat-list *ngIf="treats">
+          <mat-list-item class="left-align" *ngFor="let t of treats">
+            <h3 mat-line>{{t.name}}</h3>
+            <p mat-line> by {{t.manufacturer}}</p>
+          </mat-list-item>
           <p *ngIf="pet.owner_id===currentUserID">
             <button [matMenuTriggerFor]="treatSelection" class="treat-button">
               Add treats
@@ -68,7 +72,7 @@
               </button>
             </mat-menu>
           </p>
-        </ul>
+        </mat-list>
       </mat-card-content>
     </mat-card>
   </div>

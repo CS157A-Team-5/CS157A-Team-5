@@ -20,7 +20,7 @@
       <mat-card-title>
         {{pet.name}}
         <a routerLink="/profile/{{pet.id}}">
-          <button [matMenuTriggerFor]="petSelection" class="connect-button">Profile</button>
+          <button class="connect-button">Profile</button>
         </a>
       </mat-card-title>
     </mat-card-header>
@@ -36,12 +36,12 @@
   </mat-card>
 </ul>
 
-<ul class="center-list" *ngFor='let club of clubs | async'>
+<ul class="center-list" *ngFor='let club of clubs'>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
         Club: {{club.name}}
-        <button (click)="onJoin(club)" class="connect-button">
+        <button [disabled]="club.isDisabled" (click)="onJoin(club)" class="connect-button">
           Join
         </button>
       </mat-card-title>

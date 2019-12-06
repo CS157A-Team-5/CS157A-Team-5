@@ -106,7 +106,7 @@ export class PetbookService {
     return this.http.get<Club[]>(this.url + 'clubs/name/' + name);
   }
 
-  getClubsByOwner(ownerID: string): Observable<Club[]> {
+  getClubsByOwner(ownerID: number): Observable<Club[]> {
     return this.http.get<Club[]>(this.url + 'clubs/owner/' + ownerID);
   }
 

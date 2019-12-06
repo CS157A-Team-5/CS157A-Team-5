@@ -142,6 +142,7 @@ app-dashboard,
 app-toolbar,
 app-search-bar,
 app-petbook,
+app-profile,
 app-login,
 app-registration {
   width: var(--content-width);
