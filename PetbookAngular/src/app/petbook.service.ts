@@ -106,7 +106,7 @@ export class PetbookService {
     return this.http.get<Club[]>(this.url + 'clubs/name/' + name);
   }
 
-  getClubsByOwner(ownerID: string): Observable<Club[]> {
+  getClubsByOwner(ownerID: number): Observable<Club[]> {
     return this.http.get<Club[]>(this.url + 'clubs/owner/' + ownerID);
   }
 
@@ -150,35 +150,28 @@ export class PetbookService {
   }
 
   addFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
-    this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }).subscribe(
-      res => {
-        console.log('Created friendship: ' + pet1ID + ' and ' + pet2ID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+    return this.http.post((this.url + 'friendships'), { pet1_id: String(pet1ID), pet2_id: String(pet2ID) });
   }
 
-  deleteFriendship(friendshipID: number, returnURL?: string) {
-    this.http.delete((this.url + 'friendships/' + friendshipID)).subscribe(
-      res => {
-        console.log('Removed friendship: ' + friendshipID);
-        if (returnURL !== undefined) {
-          this.router.navigateByUrl(returnURL);
-        }
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
+  deleteFriendship(pet1ID: number, pet2ID: number, returnURL?: string) {
+    return this.http.delete((this.url + 'friendships/'), { params: { pet1_id: String(pet1ID), pet2_id: String(pet2ID) }});
   }
 
 	getFriendshipSuggestions(owner_id: number, location: string, species: string, count: number): Observable<Pet[]> {
     return this.http.get<Pet[]>((this.url + 'suggestions'),
       { params: { location: location, species: species, owner_id: String(owner_id), count: String(count) } });
+  }
+
+  getTreatsByPet(petID: number): Observable<any[]> {
+    return this.http.get<any[]>((this.url + 'treats/pet/' + petID));
+  }
+
+  getNewTreats(petID: number): Observable<any[]> {
+    return this.http.get<any[]>((this.url + 'treats/new/' + petID));
+  }
+
+  addTreat(petID: number, treatID: number) {
+    return this.http.post<any[]>((this.url + 'treats/'),
+      { pet_id: String(petID), treat_id: String(treatID) });
   }
 }

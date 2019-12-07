@@ -4,21 +4,15 @@
       <mat-card-header>
         <mat-card-title>Pets</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <ul class="left-align" *ngIf="pets">
-          <ul *ngFor="let p of pets" class="list-group-item" role="listitem">
-            <h3>{{p.name}}</h3>
-            <li>{{p.species}}</li>
-            <li>{{p.age}} years old</li>
-            <li>{{p.weight}} pounds</li>
-            <li>ID# {{p.id}}</li>
-          </ul>
+      <mat-card-content *ngIf="pets">
+        <ul class="left-align" *ngFor="let p of pets" class="list-group-item" role="listitem">
+          <h3 class="left-align"><a [routerLink]="['/profile',p.id]">{{p.name}}</a></h3>
+          <li class="left-align">{{p.species}}</li>
+          <li class="left-align">{{p.age}} years old</li>
+          <li class="left-align">{{p.weight}} pounds</li>
         </ul>
       </mat-card-content>
-    </mat-card>
-
-    <mat-accordion>
-      <mat-expansion-panel [expanded]="openCreatePanel" (opened)="openCreatePanel = true">
+      <mat-expansion-panel style="margin: 0.5em 0.5em;" [expanded]="openCreatePanel" (opened)="openCreatePanel = true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             New Pet
@@ -36,102 +30,60 @@
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="openUpdatePanel" (opened)="openUpdatePanel = true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Update A Pet
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form #petUpdateForm="ngForm" (ngSubmit)="updatePet(petUpdateForm.value)">
-          <input type="text" name="id" placeholder="ID" ngModel>
-          <br />
-          <input type="text" name="name" placeholder="Name" ngModel>
-          <br />
-          <input type="text" name="species" placeholder="Species" ngModel>
-          <br />
-          <input type="text" name="age" placeholder="Age" ngModel>
-          <br />
-          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
-          <br />
-          <button type="submit" value="submit">Submit</button>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="openDeletePanel" (opened)="openDeletePanel = true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Remove Pet
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form #petDeleteForm="ngForm" (ngSubmit)="deletePet(petDeleteForm.value)">
-          <input type="text" name="id" placeholder="ID" ngModel>
-          <br />
-          <button type="submit" value="submit">Submit</button>
-        </form>
-      </mat-expansion-panel>
-    </mat-accordion>
+    </mat-card>
   </div>
 
   <div style="flex-direction: column;">
-    <mat-card>
+    <mat-card style="width: 300px;">
       <mat-card-header>
         <mat-card-title>Friends You Follow</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <ul class="left-align" *ngIf="friends">
-          <ul *ngFor="let friendArray of friends; let i = index" class="list-group-item" role="listitem">
-            <h3>{{pets[i].name}}</h3>
-            <div *ngFor="let friend of friendArray">
-              <li *ngIf="friend">
-                {{friend.name}}
-                <!-- <a href="pet/{{friend.id}}">{{friend.name}}</a> -->
-              </li>
-            </div>
-          </ul>
-        </ul>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Suggestions</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <ul *ngIf="suggestions">
-          <ul class="left-align" *ngIf="suggestions.length > 0">
-            <div *ngFor="let s of suggestions">
-              <li *ngIf="s">{{s.name}}</li>
-              <!-- <a href="pet/{{s.id}}">{{s.name}}</a> -->
-            </div>
-          </ul>
+      <mat-card-content *ngIf="friends">
+        <ul class="left-align" *ngFor="let friendArray of friends; let i = index" class="list-group-item" role="listitem">
+          <h3 class="left-align">{{pets[i].name}}</h3>
+          <div class="left-align" *ngFor="let friend of friendArray">
+            <li *ngIf="friend">
+              <a [routerLink]="['/profile',friend.id]">{{friend.name}}</a>
+            </li>
+          </div>
         </ul>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div style="flex-direction: column;">
-    <mat-card>
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title>Suggestions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="suggestions">
+        <mat-list *ngIf="suggestions.length > 0">
+          <mat-list-item class="left-align" *ngFor="let s of suggestions">
+              <a *ngIf="s" [routerLink]="['/profile',s.id]">{{s.name}}</a>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div style="flex-direction: column;">
+    <mat-card style="width: 300px;">
       <mat-card-header>
         <mat-card-title>Clubs</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <ng-container *ngIf="clubs | async as clubs_list">
-          <ul class="list-group" *ngIf="clubs_list.length > 0">
-            <div *ngFor="let club of clubs_list">
-              <p class="left-align"> {{club.name}}
-                <button name="leave-button" type="button" value="club" (click)="leaveClub(club)"
-                  style="position: absolute; right: 1em">Leave</button>
-                <br>
-                <p class="left-align">ID# {{club.id}}</p>
-                <br>
-            </div>
-          </ul>
+          <mat-list *ngIf="clubs_list.length > 0">
+            <mat-list-item class="left-align" *ngFor="let club of clubs_list">
+              <h3 mat-line>{{club.name}}</h3>
+              <p mat-line>Club# {{club.id}}</p>
+              <button name="leave-button" type="button" value="club" (click)="leaveClub(club)" style="position: absolute; right: 1em">Leave</button>
+            </mat-list-item>
+          </mat-list>
         </ng-container>
       </mat-card-content>
-      <button type="button" (click)="searchClub()" class="leave-button">Find clubs!</button>
-    </mat-card>
-
-    <mat-accordion>
-      <mat-expansion-panel>
+      <button class="mat-raised-button" (click)="searchClub()" style="margin: 0.5em 0.5em;">Find clubs!</button>
+      <mat-expansion-panel style="margin: 0.5em 0.5em;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             New Club
@@ -145,7 +97,7 @@
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel style="margin: 0.5em 0.5em;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Update A Club
@@ -161,6 +113,6 @@
           <button type="submit" value="submit">Submit</button>
         </form>
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-card>
   </div>
 </div>

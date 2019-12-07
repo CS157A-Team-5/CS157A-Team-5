@@ -1,0 +1,79 @@
+<div style="display: flex; flex-direction: row;">
+  <div style="flex-direction: column;">
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title *ngIf="pet">{{pet.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list *ngIf="pet">
+          <mat-list-item>Species: {{pet.species}}</mat-list-item>
+          <mat-list-item>{{pet.age}} years old</mat-list-item>
+          <mat-list-item>{{pet.weight}} pounds</mat-list-item>
+          <div *ngIf="pet.owner_id===currentUserID" style="padding: 10px;">
+            <button [matMenuTriggerFor]="editSelection">Edit</button>
+            <mat-menu #editSelection="matMenu">
+              <p class="left-align" style="padding: 10px;">What would you like to do with this pet?</p>
+              <div style="padding: 10px">
+                <button (click)="editing=true" style="margin: 4px 2px;">Edit Details</button>
+                <button (click)="deletePet()" style="margin: 4px 2px;">Delete Pet</button>
+              </div>
+            </mat-menu>
+          </div>
+          <div *ngIf="pet.owner_id!==currentUserID" style="padding: 10px;">
+            <button [matMenuTriggerFor]="petSelection" style="margin: 4px 2px;">Follow</button>
+            <mat-menu #petSelection="matMenu">
+              <p style="padding: 20px; margin-top: -10px;">Which pet would you like to add this friend to?</p>
+              <button mat-menu-item [disabled]="currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
+                (click)="onConnect(currentPet, pet)">{{currentPet.name}}</button>
+            </mat-menu>
+            <button [matMenuTriggerFor]="petSelectionUnfollow" style="margin: 4px 2px;">Unfollow</button>
+            <mat-menu #petSelectionUnfollow="matMenu">
+              <p style="padding: 20px; margin-top: -10px;">Which pet would you like to unfollow this page?</p>
+              <button mat-menu-item [disabled]="!currentPet.isDisabled" *ngFor='let currentPet of currentUserPets'
+                (click)="onDisconnect(currentPet, pet)">{{currentPet.name}}</button>
+            </mat-menu>
+          </div>
+        </mat-list>
+        <form *ngIf="editing" #petUpdateForm="ngForm">
+          <input type="text" name="name" placeholder="Name" ngModel>
+          <br />
+          <input type="text" name="species" placeholder="Species" ngModel>
+          <br />
+          <input type="text" name="age" placeholder="Age" ngModel>
+          <br />
+          <input type="text" name="weight" placeholder="Weight (in pounds)" ngModel>
+          <br />
+          <button (click)="editPet(petUpdateForm.value)" style="margin: 4px 2px;">Submit</button>
+          <button (click)="editing=false" style="margin: 4px 2px;">Cancel</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div style="flex-direction: column;">
+    <mat-card style="width: 300px;">
+      <mat-card-header>
+        <mat-card-title>Treats</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list *ngIf="treats">
+          <mat-list-item class="left-align" *ngFor="let t of treats">
+            <h3 mat-line>{{t.name}}</h3>
+            <p mat-line> by {{t.manufacturer}}</p>
+          </mat-list-item>
+          <p *ngIf="pet.owner_id===currentUserID">
+            <button [matMenuTriggerFor]="treatSelection" class="treat-button">
+              Add treats
+            </button>
+            <mat-menu #treatSelection="matMenu">
+              <p style="padding: 10px;">Which treat would you like to add?</p>
+              <button mat-menu-item *ngFor='let t of allTreats' (click)="addTreat(t.id)">
+                <h4>{{t.name}}</h4><br><p>by {{t.manufacturer}}</p>
+              </button>
+            </mat-menu>
+          </p>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

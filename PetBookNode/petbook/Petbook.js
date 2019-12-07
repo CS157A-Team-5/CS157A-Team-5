@@ -87,7 +87,7 @@ var Petbook = {
     },
 
     getfriendsbypet: function(pet_id, callback) {
-        return db.query('SELECT * FROM pets INNER JOIN pet_pet AS pp ON pets.id=pp.pet2_id WHERE pp.pet1_id=?',
+        return db.query('SELECT pets.* FROM pets INNER JOIN pet_pet AS pp ON pets.id=pp.pet2_id WHERE pp.pet1_id=?',
             pet_id, callback);
     },
     getfriendship: function(data, callback) {
@@ -102,9 +102,9 @@ var Petbook = {
             ') LIMIT 1',
             [data.pet1_id, data.pet2_id, data.pet1_id, data.pet2_id], callback);
     },
-    deletefriendship: function(friendship_id, callback) {
-        return db.query('DELETE FROM pet_pet AS pp WHERE pp.id=?',
-            friendship_id, callback);
+    deletefriendship: function(data, callback) {
+        return db.query('DELETE FROM pet_pet AS pp WHERE pet1_id=? AND pet2_id=?',
+            [data.pet1_id, data.pet2_id], callback);
     },
     getsuggestions: function(data, callback) {
         return db.query('SELECT pets.* ' +
@@ -116,6 +116,16 @@ var Petbook = {
             'WHERE owner_id <> ? ' +
             'ORDER BY IF(LOWER(location)=?, 1, 0) + IF(LOWER(species)=?, 1, 0) DESC ' +
             'LIMIT ?', [data.owner_id, data.location, data.species, parseInt(data.count)], callback);
+    },
+    gettreatsbypet: function(pet_id, callback) {
+        return db.query('SELECT * from treats WHERE id IN (SELECT treat_id FROM pet_treat WHERE pet_id=?)', pet_id, callback);
+    },
+    getnewtreats: function(pet_id, callback) {
+        return db.query('SELECT * from treats WHERE id NOT IN (SELECT treat_id FROM pet_treat WHERE pet_id=?)', pet_id, callback);
+    },
+    addtreat: function(data, callback) {
+        return db.query('INSERT INTO pet_treat (pet_id, treat_id) VALUES(?, ?)',
+            [data.pet_id, data.treat_id], callback);
     }
 }
 

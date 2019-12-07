@@ -21,6 +21,7 @@ export interface Club {
   name: string;
   species: string;
   size: number;
+  isDisabled: boolean;
 }
 
 export interface Park {

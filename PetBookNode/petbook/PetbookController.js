@@ -278,9 +278,9 @@ router.get('/friendships', function (req, res) {
             res.status(400).json(err);
         } else {
             if (id === 0)
-                res.send(0)
+                res.send(0);
             else
-                res.json(id[0]);
+                res.json(id.length);
         }
     });
 });
@@ -295,8 +295,8 @@ router.post('/friendships', function (req, res) {
     });
 });
 
-router.delete('/friendships/:friendship_id', function (req, res) {
-    Petbook.deletefriendship(req.params.friendship_id, function(err, count) {
+router.delete('/friendships', function (req, res) {
+    Petbook.deletefriendship(req.query, function(err, count) {
         if(err) {
             res.status(400).json(err);
         } else {
@@ -313,6 +313,46 @@ router.get('/suggestions', function(req, res) {
             res.json(pets);
         }
     });
-})
+});
+
+router.get('/treats/pet/:pet_id', function(req, res) {
+    Petbook.gettreatsbypet(req.params.pet_id, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
+
+router.get('/treats/new/:pet_id', function(req, res) {
+    Petbook.getnewtreats(req.params.pet_id, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
+
+router.get('/treats', function(req, res) {
+    Petbook.gettreats(req.body, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
+
+router.post('/treats', function(req, res) {
+    Petbook.addtreat(req.body, function(err, treats) {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(treats);
+        }
+    });
+});
 
 module.exports = router;
