@@ -75,8 +75,8 @@ var Petbook = {
 
     },
     createclub: function(club, callback) {
-        return db.query('INSERT INTO clubs(name, size, species) VALUES(?, ?, ?)',
-            [club.name, club.size, club.species], callback);
+        return db.query('INSERT INTO clubs(name, size, species) VALUES(?, 0, ?)',
+            [club.name, club.species], callback);
     },
     updateclub: function(club, callback) {
     	return db.query('UPDATE clubs SET name=?, species=?, size=? WHERE id=?',
