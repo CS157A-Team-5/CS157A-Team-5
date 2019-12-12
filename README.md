@@ -4,6 +4,8 @@
 
 ### Elana Olson, Julio Mercado Soto, Lovejit Kharod
 
+To view a more extensive report, go [here](https://docs.google.com/document/d/19LSLWUh1MhDIToHdLwoChvyRqPOHpiCg9Q5FJ0Knu_s/edit?usp=sharing)
+
 ---
 
 ## Project Overview 
